@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value="/mock")
 public class MockController {
 
-    @RequestMapping(value= "/mock", method = RequestMethod.GET,produces="application/json; charset=utf-8")
+    @RequestMapping(value= "/mock", method = RequestMethod.GET, produces="application/json; charset=utf-8")
     public Mock mock() {
     	return new Mock("This is the Mock service.");
     }
