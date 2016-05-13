@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(value="/mock/ehealthexchange")
+@RequestMapping("/mock/ehealthexchange")
 public class PatientController {
 	private static final Logger logger = LogManager.getLogger(PatientController.class);
 	private static final String PATIENT_FILE_NAME = "patients.csv";
@@ -64,7 +65,7 @@ public class PatientController {
 			List<Patient> allPatients = new ArrayList<Patient>();
 			for(CSVRecord record : records) {
 				String colValue = record.get(0).toString().trim();
-				if(!StringUtils.isEmpty(colValue) && "ID".equals(colValue)) {
+				if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 					Patient patient = new Patient();
 					patient.setId(colValue);
 					patient.setFirstName(record.get(1).toString().trim());
@@ -86,6 +87,7 @@ public class PatientController {
 					patient.setState(record.get(8).toString().trim());
 					patient.setZipcode(record.get(9).toString().trim());
 					patient.setSsn(record.get(10).toString().trim());
+					allPatients.add(patient);
 				}
 			}
 			
@@ -114,7 +116,7 @@ public class PatientController {
 			return matchedPatients;
 		} catch(IOException ioEx) {
 			logger.error("Could not get input stream for uploaded file " + PATIENT_FILE_NAME);			
-			throw new IOException("Could not get input stream for file " + PATIENT_FILE_NAME);
+			throw ioEx;
 		} finally {
 			 try { parser.close(); } catch(Exception ignore) {}
 			try { reader.close(); } catch(Exception ignore) {}

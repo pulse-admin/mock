@@ -48,6 +48,18 @@ eclipse {
 		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
 		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
 	}
+	
+	tasks.withType(Test) {
+		if(System.getProperty('DEBUG', 'false') == 'true') {
+			jvmArgs '-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9009'
+		}
+	}
+	
+	tasks.withType(JavaExec) {
+		if(System.getProperty('DEBUG', 'false') == 'true') {
+			jvmArgs '-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9009'
+		}
+	}
 }
 
 task wrapper(type: Wrapper) {

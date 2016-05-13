@@ -27,6 +27,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @Api(value="/mock/ehealthexchange")
+@RequestMapping("/mock/ehealthexchange")
 public class DocumentController {
 	private static final Logger logger = LogManager.getLogger(DocumentController.class);
 	private static final String DOCUMENTS_FILE_NAME = "documents.csv";
@@ -55,7 +56,7 @@ public class DocumentController {
 			List<Document> docsForPatient = new ArrayList<Document>();
 			for(CSVRecord record : records) {
 				String colValue = record.get(0).toString().trim();
-				if(!StringUtils.isEmpty(colValue) && "ID".equals(colValue)) {
+				if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 					String docPatientId = record.get(1).toString().trim();
 					if(!StringUtils.isEmpty(docPatientId) && docPatientId.equals(patientId)) {
 						Document document = new Document();
