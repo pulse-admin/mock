@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value="/mock/ehealthexchange")
-@RequestMapping("/mock/ehealthexchange")
+@Api(value="/mock")
+@RequestMapping("/mock")
 public class PatientController {
 	private static final Logger logger = LogManager.getLogger(PatientController.class);
 	private static final String PATIENT_FILE_NAME = "patients.csv";
@@ -43,7 +43,7 @@ public class PatientController {
 	}
 	
 	//note that the first name and last name search params must be a valid java regex
-	@RequestMapping(value= "/patient", method = RequestMethod.GET, 
+	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.GET, 
 			produces="application/json; charset=utf-8")
 	public List<Patient> getPatients(@RequestParam(value="firstName", required=false) String firstName,
 			@RequestParam(value="lastName", required=false) String lastName) throws IOException {

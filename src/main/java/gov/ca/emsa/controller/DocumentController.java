@@ -2,19 +2,25 @@ package gov.ca.emsa.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,16 +32,17 @@ import gov.ca.emsa.domain.Patient;
 import io.swagger.annotations.Api;
 
 @RestController
-@Api(value="/mock/ehealthexchange")
-@RequestMapping("/mock/ehealthexchange")
+@Api(value="/mock")
+@RequestMapping("/mock")
 public class DocumentController {
 	private static final Logger logger = LogManager.getLogger(DocumentController.class);
 	private static final String DOCUMENTS_FILE_NAME = "documents.csv";
+	private static final String CCDA_DOCUMENT = "VCN CCDA.xml";
 	
 	@Autowired private ResourceLoader resourceLoader;
 	
 	//note that the first name and last name search params must be a valid java regex
-	@RequestMapping(value= "/documents", method = RequestMethod.GET, 
+	@RequestMapping(value= "/ehealthexchange/documents", method = RequestMethod.GET, 
 			produces="application/json; charset=utf-8")
 	public List<Document> getDocuments(@RequestParam(value="patientId", required=true) String patientId) throws IOException {
 		
@@ -84,4 +91,45 @@ public class DocumentController {
 			try { reader.close(); } catch(Exception ignore) {}
 		}
     }
+	
+	@RequestMapping(value= "/ehealthexchange/document/{documentId}", method = RequestMethod.GET, 
+			produces="application/xml; charset=utf-8")
+	public String getDocument(@PathVariable(value="documentId") String documentId, 
+			HttpServletResponse response) throws IOException {
+		
+		Resource documentFile = resourceLoader.getResource("classpath:" + CCDA_DOCUMENT);
+		byte[] buffer = new byte[(int)documentFile.contentLength()];
+		IOUtils.readFully(documentFile.getInputStream(), buffer);
+		return new String(buffer);
+	}
+	
+	@RequestMapping(value= "/ehealthexchange/document/{documentId}/download", method = RequestMethod.GET, 
+			produces="application/xml; charset=utf-8")
+	public void downloadDocument(@PathVariable(value="documentId") String documentId, 
+			HttpServletResponse response) throws IOException {
+		
+		Resource documentFile = resourceLoader.getResource("classpath:" + CCDA_DOCUMENT);
+		response.setContentLength((int) documentFile.contentLength());
+	 
+		// set headers for the response
+		String headerKey = "Content-Disposition";
+		String headerValue = String.format("attachment; filename=\"%s\"",
+	                documentFile.getFilename());
+		response.setHeader(headerKey, headerValue);
+	 
+		// get output stream of the response
+		OutputStream outStream = response.getOutputStream();
+	 
+		byte[] buffer = new byte[1024];
+		int bytesRead = -1;
+		
+		InputStream inputStream = documentFile.getInputStream();
+		// write bytes read from the input stream into the output stream
+		while ((bytesRead = inputStream.read(buffer)) != -1) {
+			outStream.write(buffer, 0, bytesRead);
+		}
+	 
+		inputStream.close();
+		outStream.close();	   
+	}
 }
