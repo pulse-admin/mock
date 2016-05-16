@@ -1,34 +1,42 @@
 package gov.ca.emsa;
 
 import gov.ca.emsa.domain.Organization;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import gov.ca.emsa.domain.Organizations;
 import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 
 public class Utils {
 	
-	public static List<Organization> readOrganizations(InputStream file){
-		List<Organization> orgs = new ArrayList<Organization>();
-		BufferedReader br = null;
+	public static List<Organization> readOrganizations(String file){
+		JAXBContext jaxbContext = null;
+		List<Organization> organizations = null;
 		try {
-			br = new BufferedReader(new InputStreamReader(file));
-		    String line = br.readLine();
-		    while (line != null) {
-		        orgs.add(new Organization(line));
-		        line = br.readLine();
-		    }
-		    br.close();
-		} catch (IOException e) {
+			jaxbContext = JAXBContext.newInstance(Organizations.class,Wrapper.class,Organization.class);
+		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
-		return orgs;
+		Unmarshaller jaxbUnmarshaller = null;
+		try {
+			jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		try {
+			organizations = unmarshal(jaxbUnmarshaller , Organization.class , file);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		return organizations;
 	}
+	
+	 private static <T> List<T> unmarshal(Unmarshaller unmarshaller,
+	            Class<T> clazz, String xmlLocation) throws JAXBException {
+	        StreamSource xml = new StreamSource(xmlLocation);
+	        Wrapper<T> wrapper = (Wrapper<T>) unmarshaller.unmarshal(xml,Wrapper.class).getValue();
+	        return wrapper.getItems();
+	    }
 
 }

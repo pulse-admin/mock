@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<organizations>
+	<organization>
+		<name>OrganizationOne</name>
+		<id>1</id>
+	</organization>
+	<organization>
+		<name>OrganizationTwo</name>
+		<id>2</id>
+	</organization>
+	<organization>
+		<name>OrganizationThree</name>
+		<id>3</id>
+	</organization>
+</organizations>
