@@ -3,13 +3,27 @@
 	<organization>
 		<name>OrganizationOne</name>
 		<id>1</id>
+		<active>true</active>
+		<adapter>eHealth</adapter>
+		<ipAddress>127.0.0.1</ipAddress>
+		<username>org1User</username>
+		<password>password1</password>
 	</organization>
 	<organization>
 		<name>OrganizationTwo</name>
 		<id>2</id>
+		<active>true</active>
+		<adapter>eHealth</adapter>
+		<ipAddress>127.0.0.1</ipAddress>
+		<certificationKey>1234567</certificationKey>
 	</organization>
 	<organization>
 		<name>OrganizationThree</name>
 		<id>3</id>
+		<active>true</active>
+		<adapter>eHealth</adapter>
+		<ipAddress>127.0.0.1</ipAddress>
+		<username>org3User</username>
+		<password>password3</password>
 	</organization>
 </organizations>
