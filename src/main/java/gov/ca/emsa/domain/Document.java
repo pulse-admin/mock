@@ -3,7 +3,6 @@ package gov.ca.emsa.domain;
 public class Document {
 	private String id;
 	private String name;
-	private Organization organization;
 	private Patient patient;
 	
 	public String getId() {
@@ -17,12 +16,6 @@ public class Document {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Organization getOrganization() {
-		return organization;
-	}
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
 	}
 	public Patient getPatient() {
 		return patient;

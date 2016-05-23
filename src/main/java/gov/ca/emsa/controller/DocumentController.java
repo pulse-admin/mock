@@ -68,15 +68,11 @@ public class DocumentController {
 					if(!StringUtils.isEmpty(docPatientId) && docPatientId.equals(patientId)) {
 						Document document = new Document();
 						document.setId(colValue);
-						document.setName(record.get(3).toString().trim());
+						document.setName(record.get(2).toString().trim());
 						
 						Patient patient = new Patient();
 						patient.setId(docPatientId);
 						document.setPatient(patient);
-						
-						String orgName = record.get(2).toString().trim();
-						Organization org = new Organization(orgName);
-						document.setOrganization(org);
 						
 						docsForPatient.add(document);
 					}
