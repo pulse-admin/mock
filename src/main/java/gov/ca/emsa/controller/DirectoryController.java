@@ -1,11 +1,8 @@
 package gov.ca.emsa.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,16 +15,11 @@ import io.swagger.annotations.Api;
 @RestController
 @Api(value="/mock/directory")
 public class DirectoryController {
+	private String xmlLocation = "C:/Users/blindsey/workspace/pulse/mock/src/main/resources/organizations1.xml";
 	@Autowired
 	private ResourceLoader resourceLoader;
 	@RequestMapping(value= "/mock/directory", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public List<Organization> directory() {
-		Resource resource = resourceLoader.getResource("classpath:organizations.txt");
-    	try {
-			return Utils.readOrganizations(resource.getInputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return new ArrayList<Organization>();
-		}
+    	return Utils.readOrganizations(xmlLocation);
     }
 }
