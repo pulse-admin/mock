@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Organization {
 	
 	private String name;
-	private Long id;
+	private Long organizationId;
 	private boolean isActive;
 	private String adapter;
 	private String ipAddress;
@@ -76,13 +76,13 @@ public class Organization {
 		this.certificationKey = certificationKey;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getOrganizationId() {
+		return organizationId;
 	}
 	
 	@XmlElement
-	public void setId(Long id) {
-		this.id = id;
+	public void setOrganizationId(Long id) {
+		this.organizationId = id;
 	}
 	
 	@XmlElement
