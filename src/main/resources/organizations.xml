@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<organizations>
+	<organization>
+		<name>eHealthExchange</name>
+		<id>1</id>
+		<active>true</active>
+		<adapter>eHealth</adapter>
+		<ipAddress>http://localhost:8080/mock/mock/ehealthexchange</ipAddress>
+		<username>org1User</username>
+		<password>password1</password>
+	</organization>
+</organizations>
