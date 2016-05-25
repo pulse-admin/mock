@@ -5,7 +5,7 @@
 		<id>1</id>
 		<active>true</active>
 		<adapter>eHealth</adapter>
-		<ipAddress>127.0.0.1</ipAddress>
+		<endpointUrl>http://localhost:8080/mock/mock/ehealthexchange</endpointUrl>
 		<username>org1User</username>
 		<password>password1</password>
 	</organization>

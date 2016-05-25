@@ -14,6 +14,7 @@ public class Organization {
 	private String username;
 	private String password;
 	private String certificationKey;
+	private String endpointUrl;
 	
 	public Organization(){}
 	
@@ -92,5 +93,14 @@ public class Organization {
 	public String getName(){
 		return name;
 	}
-
+	
+	public String getEndpointUrl() {
+		return endpointUrl;
+	}
+	
+	@XmlElement
+	public void setEndpointUrl(String endpointUrl) {
+		this.endpointUrl = endpointUrl;
+	}
+	
 }
