@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mock")
 public class PatientController {
 	private static final Logger logger = LogManager.getLogger(PatientController.class);
-	private static final String PATIENT_FILE_NAME = "patients.csv";
+	private static final String PATIENT_FILE_NAME = "eHealthpatients.csv";
 	private static final String DATE_FORMAT = "yyyyMMdd";
 	
 	@Autowired private ResourceLoader resourceLoader;
