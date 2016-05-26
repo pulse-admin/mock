@@ -80,13 +80,14 @@ public class PatientController {
 							throw new IOException(pex.getMessage());
 						}
 					}
-					patient.setPhoneNumber(record.get(4).toString().trim());
-					patient.setAddressLine1(record.get(5).toString().trim());
-					patient.setAddressLine2(record.get(6).toString().trim());
-					patient.setCity(record.get(7).toString().trim());
-					patient.setState(record.get(8).toString().trim());
-					patient.setZipcode(record.get(9).toString().trim());
-					patient.setSsn(record.get(10).toString().trim());
+					patient.setGender(record.get(4).toString().trim());
+					patient.setPhoneNumber(record.get(5).toString().trim());
+					patient.setAddressLine1(record.get(6).toString().trim());
+					patient.setAddressLine2(record.get(7).toString().trim());
+					patient.setCity(record.get(8).toString().trim());
+					patient.setState(record.get(9).toString().trim());
+					patient.setZipcode(record.get(10).toString().trim());
+					patient.setSsn(record.get(11).toString().trim());
 					allPatients.add(patient);
 				}
 			}
