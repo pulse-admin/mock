@@ -73,7 +73,7 @@ public class DocumentController {
 						document.setName(record.get(2).toString().trim());
 						
 						Patient patient = new Patient();
-						patient.setId(docPatientId);
+						patient.setOrgPatientId(docPatientId);
 						document.setPatient(patient);
 						
 						docsForPatient.add(document);
@@ -161,7 +161,7 @@ public class DocumentController {
 							document.setName(record.get(2).toString().trim());
 							
 							Patient patient = new Patient();
-							patient.setId(docPatientId);
+							patient.setOrgPatientId(docPatientId);
 							document.setPatient(patient);
 							
 							docsForPatient.add(document);

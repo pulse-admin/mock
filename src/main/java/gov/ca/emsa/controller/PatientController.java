@@ -67,7 +67,7 @@ public class PatientController {
 				String colValue = record.get(0).toString().trim();
 				if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 					Patient patient = new Patient();
-					patient.setId(colValue);
+					patient.setOrgPatientId(colValue);
 					patient.setFirstName(record.get(1).toString().trim());
 					patient.setLastName(record.get(2).toString().trim());
 					String dateStr = record.get(3).toString().trim();
