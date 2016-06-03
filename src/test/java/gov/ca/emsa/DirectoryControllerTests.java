@@ -31,7 +31,7 @@ public class DirectoryControllerTests {
 	public void contextLoads() {
 	}
 	
-	@Test
+	//@Test
 	public void getDirectoriesTest() throws Exception{
 		setup();
 		mvc.perform(get("/mock/directory"))

@@ -2,7 +2,9 @@ package gov.ca.emsa;
 
 import gov.ca.emsa.domain.Organization;
 import gov.ca.emsa.domain.Organizations;
+
 import java.util.List;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
