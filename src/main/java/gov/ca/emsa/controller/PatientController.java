@@ -21,13 +21,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -49,13 +46,9 @@ public class PatientController {
 	//note that the first name and last name search params must be a valid java regex
 	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.POST, 
 			produces="application/json; charset=utf-8")
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
 	public List<Patient> getEHealthPatients(@RequestParam(value="firstName", required=false) String firstName,
 			@RequestParam(value="lastName", required=false) String lastName,
 			@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
-		
-		System.out.println("SAML RECIEVED:" + samlMessage);
 		
 		Resource patientsFile = resourceLoader.getResource("classpath:" + E_HEALTH_PATIENT_FILE_NAME);
 		
@@ -76,7 +69,7 @@ public class PatientController {
 				String colValue = record.get(0).toString().trim();
 				if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 					Patient patient = new Patient();
-					patient.setId(colValue);
+					patient.setOrgPatientId(colValue);
 					patient.setFirstName(record.get(1).toString().trim());
 					patient.setLastName(record.get(2).toString().trim());
 					String dateStr = record.get(3).toString().trim();
@@ -89,13 +82,14 @@ public class PatientController {
 							throw new IOException(pex.getMessage());
 						}
 					}
-					patient.setPhoneNumber(record.get(4).toString().trim());
-					patient.setAddressLine1(record.get(5).toString().trim());
-					patient.setAddressLine2(record.get(6).toString().trim());
-					patient.setCity(record.get(7).toString().trim());
-					patient.setState(record.get(8).toString().trim());
-					patient.setZipcode(record.get(9).toString().trim());
-					patient.setSsn(record.get(10).toString().trim());
+					patient.setGender(record.get(4).toString().trim());
+					patient.setPhoneNumber(record.get(5).toString().trim());
+					patient.setAddressLine1(record.get(6).toString().trim());
+					patient.setAddressLine2(record.get(7).toString().trim());
+					patient.setCity(record.get(8).toString().trim());
+					patient.setState(record.get(9).toString().trim());
+					patient.setZipcode(record.get(10).toString().trim());
+					patient.setSsn(record.get(11).toString().trim());
 					allPatients.add(patient);
 				}
 			}
@@ -135,13 +129,9 @@ public class PatientController {
 	//note that the first name and last name search params must be a valid java regex
 		@RequestMapping(value= "/ihe/patients", method = RequestMethod.POST, 
 				produces="application/json; charset=utf-8")
-		@ResponseBody
-		@ResponseStatus(HttpStatus.OK)
 		public List<Patient> getIHEPatients(@RequestParam(value="firstName", required=false) String firstName,
 				@RequestParam(value="lastName", required=false) String lastName,
 				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
-			
-			System.out.println("SAML RECIEVED:" + samlMessage);
 			
 			Resource patientsFile = resourceLoader.getResource("classpath:" + IHE_PATIENT_FILE_NAME);
 			
@@ -162,7 +152,7 @@ public class PatientController {
 					String colValue = record.get(0).toString().trim();
 					if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 						Patient patient = new Patient();
-						patient.setId(colValue);
+						patient.setOrgPatientId(colValue);
 						patient.setFirstName(record.get(1).toString().trim());
 						patient.setLastName(record.get(2).toString().trim());
 						String dateStr = record.get(3).toString().trim();
@@ -175,13 +165,14 @@ public class PatientController {
 								throw new IOException(pex.getMessage());
 							}
 						}
-						patient.setPhoneNumber(record.get(4).toString().trim());
-						patient.setAddressLine1(record.get(5).toString().trim());
-						patient.setAddressLine2(record.get(6).toString().trim());
-						patient.setCity(record.get(7).toString().trim());
-						patient.setState(record.get(8).toString().trim());
-						patient.setZipcode(record.get(9).toString().trim());
-						patient.setSsn(record.get(10).toString().trim());
+						patient.setGender(record.get(4).toString().trim());
+						patient.setPhoneNumber(record.get(5).toString().trim());
+						patient.setAddressLine1(record.get(6).toString().trim());
+						patient.setAddressLine2(record.get(7).toString().trim());
+						patient.setCity(record.get(8).toString().trim());
+						patient.setState(record.get(9).toString().trim());
+						patient.setZipcode(record.get(10).toString().trim());
+						patient.setSsn(record.get(11).toString().trim());
 						allPatients.add(patient);
 					}
 				}

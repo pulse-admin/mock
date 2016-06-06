@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <organizations>
 	<organization>
-		<name>OrganizationOne</name>
+		<name>eHealthExchange</name>
 		<organizationId>1</organizationId>
 		<active>true</active>
 		<adapter>eHealth</adapter>
