@@ -3,7 +3,7 @@ package gov.ca.emsa.domain;
 import java.util.Date;
 
 public class Patient {
-	private String id;
+	private String orgPatientId;
 	private String firstName;
 	private String lastName;
 	private Date dateOfBirth;
@@ -16,12 +16,6 @@ public class Patient {
 	private String zipcode;
 	private String ssn;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -87,5 +81,11 @@ public class Patient {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public String getOrgPatientId() {
+		return orgPatientId;
+	}
+	public void setOrgPatientId(String patientUniqueId) {
+		this.orgPatientId = patientUniqueId;
 	}
 }
