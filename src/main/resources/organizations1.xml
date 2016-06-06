@@ -5,7 +5,7 @@
 		<organizationId>1</organizationId>
 		<active>true</active>
 		<adapter>eHealth</adapter>
-		<endpointUrl>http://localhost:8080/mock/mock/ehealthexchange</endpointUrl>
+		<endpointUrl>http://localhost:8090/mock/ehealthexchange</endpointUrl>
 		<username>org1User</username>
 		<password>password1</password>
 	</organization>
@@ -15,7 +15,7 @@
 		<active>true</active>
 		<adapter>eHealth</adapter>
 		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:8080/mock/mock/ehealthexchange</endpointUrl>
+		<endpointUrl>http://localhost:8090/mock/ehealthexchange</endpointUrl>
 		<certificationKey>1234567</certificationKey>
 	</organization>
 	<organization>
@@ -24,7 +24,7 @@
 		<active>true</active>
 		<adapter>eHealth</adapter>
 		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:8080/mock/mock/ehealthexchange</endpointUrl>
+		<endpointUrl>http://localhost:8090/mock/ehealthexchange</endpointUrl>
 		<username>org3User</username>
 		<password>password3</password>
 	</organization>

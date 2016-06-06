@@ -21,10 +21,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -44,10 +47,15 @@ public class PatientController {
 	}
 	
 	//note that the first name and last name search params must be a valid java regex
-	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.GET, 
+	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.POST, 
 			produces="application/json; charset=utf-8")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public List<Patient> getEHealthPatients(@RequestParam(value="firstName", required=false) String firstName,
-			@RequestParam(value="lastName", required=false) String lastName) throws IOException {
+			@RequestParam(value="lastName", required=false) String lastName,
+			@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
+		
+		System.out.println("SAML RECIEVED:" + samlMessage);
 		
 		Resource patientsFile = resourceLoader.getResource("classpath:" + E_HEALTH_PATIENT_FILE_NAME);
 		
@@ -125,10 +133,15 @@ public class PatientController {
     }
 	
 	//note that the first name and last name search params must be a valid java regex
-		@RequestMapping(value= "/ihe/patients", method = RequestMethod.GET, 
+		@RequestMapping(value= "/ihe/patients", method = RequestMethod.POST, 
 				produces="application/json; charset=utf-8")
+		@ResponseBody
+		@ResponseStatus(HttpStatus.OK)
 		public List<Patient> getIHEPatients(@RequestParam(value="firstName", required=false) String firstName,
-				@RequestParam(value="lastName", required=false) String lastName) throws IOException {
+				@RequestParam(value="lastName", required=false) String lastName,
+				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
+			
+			System.out.println("SAML RECIEVED:" + samlMessage);
 			
 			Resource patientsFile = resourceLoader.getResource("classpath:" + IHE_PATIENT_FILE_NAME);
 			

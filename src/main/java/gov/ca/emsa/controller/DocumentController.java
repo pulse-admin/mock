@@ -46,7 +46,10 @@ public class DocumentController {
 	//note that the first name and last name search params must be a valid java regex
 	@RequestMapping(value= "/ehealthexchange/documents", method = RequestMethod.GET, 
 			produces="application/json; charset=utf-8")
-	public List<Document> getEHealthDocuments(@RequestParam(value="patientId", required=true) String patientId) throws IOException {
+	public List<Document> getEHealthDocuments(@RequestParam(value="patientId", required=true) String patientId,
+			@RequestParam(value="samlMessage", required=true) String samlMessage) throws IOException {
+		
+		System.out.println("SAML RECIEVED:" + samlMessage);
 		
 		Resource documentsFile = resourceLoader.getResource("classpath:" + E_HEALTH_DOCUMENTS_FILE_NAME);
 		
@@ -93,8 +96,8 @@ public class DocumentController {
 	@RequestMapping(value= "/ehealthexchange/document/{documentId}", method = RequestMethod.GET, 
 			produces="application/xml; charset=utf-8")
 	public String getEHealthDocument(@PathVariable(value="documentId") String documentId, 
-			HttpServletResponse response) throws IOException {
-		
+			HttpServletResponse response, @RequestParam(value="samlMessage", required=true) String samlMessage) throws IOException {
+		System.out.println("SAML RECIEVED:" + samlMessage);
 		Resource documentFile = resourceLoader.getResource("classpath:" + E_HEALTH_CCDA_DOCUMENT);
 		byte[] buffer = new byte[(int)documentFile.contentLength()];
 		IOUtils.readFully(documentFile.getInputStream(), buffer);
@@ -134,8 +137,9 @@ public class DocumentController {
 	//note that the first name and last name search params must be a valid java regex
 		@RequestMapping(value= "/ihe/documents", method = RequestMethod.GET, 
 				produces="application/json; charset=utf-8")
-		public List<Document> getIHEDocuments(@RequestParam(value="patientId", required=true) String patientId) throws IOException {
-			
+		public List<Document> getIHEDocuments(@RequestParam(value="patientId", required=true) String patientId,
+				@RequestParam(value="samlMessage", required=true) String samlMessage) throws IOException {
+			System.out.println("SAML RECIEVED:" + samlMessage);
 			Resource documentsFile = resourceLoader.getResource("classpath:" + IHE_DOCUMENTS_FILE_NAME);
 			
 	    	//load all patients from the file
@@ -181,8 +185,8 @@ public class DocumentController {
 		@RequestMapping(value= "/ihe/document/{documentId}", method = RequestMethod.GET, 
 				produces="application/xml; charset=utf-8")
 		public String getIHEDocument(@PathVariable(value="documentId") String documentId, 
-				HttpServletResponse response) throws IOException {
-			
+				HttpServletResponse response, @RequestParam(value="samlMessage", required=true) String samlMessage) throws IOException {
+			System.out.println("SAML RECIEVED:" + samlMessage);
 			Resource documentFile = resourceLoader.getResource("classpath:" + IHE_CCDA_DOCUMENT);
 			byte[] buffer = new byte[(int)documentFile.contentLength()];
 			IOUtils.readFully(documentFile.getInputStream(), buffer);
