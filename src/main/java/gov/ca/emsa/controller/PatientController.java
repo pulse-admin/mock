@@ -49,7 +49,7 @@ public class PatientController {
 	public List<Patient> getEHealthPatients(@RequestParam(value="firstName", required=false) String firstName,
 			@RequestParam(value="lastName", required=false) String lastName,
 			@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
-		
+
 		Resource patientsFile = resourceLoader.getResource("classpath:" + E_HEALTH_PATIENT_FILE_NAME);
 		
     	//load all patients from the file
@@ -132,7 +132,7 @@ public class PatientController {
 		public List<Patient> getIHEPatients(@RequestParam(value="firstName", required=false) String firstName,
 				@RequestParam(value="lastName", required=false) String lastName,
 				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
-			
+
 			Resource patientsFile = resourceLoader.getResource("classpath:" + IHE_PATIENT_FILE_NAME);
 			
 	    	//load all patients from the file
