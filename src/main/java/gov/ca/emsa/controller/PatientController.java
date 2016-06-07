@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -46,7 +47,7 @@ public class PatientController {
 	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.GET, 
 			produces="application/json; charset=utf-8")
 	public List<Patient> getPatients(@RequestParam(value="firstName", required=false) String firstName,
-			@RequestParam(value="lastName", required=false) String lastName) throws IOException {
+			@RequestParam(value="lastName", required=false) String lastName) throws IOException, InterruptedException {
 		
 		Resource patientsFile = resourceLoader.getResource("classpath:" + PATIENT_FILE_NAME);
 		
@@ -114,11 +115,17 @@ public class PatientController {
 					matchedPatients.add(patient);
 				}
 			}
+			
+			Thread.sleep(15000);
 			return matchedPatients;
 		} catch(IOException ioEx) {
 			logger.error("Could not get input stream for uploaded file " + PATIENT_FILE_NAME);			
 			throw ioEx;
-		} finally {
+		} catch(InterruptedException inter) {
+			logger.error("Interruped!", inter);
+			throw inter;
+		}
+		finally {
 			 try { parser.close(); } catch(Exception ignore) {}
 			try { reader.close(); } catch(Exception ignore) {}
 		}
