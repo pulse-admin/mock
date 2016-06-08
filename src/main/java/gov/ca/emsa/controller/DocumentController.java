@@ -19,11 +19,14 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.ca.emsa.domain.Document;
@@ -44,9 +47,10 @@ public class DocumentController {
 	@Autowired private ResourceLoader resourceLoader;
 	
 	//note that the first name and last name search params must be a valid java regex
-	@RequestMapping(value= "/ehealthexchange/documents", method = RequestMethod.GET, 
+	@RequestMapping(value= "/ehealthexchange/documents", method = RequestMethod.POST, 
 			produces="application/json; charset=utf-8")
-	public List<Document> getEHealthDocuments(@RequestParam(value="patientId", required=true) String patientId) throws IOException {
+	public List<Document> getEHealthDocuments(@RequestParam(value="patientId", required=true) String patientId,
+			@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
 		
 		Resource documentsFile = resourceLoader.getResource("classpath:" + E_HEALTH_DOCUMENTS_FILE_NAME);
 		
@@ -90,21 +94,20 @@ public class DocumentController {
 		}
     }
 	
-	@RequestMapping(value= "/ehealthexchange/document/{documentId}", method = RequestMethod.GET, 
+	@RequestMapping(value= "/ehealthexchange/document/{documentId}", method = RequestMethod.POST, 
 			produces="application/xml; charset=utf-8")
 	public String getEHealthDocument(@PathVariable(value="documentId") String documentId, 
-			HttpServletResponse response) throws IOException {
-		
+			HttpServletResponse response, @RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
 		Resource documentFile = resourceLoader.getResource("classpath:" + E_HEALTH_CCDA_DOCUMENT);
 		byte[] buffer = new byte[(int)documentFile.contentLength()];
 		IOUtils.readFully(documentFile.getInputStream(), buffer);
 		return new String(buffer);
 	}
 	
-	@RequestMapping(value= "/ehealthexchange/document/{documentId}/download", method = RequestMethod.GET, 
+	@RequestMapping(value= "/ehealthexchange/document/{documentId}/download", method = RequestMethod.POST, 
 			produces="application/xml; charset=utf-8")
 	public void downloadEHealthDocument(@PathVariable(value="documentId") String documentId, 
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response,@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
 		
 		Resource documentFile = resourceLoader.getResource("classpath:" + E_HEALTH_CCDA_DOCUMENT);
 		response.setContentLength((int) documentFile.contentLength());
@@ -132,9 +135,10 @@ public class DocumentController {
 	}
 	
 	//note that the first name and last name search params must be a valid java regex
-		@RequestMapping(value= "/ihe/documents", method = RequestMethod.GET, 
+		@RequestMapping(value= "/ihe/documents", method = RequestMethod.POST, 
 				produces="application/json; charset=utf-8")
-		public List<Document> getIHEDocuments(@RequestParam(value="patientId", required=true) String patientId) throws IOException {
+		public List<Document> getIHEDocuments(@RequestParam(value="patientId", required=true) String patientId,
+				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
 			
 			Resource documentsFile = resourceLoader.getResource("classpath:" + IHE_DOCUMENTS_FILE_NAME);
 			
@@ -178,22 +182,22 @@ public class DocumentController {
 			}
 	    }
 		
-		@RequestMapping(value= "/ihe/document/{documentId}", method = RequestMethod.GET, 
+		@RequestMapping(value= "/ihe/document/{documentId}", method = RequestMethod.POST, 
 				produces="application/xml; charset=utf-8")
 		public String getIHEDocument(@PathVariable(value="documentId") String documentId, 
-				HttpServletResponse response) throws IOException {
-			
+				HttpServletResponse response, @RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
+
 			Resource documentFile = resourceLoader.getResource("classpath:" + IHE_CCDA_DOCUMENT);
 			byte[] buffer = new byte[(int)documentFile.contentLength()];
 			IOUtils.readFully(documentFile.getInputStream(), buffer);
 			return new String(buffer);
 		}
 		
-		@RequestMapping(value= "/ihe/document/{documentId}/download", method = RequestMethod.GET, 
+		@RequestMapping(value= "/ihe/document/{documentId}/download", method = RequestMethod.POST, 
 				produces="application/xml; charset=utf-8")
 		public void downloadIHEDocument(@PathVariable(value="documentId") String documentId, 
-				HttpServletResponse response) throws IOException {
-			
+				HttpServletResponse response,@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
+
 			Resource documentFile = resourceLoader.getResource("classpath:" + IHE_CCDA_DOCUMENT);
 			response.setContentLength((int) documentFile.contentLength());
 		 
