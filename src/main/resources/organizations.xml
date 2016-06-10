@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <organizations>
 	<organization>
-		<name>eHealthExchange</name>
-		<id>1</id>
+		<name>eHealthExchangeOrg</name>
+		<organizationId>1</organizationId>
 		<active>true</active>
 		<adapter>eHealth</adapter>
-		<ipAddress>http://localhost:8080/mock/mock/ehealthexchange</ipAddress>
+		<ipAddress>127.0.0.1</ipAddress>
+		<endpointUrl>http://localhost:8090/mock/ehealthexchange</endpointUrl>
 		<username>org1User</username>
 		<password>password1</password>
+	</organization>
+	<organization>
+		<name>IHEOrg</name>
+		<organizationId>2</organizationId>
+		<active>true</active>
+		<adapter>IHE</adapter>
+		<ipAddress>127.0.0.1</ipAddress>
+		<endpointUrl>http://localhost:8090/mock/ihe</endpointUrl>
+		<certificationKey>1234567</certificationKey>
 	</organization>
 </organizations>

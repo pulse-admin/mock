@@ -81,6 +81,8 @@ public class PatientController {
 						} catch(ParseException pex) {
 							logger.error("Could not parse " + dateStr + " as a date in the format " + DATE_FORMAT);
 							throw new IOException(pex.getMessage());
+						} catch(NumberFormatException nfEx) {
+							logger.error("Could not parse " + dateStr, nfEx);
 						}
 					}
 					patient.setGender(record.get(4).toString().trim());
