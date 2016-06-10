@@ -16,8 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = MockApplication.class)
 @WebAppConfiguration
-public class MockApplicationTests {
-
+public class DirectoryControllerTests {
+	
 	@Autowired
 	private WebApplicationContext context;
 
@@ -31,12 +31,22 @@ public class MockApplicationTests {
 	public void contextLoads() {
 	}
 	
-	@Test
-	public void MockTest() throws Exception{
+	//@Test
+	public void getDirectoriesTest() throws Exception{
 		setup();
-		mvc.perform(get("/mock"))
+		mvc.perform(get("/mock/directory"))
 		.andExpect(status().isOk())
-		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(content().json("[{\"name\":\"OrganizationOne\"},{\"name\":\"OrganizationTwo\"},{\"name\":\"OrganizationThree\"}]"));
+	}
+	
+	//@Test
+	public void getDirectoriesNoneTest() throws Exception{
+		setup();
+		mvc.perform(get("/mock/directory"))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(content().json("[]"));
 	}
 
 }
