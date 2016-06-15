@@ -3,6 +3,8 @@ package gov.ca.emsa;
 import gov.ca.emsa.domain.Organization;
 import gov.ca.emsa.domain.Organizations;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -12,7 +14,7 @@ import javax.xml.transform.stream.StreamSource;
 
 public class Utils {
 	
-	public static List<Organization> readOrganizations(String file){
+	public static List<Organization> readOrganizations(InputStream xmlFile){
 		JAXBContext jaxbContext = null;
 		List<Organization> organizations = null;
 		try {
@@ -27,7 +29,7 @@ public class Utils {
 			e.printStackTrace();
 		}
 		try {
-			organizations = unmarshal(jaxbUnmarshaller , Organization.class , file);
+			organizations = unmarshal(jaxbUnmarshaller , Organization.class , xmlFile);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -35,8 +37,9 @@ public class Utils {
 	}
 	
 	 private static <T> List<T> unmarshal(Unmarshaller unmarshaller,
-	            Class<T> clazz, String xmlLocation) throws JAXBException {
-	        StreamSource xml = new StreamSource(xmlLocation);
+	            Class<T> clazz, InputStream xmlFile) throws JAXBException {
+		 
+	        StreamSource xml = new StreamSource(xmlFile);
 	        Wrapper<T> wrapper = (Wrapper<T>) unmarshaller.unmarshal(xml,Wrapper.class).getValue();
 	        return wrapper.getItems();
 	    }

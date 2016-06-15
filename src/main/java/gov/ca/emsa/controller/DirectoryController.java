@@ -1,9 +1,6 @@
 package gov.ca.emsa.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -32,7 +29,7 @@ public class DirectoryController {
 		
 		List<Organization> results = null;
 		try {
-			results = Utils.readOrganizations(documentsFile.getFile().getAbsolutePath());
+			results = Utils.readOrganizations(documentsFile.getInputStream());
 		} catch(IOException ioEx) {
 			logger.error("Could not read documents file " + documentsFile.getFilename(), ioEx);
 		}

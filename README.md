@@ -22,9 +22,7 @@ $ git clone https://github.com/pulse/mock.git
 
 ## Deploy the Web App
 
-1. On the command line go to mock/build/libs/
-~~2. Run command: `java -jar mock-0.0.1-SNAPSHOT.jar`~~
-2. Run the command: `gradlew bootRun`
+Run the command: `gradlew bootRun`
 
 ## Change the "Active Organizations"
 

@@ -49,6 +49,10 @@ public class PatientController {
 			produces="application/json; charset=utf-8")
 	public List<Patient> getEHealthPatients(@RequestParam(value="firstName", required=false) String firstName,
 			@RequestParam(value="lastName", required=false) String lastName,
+			@RequestParam(value="dob", required = false) Date dob,
+			@RequestParam(value="ssn", required=false) String ssn,
+			@RequestParam(value="gender", required=false) String gender,
+			@RequestParam(value="zipcode", required=false) String zipcode,
 			@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException, InterruptedException {
 
 		Resource patientsFile = resourceLoader.getResource("classpath:" + E_HEALTH_PATIENT_FILE_NAME);
@@ -115,7 +119,40 @@ public class PatientController {
 					}
 				}
 				
-				if(firstNameMatch && lastNameMatch) {
+				boolean dobMatch = true;
+				if(dob != null) {
+					if(dob.getTime() != patient.getDateOfBirth().getTime()) {
+						dobMatch = false;
+					}
+				}
+				
+				boolean genderMatch = true;
+				if(!StringUtils.isEmpty(gender)) {
+					if(gender.toUpperCase().startsWith("M")) {
+						gender.equals("M");
+					} else if(gender.toUpperCase().startsWith("F")) {
+						gender.equals("F");
+					}
+					if(!patient.getGender().equals(gender)) {
+						genderMatch = false;
+					}
+				}
+				
+				boolean ssnMatch = true;
+				if(!StringUtils.isEmpty(ssn)) {
+					if(!ssn.trim().equals(patient.getSsn())) {
+						ssnMatch = false;
+					}
+				}
+				
+				boolean zipMatch = true;
+				if(!StringUtils.isEmpty(zipcode)) {
+					if(!zipcode.trim().equals(patient.getZipcode().trim())) {
+						zipMatch = false;
+					}
+				}
+				
+				if(firstNameMatch && lastNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
 					matchedPatients.add(patient);
 				}
 			}
@@ -140,6 +177,10 @@ public class PatientController {
 				produces="application/json; charset=utf-8")
 		public List<Patient> getIHEPatients(@RequestParam(value="firstName", required=false) String firstName,
 				@RequestParam(value="lastName", required=false) String lastName,
+				@RequestParam(value="dob", required = false) Date dob,
+				@RequestParam(value="ssn", required=false) String ssn,
+				@RequestParam(value="gender", required=false) String gender,
+				@RequestParam(value="zipcode", required=false) String zipcode,
 				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
 
 			Resource patientsFile = resourceLoader.getResource("classpath:" + IHE_PATIENT_FILE_NAME);
@@ -204,7 +245,40 @@ public class PatientController {
 						}
 					}
 					
-					if(firstNameMatch && lastNameMatch) {
+					boolean dobMatch = true;
+					if(dob != null) {
+						if(dob.getTime() != patient.getDateOfBirth().getTime()) {
+							dobMatch = false;
+						}
+					}
+					
+					boolean genderMatch = true;
+					if(!StringUtils.isEmpty(gender)) {
+						if(gender.toUpperCase().startsWith("M")) {
+							gender.equals("M");
+						} else if(gender.toUpperCase().startsWith("F")) {
+							gender.equals("F");
+						}
+						if(!patient.getGender().equals(gender)) {
+							genderMatch = false;
+						}
+					}
+					
+					boolean ssnMatch = true;
+					if(!StringUtils.isEmpty(ssn)) {
+						if(!ssn.trim().equals(patient.getSsn())) {
+							ssnMatch = false;
+						}
+					}
+					
+					boolean zipMatch = true;
+					if(!StringUtils.isEmpty(zipcode)) {
+						if(!zipcode.trim().equals(patient.getZipcode().trim())) {
+							zipMatch = false;
+						}
+					}
+					
+					if(firstNameMatch && lastNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
 						matchedPatients.add(patient);
 					}
 				}
