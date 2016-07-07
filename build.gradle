@@ -16,6 +16,10 @@ apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'findbugs'
 
+springBoot {
+    executable = true
+}
+
 jar {
   baseName = 'mock'
   version = '0.0.1-SNAPSHOT'
