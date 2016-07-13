@@ -1,6 +1,7 @@
 package gov.ca.emsa.controller;
 
-import gov.ca.emsa.domain.Patient;
+import gov.ca.emsa.pulse.common.domain.Address;
+import gov.ca.emsa.pulse.common.domain.Patient;
 import io.swagger.annotations.Api;
 
 import java.io.BufferedReader;
@@ -91,11 +92,13 @@ public class PatientController {
 					}
 					patient.setGender(record.get(4).toString().trim());
 					patient.setPhoneNumber(record.get(5).toString().trim());
-					patient.setAddressLine1(record.get(6).toString().trim());
-					patient.setAddressLine2(record.get(7).toString().trim());
-					patient.setCity(record.get(8).toString().trim());
-					patient.setState(record.get(9).toString().trim());
-					patient.setZipcode(record.get(10).toString().trim());
+					Address address = new Address();
+					address.setStreet1(record.get(6).toString().trim());
+					address.setStreet2(record.get(7).toString().trim());
+					address.setCity(record.get(8).toString().trim());
+					address.setState(record.get(9).toString().trim());
+					address.setZipcode(record.get(10).toString().trim());
+					patient.setAddress(address);
 					patient.setSsn(record.get(11).toString().trim());
 					allPatients.add(patient);
 				}
@@ -147,7 +150,7 @@ public class PatientController {
 				
 				boolean zipMatch = true;
 				if(!StringUtils.isEmpty(zipcode)) {
-					if(!zipcode.trim().equals(patient.getZipcode().trim())) {
+					if(!zipcode.trim().equals(patient.getAddress().getZipcode().trim())) {
 						zipMatch = false;
 					}
 				}
@@ -217,11 +220,13 @@ public class PatientController {
 						}
 						patient.setGender(record.get(4).toString().trim());
 						patient.setPhoneNumber(record.get(5).toString().trim());
-						patient.setAddressLine1(record.get(6).toString().trim());
-						patient.setAddressLine2(record.get(7).toString().trim());
-						patient.setCity(record.get(8).toString().trim());
-						patient.setState(record.get(9).toString().trim());
-						patient.setZipcode(record.get(10).toString().trim());
+						Address address = new Address();
+						address.setStreet1(record.get(6).toString().trim());
+						address.setStreet2(record.get(7).toString().trim());
+						address.setCity(record.get(8).toString().trim());
+						address.setState(record.get(9).toString().trim());
+						address.setZipcode(record.get(10).toString().trim());
+						patient.setAddress(address);
 						patient.setSsn(record.get(11).toString().trim());
 						allPatients.add(patient);
 					}
@@ -273,7 +278,7 @@ public class PatientController {
 					
 					boolean zipMatch = true;
 					if(!StringUtils.isEmpty(zipcode)) {
-						if(!zipcode.trim().equals(patient.getZipcode().trim())) {
+						if(!zipcode.trim().equals(patient.getAddress().getZipcode().trim())) {
 							zipMatch = false;
 						}
 					}
