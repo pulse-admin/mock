@@ -3,11 +3,10 @@
 	<organization>
 		<name>eHealthExchange</name>
 		<organizationId>1</organizationId>
-		<active>true</active>
+		<active>false</active>
 		<adapter>eHealth</adapter>
-		<endpointUrl>http://localhost:8090/mock/ehealthexchange</endpointUrl>
-		<username>org1User</username>
-		<password>password1</password>
+		<endpointUrl>http://localhost:9080/mock/ehealthexchange</endpointUrl>
+		<certificationKey>7654400</certificationKey>
 	</organization>
 	<organization>
 		<name>OrganizationTwo</name>
@@ -15,16 +14,25 @@
 		<active>true</active>
 		<adapter>IHE</adapter>
 		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:8090/mock/ihe</endpointUrl>
-		<certificationKey>1234567</certificationKey>
+		<endpointUrl>http://localhost:9080/mock/ihe</endpointUrl>
+		<certificationKey>12345</certificationKey>
 	</organization>
+	<!--<organization>
+		<name>OrganizationTwo</name>
+		<organizationId>2</organizationId>
+		<active>true</active>
+		<adapter>IHE</adapter>
+		<ipAddress>127.0.0.1</ipAddress>
+		<endpointUrl>http://localhost:8090/mock/ihe</endpointUrl>
+		<certificationKey>12345</certificationKey>
+	</organization>-->
 	<organization>
-		<name>OrganizationThree</name>
-		<organizationId>3</organizationId>
+		<name>OrganizationThreeUpdatedName</name>
+		<organizationId>4</organizationId>
 		<active>true</active>
 		<adapter>eHealth</adapter>
-		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:8090/mock/ehealthexchange</endpointUrl>
+		<ipAddress>127.0.0.14</ipAddress>
+		<endpointUrl>http://localhost:9080/mock/ehealthexchange</endpointUrl>
 		<username>org3User</username>
 		<password>password3</password>
 	</organization>
