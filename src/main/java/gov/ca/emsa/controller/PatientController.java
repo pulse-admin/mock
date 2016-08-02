@@ -35,13 +35,15 @@ public class PatientController {
 	private static final Logger logger = LogManager.getLogger(PatientController.class);
 	private static final String E_HEALTH_PATIENT_FILE_NAME = "eHealthpatients.csv";
 	private static final String IHE_PATIENT_FILE_NAME = "IHEpatients.csv";
-	private static final String DATE_FORMAT = "yyyyMMdd";
-	
+	private static final String XLS_DATE_FORMAT = "yyyyMMdd";
+	private static final String CLIENT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.S'Z'";
 	@Autowired private ResourceLoader resourceLoader;
-	private DateFormat dateFormatter;
+	private DateFormat xlsDateFormatter;
+	private DateFormat clientDateFormatter;
 	
 	public PatientController() {
-		dateFormatter = new SimpleDateFormat(DATE_FORMAT);
+		xlsDateFormatter = new SimpleDateFormat(XLS_DATE_FORMAT);
+		clientDateFormatter = new SimpleDateFormat(CLIENT_DATE_FORMAT);
 	}
 	
 	//note that the first name and last name search params must be a valid java regex
@@ -49,7 +51,7 @@ public class PatientController {
 			produces="application/json; charset=utf-8")
 	public List<Patient> getEHealthPatients(@RequestParam(value="firstName", required=false) String firstName,
 			@RequestParam(value="lastName", required=false) String lastName,
-			@RequestParam(value="dob", required = false) Date dob,
+			@RequestParam(value="dob", required = false) String dob,
 			@RequestParam(value="ssn", required=false) String ssn,
 			@RequestParam(value="gender", required=false) String gender,
 			@RequestParam(value="zipcode", required=false) String zipcode,
@@ -80,10 +82,10 @@ public class PatientController {
 					String dateStr = record.get(3).toString().trim();
 					if(!StringUtils.isEmpty(dateStr)) {
 						try {
-						Date dateOfBirth = dateFormatter.parse(dateStr);
+						Date dateOfBirth = xlsDateFormatter.parse(dateStr);
 						patient.setDateOfBirth(dateOfBirth);
 						} catch(ParseException pex) {
-							logger.error("Could not parse " + dateStr + " as a date in the format " + DATE_FORMAT);
+							logger.error("Could not parse " + dateStr + " as a date in the format " + XLS_DATE_FORMAT);
 							throw new IOException(pex.getMessage());
 						} catch(NumberFormatException nfEx) {
 							logger.error("Could not parse " + dateStr, nfEx);
@@ -120,8 +122,19 @@ public class PatientController {
 				}
 				
 				boolean dobMatch = true;
-				if(dob != null) {
-					if(dob.getTime() != patient.getDateOfBirth().getTime()) {
+				if(!StringUtils.isEmpty(dob)) {
+					Date dobDate = null;
+					try {
+						dobDate = clientDateFormatter.parse(dob);
+					} catch(ParseException pex) {
+						logger.error("Could not parse " + dob + " as a date in the format " + CLIENT_DATE_FORMAT);
+						throw new IOException(pex.getMessage());
+					} catch(NumberFormatException nfEx) {
+						logger.error("Could not parse " + dob, nfEx);
+					}
+					
+					if(dobDate == null || patient.getDateOfBirth() == null ||
+							dobDate.getTime() != patient.getDateOfBirth().getTime()) {
 						dobMatch = false;
 					}
 				}
@@ -177,7 +190,7 @@ public class PatientController {
 				produces="application/json; charset=utf-8")
 		public List<Patient> getIHEPatients(@RequestParam(value="firstName", required=false) String firstName,
 				@RequestParam(value="lastName", required=false) String lastName,
-				@RequestParam(value="dob", required = false) Date dob,
+				@RequestParam(value="dob", required = false) String dob,
 				@RequestParam(value="ssn", required=false) String ssn,
 				@RequestParam(value="gender", required=false) String gender,
 				@RequestParam(value="zipcode", required=false) String zipcode,
@@ -208,10 +221,10 @@ public class PatientController {
 						String dateStr = record.get(3).toString().trim();
 						if(!StringUtils.isEmpty(dateStr)) {
 							try {
-							Date dateOfBirth = dateFormatter.parse(dateStr);
+							Date dateOfBirth = xlsDateFormatter.parse(dateStr);
 							patient.setDateOfBirth(dateOfBirth);
 							} catch(ParseException pex) {
-								logger.error("Could not parse " + dateStr + " as a date in the format " + DATE_FORMAT);
+								logger.error("Could not parse " + dateStr + " as a date in the format " + XLS_DATE_FORMAT);
 								throw new IOException(pex.getMessage());
 							}
 						}
@@ -246,8 +259,19 @@ public class PatientController {
 					}
 					
 					boolean dobMatch = true;
-					if(dob != null) {
-						if(dob.getTime() != patient.getDateOfBirth().getTime()) {
+					if(!StringUtils.isEmpty(dob)) {
+						Date dobDate = null;
+						try {
+							dobDate = clientDateFormatter.parse(dob);
+						} catch(ParseException pex) {
+							logger.error("Could not parse " + dob + " as a date in the format " + CLIENT_DATE_FORMAT);
+							throw new IOException(pex.getMessage());
+						} catch(NumberFormatException nfEx) {
+							logger.error("Could not parse " + dob, nfEx);
+						}
+						
+						if(dobDate == null || patient.getDateOfBirth() == null ||
+								dobDate.getTime() != patient.getDateOfBirth().getTime()) {
 							dobMatch = false;
 						}
 					}
