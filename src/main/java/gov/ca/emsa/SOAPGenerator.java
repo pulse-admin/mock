@@ -16,6 +16,8 @@ import javax.xml.soap.Name;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.activation.DataHandler;
 
@@ -53,6 +55,14 @@ public class SOAPGenerator{
 		soapHeader.addChildElement(headerElement5);
 	}
 	
+	// ITI-55
+	
+	// IHE ITI-2b:3.55 - Part of the Demographic Query only mode - only demographics are included in request.
+	// Other query modes are 'Demographic Query and Feed Mode' - must include a homeCommunityId (HIE) identifier 
+	// and 'National Patient Identifier Query and Feed Mode' - query includes an Id that is recognized nationally
+	// Two required fields are LivingSubjectName, LivingSubjectBirthTime
+	// Should return with patient Demo and PatientId
+	// Query-Based-Document-Exchange-Implementation-Guide says only one patient is returned?
 	public void addQueryForPatient(String firstName, String lastName) throws SOAPException{
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
 		
@@ -80,6 +90,15 @@ public class SOAPGenerator{
 		SOAPBodyElement livingSubjectBirthTime = soapBody.addBodyElement(qNameLivingSubjectBirthTime);
 		paramsList.addChildElement(livingSubjectBirthTime);
 		
+		QName qNameBirth = new QName("value");
+		SOAPBodyElement valueBirth = soapBody.addBodyElement(qNameBirth);
+		Calendar birthday = Calendar.getInstance();
+		birthday.set(Calendar.YEAR, 1993);
+		birthday.set(Calendar.MONTH,Calendar.MAY);
+		birthday.set(Calendar.DAY_OF_MONTH,2);
+		
+		livingSubjectBirthTime.addChildElement(valueBirth).setTextContent(String.valueOf(birthday.getTime().getTime()));
+		
 		QName qNameLivingSubjectName = new QName("livingSubjectName");
 		SOAPBodyElement livingSubjectName = soapBody.addBodyElement(qNameLivingSubjectName);
 		paramsList.addChildElement(livingSubjectName);
@@ -97,22 +116,29 @@ public class SOAPGenerator{
 		value.addChildElement(family).setTextContent(lastName);
 	}
 	
+	// ITI-38
+	// IHE ITI TF-2b: 3.38 - 'FindDocuments' request
+	// Two required fields are the homeCommunityId and the status of the docmuent
+	// Will return metaData contents of the documents for the patient including DocumentId, RepositoryId, and HomeCommunityId
 	public void addQueryOfPatientList(ArrayList<String> patients) throws SOAPException{
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
 		
 		QName bodyQuery = new QName("query", "AdHocQueryRequest");
 		SOAPBodyElement queryBodyElement = soapBody.addBodyElement(bodyQuery);
+		// name spaces below are used to tell the HIE what kind of request we have - 'FindDocuments'
 		queryBodyElement.setAttribute("xmlns:query", "urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0");
 		queryBodyElement.setAttribute("xmlns:rim", "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0");
 		soapBody.addChildElement(queryBodyElement);
 		
+		// LeafClass = full meta data but highly restricted
+		// Object class = not full metadat??
 		QName qNameQueryId = new QName("query", "ResponseOption");
 		SOAPBodyElement responseOption = soapBody.addBodyElement(qNameQueryId);
 		queryBodyElement.addChildElement(responseOption).setTextContent("1");
 		
-		// the type of query 
 		QName qNameStatusCode = new QName("rim", "AdhocQuery");
 		SOAPBodyElement adHocQuery = soapBody.addBodyElement(qNameStatusCode);
+		// id of the 'FindDocuments' request
 		adHocQuery.setAttribute("id", "urn:uuid:14d4debf-8f97-4251-9a74-a90016b0af0d");
 		// must include homeCommunityID in every request
 		adHocQuery.setAttribute("home", "urn:uuid:123456789");
@@ -141,13 +167,16 @@ public class SOAPGenerator{
 			SOAPBodyElement valueList2 = soapBody.addBodyElement(qNameParamsList);
 			slot2.addChildElement(valueList2);
 			
-			// the status of the document to return
+			// the status of the document to return - is it available for patient care
 			QName qNameLivingSubjectName = new QName("rim", "value");
 			SOAPBodyElement value2 = soapBody.addBodyElement(qNameLivingSubjectName);
 			valueList.addChildElement(value2).setTextContent("('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')");
 		}
 	}
 	
+	// ITI-39
+	// IHE ITI TF-2b: 3.39 - Specify which Documents to return fully
+	// Must include DocumentId, RepositoryId, and HomeCommunityId as returned by 
 	public void addQueryOfDocumentList(ArrayList<String> documents) throws SOAPException{
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
 		
