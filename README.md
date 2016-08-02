@@ -22,7 +22,15 @@ $ git clone https://github.com/pulse/mock.git
 
 ## Deploy the Web App
 
+### Command Line
 Run the command: `gradlew bootRun`
+
+### Eclipse
+Right click 'MockApplication.java' file in workspace explorer -> Run as... -> Java Application
+
+## Change the time interval for Mock HIE SOAP querying
+1. In `src/main/resources` change the variable value for 'patientSearchInterval' (note that the value is in seconds)
+2. Restart the application
 
 ## Change the "Active Organizations"
 
