@@ -36,8 +36,8 @@ public class DirectoryControllerTests {
 		setup();
 		mvc.perform(get("/mock/directory"))
 		.andExpect(status().isOk())
-		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-		.andExpect(content().json("[{\"name\":\"OrganizationOne\"},{\"name\":\"OrganizationTwo\"},{\"name\":\"OrganizationThree\"}]"));
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+		
 	}
 	
 	//@Test
