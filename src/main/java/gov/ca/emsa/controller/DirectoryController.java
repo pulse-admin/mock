@@ -26,7 +26,6 @@ public class DirectoryController {
 	@RequestMapping(value= "/mock/directory", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public List<Organization> directory() {
 		Resource documentsFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
-		
 		List<Organization> results = null;
 		try {
 			results = Utils.readOrganizations(documentsFile.getInputStream());
