@@ -69,6 +69,7 @@ dependencies {
   compile('org.skyscreamer:jsonassert:1.3.0')
   compile('org.opensaml:opensaml:2.6.4')
   compile('gov.ca.emsa.pulse:common:0.0.1-SNAPSHOT')
+  compile group: 'org.springframework', name: 'spring-test'
   testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
