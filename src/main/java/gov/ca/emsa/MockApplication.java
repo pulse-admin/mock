@@ -7,11 +7,11 @@ import java.util.Timer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @SpringBootApplication
-public class MockApplication extends SpringBootServletInitializer {
+public class MockApplication {
 	
 	@Value("${patientSearchInterval}")
 	private String patientSearchInterval;
@@ -20,6 +20,11 @@ public class MockApplication extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(MockApplication.class, args);
+	}
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+	    return new PropertySourcesPlaceholderConfigurer();
 	}
 	
 	@Bean
