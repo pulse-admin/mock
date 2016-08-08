@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.ca.emsa.domain.Document;
-import gov.ca.emsa.domain.Organization;
-import gov.ca.emsa.domain.Patient;
+import gov.ca.emsa.pulse.common.domain.Document;
+import gov.ca.emsa.pulse.common.domain.Organization;
+import gov.ca.emsa.pulse.common.domain.Patient;
 import io.swagger.annotations.Api;
 
 @RestController

@@ -1,6 +1,6 @@
 package gov.ca.emsa;
 
-import gov.ca.emsa.domain.Organization;
+import gov.ca.emsa.pulse.common.domain.Organization;
 import gov.ca.emsa.domain.Organizations;
 
 import java.io.File;
