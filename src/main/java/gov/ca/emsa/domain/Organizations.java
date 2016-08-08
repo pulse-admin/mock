@@ -1,8 +1,5 @@
 package gov.ca.emsa.domain;
 
-
-import gov.ca.emsa.pulse.common.domain.Organization;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
