@@ -1,4 +1,4 @@
-ID,First Name,Last Name,Date of Birth (yyyyMMdd),Gender (M/F),Phone Number,Address Line 1,Address Line 2,City,State,Zipcode,SSN
+ID,Given Name,Family Name,Date of Birth (yyyyMMdd),Gender (M/F),Phone Number,Address Line 1,Address Line 2,City,State,Zipcode,SSN
 PERS.EH.01,John,Doe,19550524,M,3517869574,11 Audacious Rd,,Carmel,CA,10598,451674563
 PERS.EH.02,Janet,Smith,20000102,F,5638746289,115 Inquiry Lane,Apt 2B,Eureka,CA,10987,321110099
 PERS.EH.03,Sam,Johnson,19830205,M,9004783666,6740 Sycamore Hill,,San Francisco,CA,10088,451663333
