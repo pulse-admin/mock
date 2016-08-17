@@ -172,8 +172,10 @@ public class PatientController {
 					matchedPatients.add(patient);
 				}
 			}
-			
-			Thread.sleep(15000);
+
+			long sleepMillis = (long)(Math.random()*60000);
+			logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
+			Thread.sleep(sleepMillis);
 			return matchedPatients;
 		} catch(IOException ioEx) {
 			logger.error("Could not get input stream for uploaded file " + E_HEALTH_PATIENT_FILE_NAME);			
@@ -197,7 +199,7 @@ public class PatientController {
 				@RequestParam(value="ssn", required=false) String ssn,
 				@RequestParam(value="gender", required=false) String gender,
 				@RequestParam(value="zipcode", required=false) String zipcode,
-				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
+				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException, InterruptedException {
 
 			Resource patientsFile = resourceLoader.getResource("classpath:" + IHE_PATIENT_FILE_NAME);
 			
@@ -311,10 +313,17 @@ public class PatientController {
 						matchedPatients.add(patient);
 					}
 				}
+				
+				long sleepMillis = (long)(Math.random()*60000);
+				logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
+				Thread.sleep(sleepMillis);
 				return matchedPatients;
 			} catch(IOException ioEx) {
 				logger.error("Could not get input stream for uploaded file " + IHE_PATIENT_FILE_NAME);			
 				throw ioEx;
+			} catch(InterruptedException inter) {
+				logger.error("Interruped!", inter);
+				throw inter;
 			} finally {
 				 try { parser.close(); } catch(Exception ignore) {}
 				try { reader.close(); } catch(Exception ignore) {}
