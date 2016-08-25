@@ -2,6 +2,7 @@ package gov.ca.emsa;
 
 import gov.ca.emsa.service.HIEPatientSearchService;
 
+import java.util.Random;
 import java.util.Timer;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,8 +14,12 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @SpringBootApplication
 public class MockApplication {
 	
-	@Value("${patientSearchInterval}")
-	private String patientSearchInterval;
+	@Value("${minimumResponseSeconds}")
+	private String minimumResponseSeconds;
+	
+	@Value("${maximumResponseSeconds}")
+	private String maximumResponseSeconds;
+	
 	@Value("${serviceUrl}")
 	private String serviceUrl;
 	
@@ -29,18 +34,22 @@ public class MockApplication {
 	
 	@Bean
 	public HIEPatientSearchService patientSearchManager() {
-		int searchInterval = new Integer(patientSearchInterval.trim());
-		long patientSearchIntervalMillis = searchInterval * 1000;
+		int minimumSeconds = new Integer(minimumResponseSeconds.trim());
+		int maximumSeconds = new Integer(maximumResponseSeconds.trim());
+		
+		Random random = new Random();
+		Timer timer = new Timer();
+		
+		long patientSearchIntervalMillis = random.nextInt(maximumSeconds - minimumSeconds + 1) + minimumSeconds * 1000;
 		
 		HIEPatientSearchService psTask = null;
 
-		if(searchInterval > 0) {
+		if(minimumSeconds > 0 && maximumSeconds > 0) {
 			psTask = new HIEPatientSearchService();
 			psTask.setExpirationMillis(patientSearchIntervalMillis);
 			psTask.setServiceUrl(serviceUrl);
 			
-			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(psTask, 0, patientSearchIntervalMillis);
+			timer.schedule(psTask, patientSearchIntervalMillis);
 
 		}
 		

@@ -45,11 +45,11 @@ public class PatientController {
 		dateFormatter = new SimpleDateFormat(DATE_FORMAT);
 	}
 	
-	//note that the first name and last name search params must be a valid java regex
+	//note that the Given name and Family name search params must be a valid java regex
 	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.POST, 
 			produces="application/json; charset=utf-8")
-	public List<Patient> getEHealthPatients(@RequestParam(value="firstName", required=false) String firstName,
-			@RequestParam(value="lastName", required=false) String lastName,
+	public List<Patient> getEHealthPatients(@RequestParam(value="GivenName", required=false) String GivenName,
+			@RequestParam(value="FamilyName", required=false) String FamilyName,
 			@RequestParam(value="dob", required = false) Date dob,
 			@RequestParam(value="ssn", required=false) String ssn,
 			@RequestParam(value="gender", required=false) String gender,
@@ -76,8 +76,8 @@ public class PatientController {
 				if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 					Patient patient = new Patient();
 					patient.setOrgPatientId(colValue);
-					patient.setFirstName(record.get(1).toString().trim());
-					patient.setLastName(record.get(2).toString().trim());
+					patient.setGivenName(record.get(1).toString().trim());
+					patient.setFamilyName(record.get(2).toString().trim());
 					String dateStr = record.get(3).toString().trim();
 					if(!StringUtils.isEmpty(dateStr)) {
 						try {
@@ -107,18 +107,18 @@ public class PatientController {
 			//match against the passed in parameters
 			List<Patient> matchedPatients = new ArrayList<Patient>();
 			for(Patient patient : allPatients) {
-				boolean firstNameMatch = true;
-				if(!StringUtils.isEmpty(firstName)) {
-					if(!StringUtils.isEmpty(patient.getFirstName()) &&
-						!patient.getFirstName().matches(firstName)) {
-						firstNameMatch = false;
+				boolean GivenNameMatch = true;
+				if(!StringUtils.isEmpty(GivenName)) {
+					if(!StringUtils.isEmpty(patient.getGivenName()) &&
+						!patient.getGivenName().matches(GivenName)) {
+						GivenNameMatch = false;
 					}
 				}
-				boolean lastNameMatch = true;
-				if(!StringUtils.isEmpty(lastName)) {
-					if(!StringUtils.isEmpty(patient.getLastName()) &&
-						!patient.getLastName().matches(lastName)) {
-						lastNameMatch = false;
+				boolean FamilyNameMatch = true;
+				if(!StringUtils.isEmpty(FamilyName)) {
+					if(!StringUtils.isEmpty(patient.getFamilyName()) &&
+						!patient.getFamilyName().matches(FamilyName)) {
+						FamilyNameMatch = false;
 					}
 				}
 				
@@ -155,7 +155,7 @@ public class PatientController {
 					}
 				}
 				
-				if(firstNameMatch && lastNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
+				if(GivenNameMatch && FamilyNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
 					matchedPatients.add(patient);
 				}
 			}
@@ -175,11 +175,11 @@ public class PatientController {
 		}
     }
 	
-	//note that the first name and last name search params must be a valid java regex
+	//note that the Given name and Family name search params must be a valid java regex
 		@RequestMapping(value= "/ihe/patients", method = RequestMethod.POST, 
 				produces="application/json; charset=utf-8")
-		public List<Patient> getIHEPatients(@RequestParam(value="firstName", required=false) String firstName,
-				@RequestParam(value="lastName", required=false) String lastName,
+		public List<Patient> getIHEPatients(@RequestParam(value="GivenName", required=false) String GivenName,
+				@RequestParam(value="FamilyName", required=false) String FamilyName,
 				@RequestParam(value="dob", required = false) Date dob,
 				@RequestParam(value="ssn", required=false) String ssn,
 				@RequestParam(value="gender", required=false) String gender,
@@ -206,8 +206,8 @@ public class PatientController {
 					if(!StringUtils.isEmpty(colValue) && !"ID".equals(colValue)) {
 						Patient patient = new Patient();
 						patient.setOrgPatientId(colValue);
-						patient.setFirstName(record.get(1).toString().trim());
-						patient.setLastName(record.get(2).toString().trim());
+						patient.setGivenName(record.get(1).toString().trim());
+						patient.setFamilyName(record.get(2).toString().trim());
 						String dateStr = record.get(3).toString().trim();
 						if(!StringUtils.isEmpty(dateStr)) {
 							try {
@@ -235,18 +235,18 @@ public class PatientController {
 				//match against the passed in parameters
 				List<Patient> matchedPatients = new ArrayList<Patient>();
 				for(Patient patient : allPatients) {
-					boolean firstNameMatch = true;
-					if(!StringUtils.isEmpty(firstName)) {
-						if(!StringUtils.isEmpty(patient.getFirstName()) &&
-							!patient.getFirstName().matches(firstName)) {
-							firstNameMatch = false;
+					boolean GivenNameMatch = true;
+					if(!StringUtils.isEmpty(GivenName)) {
+						if(!StringUtils.isEmpty(patient.getGivenName()) &&
+							!patient.getGivenName().matches(GivenName)) {
+							GivenNameMatch = false;
 						}
 					}
-					boolean lastNameMatch = true;
-					if(!StringUtils.isEmpty(lastName)) {
-						if(!StringUtils.isEmpty(patient.getLastName()) &&
-							!patient.getLastName().matches(lastName)) {
-							lastNameMatch = false;
+					boolean FamilyNameMatch = true;
+					if(!StringUtils.isEmpty(FamilyName)) {
+						if(!StringUtils.isEmpty(patient.getFamilyName()) &&
+							!patient.getFamilyName().matches(FamilyName)) {
+							FamilyNameMatch = false;
 						}
 					}
 					
@@ -283,7 +283,7 @@ public class PatientController {
 						}
 					}
 					
-					if(firstNameMatch && lastNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
+					if(GivenNameMatch && FamilyNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
 						matchedPatients.add(patient);
 					}
 				}

@@ -1,11 +1,13 @@
 package gov.ca.emsa.service;
 
-import gov.ca.emsa.SOAPGenerator;
-import gov.ca.emsa.pulse.common.domain.Organization;
-import gov.ca.emsa.pulse.common.domain.Patient;
+import gov.ca.emsa.xcpd.XcpdUtils;
+import gov.ca.emsa.xcpd.soap.DiscoveryRequestSoapEnvelope;
+import gov.ca.emsa.xcpd.soap.DiscoveryResponseSoapEnvelope;
+import gov.ca.emsa.xcpd.soap.QueryRequestSoapEnvelope;
+import gov.ca.emsa.xcpd.soap.QueryResponseSoapEnvelope;
+import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetRequestSoapEnvelope;
+import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetResponseSoapEnvelope;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.TimerTask;
 
 import org.apache.log4j.LogManager;
@@ -18,45 +20,36 @@ public class HIEPatientSearchService extends TimerTask {
 	private String serviceUrl;
 	private long intervalMillis;
 
-	public void sendSearchQuery() throws Exception{
+	public void sendPatientSearchRequest() throws Exception{
 		RestTemplate restTemplate = new RestTemplate();
-		SOAPGenerator sg = new SOAPGenerator();
-		sg.addHeader();
-		sg.addQueryForPatient("Brian","Lindsey");
-		//Patient[] patients = restTemplate.postForObject(serviceUrl, sg, Patient[].class);
-		//logger.info(patients.toString());
-		System.out.println("HIE sending search query with SOAP...");
-		sg.getMessage().writeTo(System.out);
+		DiscoveryRequestSoapEnvelope request = XcpdUtils.generateDiscoveryRequest("Brian", "Lindsey");
+		DiscoveryResponseSoapEnvelope patientDiscoveryResponse = restTemplate.postForObject(serviceUrl + "/patientDiscovery", request, DiscoveryResponseSoapEnvelope.class);
+		logger.info(patientDiscoveryResponse);
+		logger.info("HIE sending patient discovery search query with SOAP...");
 	}
 	
-	public void sendQueryOfPatientList() throws Exception{
+	public void sendQueryRequest() throws Exception{
 		RestTemplate restTemplate = new RestTemplate();
-		SOAPGenerator sg = new SOAPGenerator();
-		sg.addHeader();
-		sg.addQueryOfPatientList(new ArrayList<String>());
-		//Patient[] patients = restTemplate.postForObject(serviceUrl, sg, Patient[].class);
-		//logger.info(patients.toString());
-		System.out.println("HIE sending search query with SOAP...");
-		sg.getMessage().writeTo(System.out);
+		QueryRequestSoapEnvelope request = XcpdUtils.generateQueryRequest();
+		QueryResponseSoapEnvelope queryResponse = restTemplate.postForObject(serviceUrl + "/queryRequest", request, QueryResponseSoapEnvelope.class);
+		logger.info(queryResponse);
+		logger.info("HIE sending query patient search with SOAP...");
 	}
 	
-	public void sendQueryOfDocumentList() throws Exception{
+	public void sendDocumentSetRequest() throws Exception{
 		RestTemplate restTemplate = new RestTemplate();
-		SOAPGenerator sg = new SOAPGenerator();
-		sg.addHeader();
-		sg.addQueryOfDocumentList(new ArrayList<String>());
-		//Patient[] patients = restTemplate.postForObject(serviceUrl, sg, Patient[].class);
-		//logger.info(patients.toString());
-		System.out.println("HIE sending search query with SOAP...");
-		sg.getMessage().writeTo(System.out);
+		RetrieveDocumentSetRequestSoapEnvelope request = XcpdUtils.generateDocumentRequest();
+		RetrieveDocumentSetResponseSoapEnvelope queryResponse = restTemplate.postForObject(serviceUrl + "/documentRequest", request, RetrieveDocumentSetResponseSoapEnvelope.class);
+		logger.info(queryResponse);
+		logger.info("HIE sending document set search query with SOAP...");
 	}
 
 	@Override
 	public void run() {
 		try {
-			sendSearchQuery();
-			sendQueryOfPatientList();
-			sendQueryOfDocumentList();
+			sendPatientSearchRequest();
+			sendQueryRequest();
+			sendDocumentSetRequest();
 		} catch(Exception ex) {
 			logger.error("Error sending SOAP search query", ex);
 		}
