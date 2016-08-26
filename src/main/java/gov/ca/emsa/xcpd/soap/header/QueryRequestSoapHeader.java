@@ -11,4 +11,6 @@ public class QueryRequestSoapHeader {
 	
 	@XmlElement(name = "To", namespace = "http://www.w3.org/2005/08/addressing") public To to;
 	
+	@XmlElement(name = "wsse:Security", namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd") public String saml;
+	
 }

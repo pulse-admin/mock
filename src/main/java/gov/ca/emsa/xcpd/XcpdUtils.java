@@ -88,10 +88,10 @@ import java.util.ArrayList;
 
 public class XcpdUtils {
 	
-	public static DiscoveryRequestSoapEnvelope generateDiscoveryRequest(String givenInput, String familyInput){
+	public static DiscoveryRequestSoapEnvelope generateDiscoveryRequest(String samlMessage, String givenInput, String familyInput){
 		PatientDiscoveryRequest pdr = new PatientDiscoveryRequest();
 		CreationTime ct = new CreationTime();
-		ct.value = (String.valueOf(System.currentTimeMillis()));
+		ct.value = String.valueOf(System.currentTimeMillis());
 		pdr.creationTime = ct;
 		InteractionId interId = new InteractionId();
 		interId.root = "12345";
@@ -260,6 +260,7 @@ public class XcpdUtils {
 		
 		sh.action = action;
 		sh.cttl = cttl;
+		sh.saml = samlMessage;
 		
 		se.sHeader = sh;
 		se.sBody = sb;
@@ -267,7 +268,7 @@ public class XcpdUtils {
 		return se;
 	}
 	
-	public static QueryRequestSoapEnvelope generateQueryRequest(){
+	public static QueryRequestSoapEnvelope generateQueryRequest(String samlMessage){
 		QueryRequestSoapEnvelope se = new QueryRequestSoapEnvelope();
 		QueryRequestSoapHeader sh = new QueryRequestSoapHeader();
 		QueryRequestSoapBody sb = new QueryRequestSoapBody();
@@ -339,13 +340,15 @@ public class XcpdUtils {
 		sh.to.mustUnderstand = "1";
 		sh.to.to = "http://localhost:2647/XdsService/DocumentConsumerReceiver.svc";
 		
+		sh.saml = samlMessage;
+		
 		se.body = sb;
 		se.header = sh;
 		
 		return se;
 	}
 	
-	public static RetrieveDocumentSetRequestSoapEnvelope generateDocumentRequest(){
+	public static RetrieveDocumentSetRequestSoapEnvelope generateDocumentRequest(String samlMessage){
 		
 		RetrieveDocumentSetRequestSoapEnvelope rdse = new RetrieveDocumentSetRequestSoapEnvelope();
 		RetrieveDocumentSetRequestSoapBody rdsb = new RetrieveDocumentSetRequestSoapBody();
@@ -362,6 +365,8 @@ public class XcpdUtils {
 		rdsh.to = to;
 		rdsh.to.mustUnderstand = "1";
 		rdsh.to.to = "http://localhost:2647/XdsService/DocumentConsumerReceiver.svc";
+		
+		rdsh.saml = samlMessage;
 		
 		RetrieveDocumentSetRequest rdsr = new RetrieveDocumentSetRequest();
 		
