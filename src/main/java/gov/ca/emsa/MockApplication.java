@@ -1,10 +1,12 @@
 package gov.ca.emsa;
 
+import gov.ca.emsa.saml.SamlGenerator;
 import gov.ca.emsa.service.HIEPatientSearchService;
 
 import java.util.Random;
 import java.util.Timer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +24,8 @@ public class MockApplication {
 	
 	@Value("${serviceUrl}")
 	private String serviceUrl;
+	
+	@Autowired static SamlGenerator samlGenerator;
 	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(MockApplication.class, args);
