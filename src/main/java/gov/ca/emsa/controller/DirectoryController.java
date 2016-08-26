@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.ca.emsa.Utils;
-import gov.ca.emsa.pulse.common.domain.Organization;
+import gov.ca.emsa.domain.Organization;
 import io.swagger.annotations.Api;
 
 @RestController
 @Api(value="/mock/directory")
 public class DirectoryController {
-	private static final String RESOURCE_FILE_NAME = "organizations1.xml";
+	private static final String RESOURCE_FILE_NAME = "organizations.xml";
 	private static final Logger logger = LogManager.getLogger(DirectoryController.class);
 	@Autowired private ResourceLoader resourceLoader;
 	

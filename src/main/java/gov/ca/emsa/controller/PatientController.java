@@ -36,21 +36,23 @@ public class PatientController {
 	private static final Logger logger = LogManager.getLogger(PatientController.class);
 	private static final String E_HEALTH_PATIENT_FILE_NAME = "eHealthpatients.csv";
 	private static final String IHE_PATIENT_FILE_NAME = "IHEpatients.csv";
-	private static final String DATE_FORMAT = "yyyyMMdd";
-	
+	private static final String XLS_DATE_FORMAT = "yyyyMMdd";
+	private static final String CLIENT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.S'Z'";
 	@Autowired private ResourceLoader resourceLoader;
-	private DateFormat dateFormatter;
+	private DateFormat xlsDateFormatter;
+	private DateFormat clientDateFormatter;
 	
 	public PatientController() {
-		dateFormatter = new SimpleDateFormat(DATE_FORMAT);
+		xlsDateFormatter = new SimpleDateFormat(XLS_DATE_FORMAT);
+		clientDateFormatter = new SimpleDateFormat(CLIENT_DATE_FORMAT);
 	}
 	
-	//note that the Given name and Family name search params must be a valid java regex
+	//note that the first name and last name search params must be a valid java regex
 	@RequestMapping(value= "/ehealthexchange/patients", method = RequestMethod.POST, 
 			produces="application/json; charset=utf-8")
-	public List<Patient> getEHealthPatients(@RequestParam(value="GivenName", required=false) String GivenName,
-			@RequestParam(value="FamilyName", required=false) String FamilyName,
-			@RequestParam(value="dob", required = false) Date dob,
+	public List<Patient> getEHealthPatients(@RequestParam(value="givenName", required=false) String givenName,
+			@RequestParam(value="familyName", required=false) String familyName,
+			@RequestParam(value="dob", required = false) String dob,
 			@RequestParam(value="ssn", required=false) String ssn,
 			@RequestParam(value="gender", required=false) String gender,
 			@RequestParam(value="zipcode", required=false) String zipcode,
@@ -81,10 +83,10 @@ public class PatientController {
 					String dateStr = record.get(3).toString().trim();
 					if(!StringUtils.isEmpty(dateStr)) {
 						try {
-						Date dateOfBirth = dateFormatter.parse(dateStr);
+						Date dateOfBirth = xlsDateFormatter.parse(dateStr);
 						patient.setDateOfBirth(dateOfBirth);
 						} catch(ParseException pex) {
-							logger.error("Could not parse " + dateStr + " as a date in the format " + DATE_FORMAT);
+							logger.error("Could not parse " + dateStr + " as a date in the format " + XLS_DATE_FORMAT);
 							throw new IOException(pex.getMessage());
 						} catch(NumberFormatException nfEx) {
 							logger.error("Could not parse " + dateStr, nfEx);
@@ -107,24 +109,35 @@ public class PatientController {
 			//match against the passed in parameters
 			List<Patient> matchedPatients = new ArrayList<Patient>();
 			for(Patient patient : allPatients) {
-				boolean GivenNameMatch = true;
-				if(!StringUtils.isEmpty(GivenName)) {
+				boolean givenNameMatch = true;
+				if(!StringUtils.isEmpty(givenName)) {
 					if(!StringUtils.isEmpty(patient.getGivenName()) &&
-						!patient.getGivenName().matches(GivenName)) {
-						GivenNameMatch = false;
+						!patient.getGivenName().matches(givenName)) {
+						givenNameMatch = false;
 					}
 				}
-				boolean FamilyNameMatch = true;
-				if(!StringUtils.isEmpty(FamilyName)) {
+				boolean familyNameMatch = true;
+				if(!StringUtils.isEmpty(familyName)) {
 					if(!StringUtils.isEmpty(patient.getFamilyName()) &&
-						!patient.getFamilyName().matches(FamilyName)) {
-						FamilyNameMatch = false;
+						!patient.getFamilyName().matches(familyName)) {
+						familyNameMatch = false;
 					}
 				}
 				
 				boolean dobMatch = true;
-				if(dob != null) {
-					if(dob.getTime() != patient.getDateOfBirth().getTime()) {
+				if(!StringUtils.isEmpty(dob)) {
+					Date dobDate = null;
+					try {
+						dobDate = clientDateFormatter.parse(dob);
+					} catch(ParseException pex) {
+						logger.error("Could not parse " + dob + " as a date in the format " + CLIENT_DATE_FORMAT);
+						throw new IOException(pex.getMessage());
+					} catch(NumberFormatException nfEx) {
+						logger.error("Could not parse " + dob, nfEx);
+					}
+					
+					if(dobDate == null || patient.getDateOfBirth() == null ||
+							dobDate.getTime() != patient.getDateOfBirth().getTime()) {
 						dobMatch = false;
 					}
 				}
@@ -155,12 +168,14 @@ public class PatientController {
 					}
 				}
 				
-				if(GivenNameMatch && FamilyNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
+				if(givenNameMatch && familyNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
 					matchedPatients.add(patient);
 				}
 			}
-			
-			Thread.sleep(15000);
+
+			long sleepMillis = (long)(Math.random()*60000);
+			logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
+			Thread.sleep(sleepMillis);
 			return matchedPatients;
 		} catch(IOException ioEx) {
 			logger.error("Could not get input stream for uploaded file " + E_HEALTH_PATIENT_FILE_NAME);			
@@ -175,16 +190,16 @@ public class PatientController {
 		}
     }
 	
-	//note that the Given name and Family name search params must be a valid java regex
+	//note that the first name and last name search params must be a valid java regex
 		@RequestMapping(value= "/ihe/patients", method = RequestMethod.POST, 
 				produces="application/json; charset=utf-8")
-		public List<Patient> getIHEPatients(@RequestParam(value="GivenName", required=false) String GivenName,
-				@RequestParam(value="FamilyName", required=false) String FamilyName,
-				@RequestParam(value="dob", required = false) Date dob,
+		public List<Patient> getIHEPatients(@RequestParam(value="givenName", required=false) String givenName,
+				@RequestParam(value="familyName", required=false) String familyName,
+				@RequestParam(value="dob", required = false) String dob,
 				@RequestParam(value="ssn", required=false) String ssn,
 				@RequestParam(value="gender", required=false) String gender,
 				@RequestParam(value="zipcode", required=false) String zipcode,
-				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
+				@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException, InterruptedException {
 
 			Resource patientsFile = resourceLoader.getResource("classpath:" + IHE_PATIENT_FILE_NAME);
 			
@@ -211,10 +226,10 @@ public class PatientController {
 						String dateStr = record.get(3).toString().trim();
 						if(!StringUtils.isEmpty(dateStr)) {
 							try {
-							Date dateOfBirth = dateFormatter.parse(dateStr);
+							Date dateOfBirth = xlsDateFormatter.parse(dateStr);
 							patient.setDateOfBirth(dateOfBirth);
 							} catch(ParseException pex) {
-								logger.error("Could not parse " + dateStr + " as a date in the format " + DATE_FORMAT);
+								logger.error("Could not parse " + dateStr + " as a date in the format " + XLS_DATE_FORMAT);
 								throw new IOException(pex.getMessage());
 							}
 						}
@@ -235,24 +250,35 @@ public class PatientController {
 				//match against the passed in parameters
 				List<Patient> matchedPatients = new ArrayList<Patient>();
 				for(Patient patient : allPatients) {
-					boolean GivenNameMatch = true;
-					if(!StringUtils.isEmpty(GivenName)) {
+					boolean givenNameMatch = true;
+					if(!StringUtils.isEmpty(givenName)) {
 						if(!StringUtils.isEmpty(patient.getGivenName()) &&
-							!patient.getGivenName().matches(GivenName)) {
-							GivenNameMatch = false;
+							!patient.getGivenName().matches(givenName)) {
+							givenNameMatch = false;
 						}
 					}
-					boolean FamilyNameMatch = true;
-					if(!StringUtils.isEmpty(FamilyName)) {
+					boolean familyNameMatch = true;
+					if(!StringUtils.isEmpty(familyName)) {
 						if(!StringUtils.isEmpty(patient.getFamilyName()) &&
-							!patient.getFamilyName().matches(FamilyName)) {
-							FamilyNameMatch = false;
+							!patient.getFamilyName().matches(familyName)) {
+							familyNameMatch = false;
 						}
 					}
 					
 					boolean dobMatch = true;
-					if(dob != null) {
-						if(dob.getTime() != patient.getDateOfBirth().getTime()) {
+					if(!StringUtils.isEmpty(dob)) {
+						Date dobDate = null;
+						try {
+							dobDate = clientDateFormatter.parse(dob);
+						} catch(ParseException pex) {
+							logger.error("Could not parse " + dob + " as a date in the format " + CLIENT_DATE_FORMAT);
+							throw new IOException(pex.getMessage());
+						} catch(NumberFormatException nfEx) {
+							logger.error("Could not parse " + dob, nfEx);
+						}
+						
+						if(dobDate == null || patient.getDateOfBirth() == null ||
+								dobDate.getTime() != patient.getDateOfBirth().getTime()) {
 							dobMatch = false;
 						}
 					}
@@ -283,14 +309,21 @@ public class PatientController {
 						}
 					}
 					
-					if(GivenNameMatch && FamilyNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
+					if(givenNameMatch && familyNameMatch && dobMatch && genderMatch && ssnMatch && zipMatch) {
 						matchedPatients.add(patient);
 					}
 				}
+				
+				long sleepMillis = (long)(Math.random()*60000);
+				logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
+				Thread.sleep(sleepMillis);
 				return matchedPatients;
 			} catch(IOException ioEx) {
 				logger.error("Could not get input stream for uploaded file " + IHE_PATIENT_FILE_NAME);			
 				throw ioEx;
+			} catch(InterruptedException inter) {
+				logger.error("Interruped!", inter);
+				throw inter;
 			} finally {
 				 try { parser.close(); } catch(Exception ignore) {}
 				try { reader.close(); } catch(Exception ignore) {}
