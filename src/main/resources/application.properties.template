@@ -3,3 +3,5 @@ patientSearchInterval = 6000
 serviceUrl = http://localhost:8090
 minimumResponseSeconds=1
 maximumResponseSeconds=5
+privateKey=C://samlPrivateKey.txt
+publicKey=C://samlPublicKey.txt

@@ -15,6 +15,8 @@ import java.util.TimerTask;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.opensaml.saml2.core.Assertion;
+import org.opensaml.saml2.core.impl.AssertionImpl;
 import org.opensaml.xml.io.MarshallingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
@@ -26,11 +28,10 @@ public class HIEPatientSearchService extends TimerTask {
 	private long intervalMillis;
 	@Autowired SamlGenerator samlGenerator;
 	
-	public String createSamlHeader(){
+	public AssertionImpl createSamlHeader(){
 		SAMLInput input = new SAMLInput();
 		input.setAssertionId("12345678-1234-1234-012345678910");
-		input.setStrNameID("Brian");
-		input.setStrNameQualifier("My Website");
+		input.setStrNameID("CN=Alex G. Bell,O=1.22.333.4444,UID=abell");
 		input.setSessionId("abcdedf1234567");
 
 		HashMap<String, String> customAttributes = new HashMap<String,String>();
@@ -41,9 +42,11 @@ public class HIEPatientSearchService extends TimerTask {
 		customAttributes.put("urn:nhin:names:saml:homeCommunityId", "urn:oid:2.16.840.1.113883.3.190");
 		customAttributes.put("urn:oasis:names:tc:xacml:2.0:subject:role", "<Role xmlns=\"urn:hl7-org:v3\" xsi:type=\"CE\" code=\"46255001\"codeSystem=\"2.16.840.1.113883.6.96\" codeSystemName=\"SNOMED_CT\"displayName=\"Pharmacist\"/>");
 		customAttributes.put("urn:oasis:names:tc:xspa:1.0:subject:purposeofuse", "<PurposeOfUse xmlns=\"urn:hl7-org:v3\" xsi:type=\"CE\" code=\"DISASTER\"codeSystem=\"2.16.840.1.113883.3.18.7.1\" codeSystemName=\"nhin-purpose\"displayName=\"Use and disclosures for disaster relief purposes\"/>");
+		// patient identifier IDNumber^^^&OIDofAA&ISO
+		customAttributes.put("urn:oasis:names:tc:xacml:2.0:resource:resource-id", "543797436^^^&amp;1.2.840.113619.6.197&amp;ISO");
 		input.setAttributes(customAttributes);
 		
-		String samlMessage = null;
+		AssertionImpl samlMessage = null;
 
 		try {
 			samlMessage = samlGenerator.createSAML(input);
@@ -57,7 +60,7 @@ public class HIEPatientSearchService extends TimerTask {
 	public void sendPatientSearchRequest() throws Exception{
 		RestTemplate restTemplate = new RestTemplate();
 		DiscoveryRequestSoapEnvelope request = XcpdUtils.generateDiscoveryRequest(createSamlHeader(), "Brian", "Lindsey");
-		logger.info(request.sHeader.saml);
+		logger.info(request.sHeader.security.assertion.toString());
 		System.out.println(request.toString());
 		DiscoveryResponseSoapEnvelope patientDiscoveryResponse = restTemplate.postForObject(serviceUrl + "/patientDiscovery", request, DiscoveryResponseSoapEnvelope.class);
 		logger.info(patientDiscoveryResponse);
@@ -67,7 +70,7 @@ public class HIEPatientSearchService extends TimerTask {
 	public void sendQueryRequest() throws Exception{
 		RestTemplate restTemplate = new RestTemplate();
 		QueryRequestSoapEnvelope request = XcpdUtils.generateQueryRequest(createSamlHeader());
-		logger.info(request);
+		logger.info(request.header.security.assertion.toString());
 		QueryResponseSoapEnvelope queryResponse = restTemplate.postForObject(serviceUrl + "/queryRequest", request, QueryResponseSoapEnvelope.class);
 		logger.info(queryResponse);
 		logger.info("HIE sending query patient search with SOAP...");
@@ -76,7 +79,7 @@ public class HIEPatientSearchService extends TimerTask {
 	public void sendDocumentSetRequest() throws Exception{
 		RestTemplate restTemplate = new RestTemplate();
 		RetrieveDocumentSetRequestSoapEnvelope request = XcpdUtils.generateDocumentRequest(createSamlHeader());
-		logger.info(request);
+		logger.info(request.header.security.assertion.toString());
 		RetrieveDocumentSetResponseSoapEnvelope queryResponse = restTemplate.postForObject(serviceUrl + "/documentRequest", request, RetrieveDocumentSetResponseSoapEnvelope.class);
 		logger.info(queryResponse);
 		logger.info("HIE sending document set search query with SOAP...");
@@ -86,8 +89,8 @@ public class HIEPatientSearchService extends TimerTask {
 	public void run() {
 		try {
 			sendPatientSearchRequest();
-			//sendQueryRequest();
-			//sendDocumentSetRequest();
+			sendQueryRequest();
+			sendDocumentSetRequest();
 		} catch(Exception ex) {
 			logger.error("Error sending SOAP search query", ex);
 		}

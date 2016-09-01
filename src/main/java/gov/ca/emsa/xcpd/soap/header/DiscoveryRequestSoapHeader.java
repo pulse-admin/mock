@@ -1,5 +1,7 @@
 package gov.ca.emsa.xcpd.soap.header;
 
+import gov.ca.emsa.xcpd.soap.header.security.Security;
+
 import javax.xml.bind.annotation.XmlElement;
 
 public class DiscoveryRequestSoapHeader {
@@ -14,6 +16,6 @@ public class DiscoveryRequestSoapHeader {
 	
 	@XmlElement(name = "CorrelationTimeToLive", namespace = "urn:ihe:iti:xcpd:2009") public CorrelationTimeToLive cttl;
 	
-	@XmlElement(name = "wsse:Security", namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd") public String saml;
+	@XmlElement(name = "Security", namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd") public Security security;
 
 }

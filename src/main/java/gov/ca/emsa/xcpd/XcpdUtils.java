@@ -17,7 +17,6 @@ import gov.ca.emsa.xcpd.soap.header.DiscoveryResponseSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.QueryResponseSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.RetrieveDocumentSetResponseSoapHeader;
 import gov.ca.emsa.xcpd.aqr.AdhocQueryRequest;
-import gov.ca.emsa.xcpd.aqr.AdhocQueryRequest;
 import gov.ca.emsa.xcpd.aqr.Classification;
 import gov.ca.emsa.xcpd.aqr.ExtrinsicObject;
 import gov.ca.emsa.xcpd.aqr.LocalizedString;
@@ -62,14 +61,8 @@ import gov.ca.emsa.xcpd.rds.DocumentRequest;
 import gov.ca.emsa.xcpd.rds.RetrieveDocumentSetRequest;
 import gov.ca.emsa.xcpd.soap.DiscoveryRequestSoapBody;
 import gov.ca.emsa.xcpd.soap.DiscoveryRequestSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.DiscoveryRequestSoapBody;
-import gov.ca.emsa.xcpd.soap.DiscoveryRequestSoapEnvelope;
 import gov.ca.emsa.xcpd.soap.QueryRequestSoapBody;
 import gov.ca.emsa.xcpd.soap.QueryRequestSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.QueryRequestSoapBody;
-import gov.ca.emsa.xcpd.soap.QueryRequestSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetRequestSoapBody;
-import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetRequestSoapEnvelope;
 import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetRequestSoapBody;
 import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetRequestSoapEnvelope;
 import gov.ca.emsa.xcpd.soap.header.Action;
@@ -77,18 +70,26 @@ import gov.ca.emsa.xcpd.soap.header.CorrelationTimeToLive;
 import gov.ca.emsa.xcpd.soap.header.DiscoveryRequestSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.MessageId;
 import gov.ca.emsa.xcpd.soap.header.QueryRequestSoapHeader;
-import gov.ca.emsa.xcpd.soap.header.QueryRequestSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.RelatesTo;
-import gov.ca.emsa.xcpd.soap.header.DiscoveryRequestSoapHeader;
-import gov.ca.emsa.xcpd.soap.header.RetrieveDocumentSetRequestSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.RetrieveDocumentSetRequestSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.To;
+import gov.ca.emsa.xcpd.soap.header.security.Created;
+import gov.ca.emsa.xcpd.soap.header.security.Expires;
+import gov.ca.emsa.xcpd.soap.header.security.KeyIdentifier;
+import gov.ca.emsa.xcpd.soap.header.security.KeyInfo;
+import gov.ca.emsa.xcpd.soap.header.security.Security;
+import gov.ca.emsa.xcpd.soap.header.security.SecurityTokenReference;
+import gov.ca.emsa.xcpd.soap.header.security.Timestamp;
 
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+import org.opensaml.saml2.core.Assertion;
+import org.opensaml.saml2.core.impl.AssertionImpl;
+
 public class XcpdUtils {
 	
-	public static DiscoveryRequestSoapEnvelope generateDiscoveryRequest(String samlMessage, String givenInput, String familyInput){
+	public static DiscoveryRequestSoapEnvelope generateDiscoveryRequest(AssertionImpl samlMessage, String givenInput, String familyInput){
 		PatientDiscoveryRequest pdr = new PatientDiscoveryRequest();
 		CreationTime ct = new CreationTime();
 		ct.value = String.valueOf(System.currentTimeMillis());
@@ -260,7 +261,29 @@ public class XcpdUtils {
 		
 		sh.action = action;
 		sh.cttl = cttl;
-		sh.saml = samlMessage;
+		Security security = new Security();
+		Timestamp time = new Timestamp();
+		Created created = new Created();
+		Expires expires = new Expires();
+		KeyInfo keyInfo = new KeyInfo();
+		SecurityTokenReference str = new SecurityTokenReference();
+		KeyIdentifier keyIdentifier = new KeyIdentifier();
+		DateTime now = new DateTime();
+		created.value = now.toString();
+		expires.value = now.plusHours(1).toString();
+		time.id = "_1";
+		time.created = created;
+		time.expires = expires;
+		security.timestamp = time;
+		keyIdentifier.valueType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID";
+		keyIdentifier.value = "ed62b6fb-4d73-4011-9f7c-43e0575b6317";
+		str.id = "uuid_2ca69267-90bd-4785-a28e-ad9cee6d962e";
+		str.tokenType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0";
+		str.keyIdentifier = keyIdentifier;
+		keyInfo.securityTokenReference = str;
+		security.keyInfo = keyInfo;
+		security.assertion = samlMessage;
+		sh.security = security;
 		
 		se.sHeader = sh;
 		se.sBody = sb;
@@ -268,7 +291,7 @@ public class XcpdUtils {
 		return se;
 	}
 	
-	public static QueryRequestSoapEnvelope generateQueryRequest(String samlMessage){
+	public static QueryRequestSoapEnvelope generateQueryRequest(AssertionImpl samlMessage){
 		QueryRequestSoapEnvelope se = new QueryRequestSoapEnvelope();
 		QueryRequestSoapHeader sh = new QueryRequestSoapHeader();
 		QueryRequestSoapBody sb = new QueryRequestSoapBody();
@@ -340,7 +363,30 @@ public class XcpdUtils {
 		sh.to.mustUnderstand = "1";
 		sh.to.to = "http://localhost:2647/XdsService/DocumentConsumerReceiver.svc";
 		
-		sh.saml = samlMessage;
+		
+		Security security = new Security();
+		Timestamp time = new Timestamp();
+		Created created = new Created();
+		Expires expires = new Expires();
+		KeyInfo keyInfo = new KeyInfo();
+		SecurityTokenReference str = new SecurityTokenReference();
+		KeyIdentifier keyIdentifier = new KeyIdentifier();
+		DateTime now = new DateTime();
+		created.value = now.toString();
+		expires.value = now.plusHours(1).toString();
+		time.id = "_1";
+		time.created = created;
+		time.expires = expires;
+		security.timestamp = time;
+		keyIdentifier.valueType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID";
+		keyIdentifier.value = "ed62b6fb-4d73-4011-9f7c-43e0575b6317";
+		str.id = "uuid_2ca69267-90bd-4785-a28e-ad9cee6d962e";
+		str.tokenType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0";
+		str.keyIdentifier = keyIdentifier;
+		keyInfo.securityTokenReference = str;
+		security.keyInfo = keyInfo;
+		sh.security = security;
+		security.assertion = samlMessage;
 		
 		se.body = sb;
 		se.header = sh;
@@ -348,7 +394,7 @@ public class XcpdUtils {
 		return se;
 	}
 	
-	public static RetrieveDocumentSetRequestSoapEnvelope generateDocumentRequest(String samlMessage){
+	public static RetrieveDocumentSetRequestSoapEnvelope generateDocumentRequest(AssertionImpl samlMessage){
 		
 		RetrieveDocumentSetRequestSoapEnvelope rdse = new RetrieveDocumentSetRequestSoapEnvelope();
 		RetrieveDocumentSetRequestSoapBody rdsb = new RetrieveDocumentSetRequestSoapBody();
@@ -366,7 +412,30 @@ public class XcpdUtils {
 		rdsh.to.mustUnderstand = "1";
 		rdsh.to.to = "http://localhost:2647/XdsService/DocumentConsumerReceiver.svc";
 		
-		rdsh.saml = samlMessage;
+		Security security = new Security();
+		Timestamp time = new Timestamp();
+		Created created = new Created();
+		Expires expires = new Expires();
+		KeyInfo keyInfo = new KeyInfo();
+		SecurityTokenReference str = new SecurityTokenReference();
+		KeyIdentifier keyIdentifier = new KeyIdentifier();
+		DateTime now = new DateTime();
+		created.value = now.toString();
+		expires.value = now.plusHours(1).toString();
+		time.id = "_1";
+		time.created = created;
+		time.expires = expires;
+		security.timestamp = time;
+		keyIdentifier.valueType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID";
+		keyIdentifier.value = "ed62b6fb-4d73-4011-9f7c-43e0575b6317";
+		str.id = "uuid_2ca69267-90bd-4785-a28e-ad9cee6d962e";
+		str.tokenType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0";
+		str.keyIdentifier = keyIdentifier;
+		keyInfo.securityTokenReference = str;
+		security.keyInfo = keyInfo;
+		security.assertion = samlMessage;
+		rdsh.security = security;
+		security.assertion = samlMessage;
 		
 		RetrieveDocumentSetRequest rdsr = new RetrieveDocumentSetRequest();
 		
