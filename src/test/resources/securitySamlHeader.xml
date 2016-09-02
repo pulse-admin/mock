@@ -1,0 +1,48 @@
+<wsse:Security>
+	<saml2:Assertion xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion"
+		ID="12345678-1234-1234-12345678910" IssueInstant="2016-08-25T19:17:47.974Z"
+		Version="2.0">
+		<saml2:AuthnStatement AuthnInstant="2016-08-25T19:17:48.021Z"
+			SessionIndex="abcdedf1234567" SessionNotOnOrAfter="2016-08-25T19:17:48.036Z">
+			<saml2:AuthnContext>
+				<saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</saml2:AuthnContextClassRef>
+			</saml2:AuthnContext>
+		</saml2:AuthnStatement>
+		<saml2:AttributeStatement>
+			<saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:subject:role">
+				<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">
+					<Role xmlns="urn:hl7-org:v3" xsi:type="CE" code="46255001"
+						codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED_CT"
+						displayName="Pharmacist" />
+				</saml2:AttributeValue>
+			</saml2:Attribute>
+			<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse">
+				<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">
+					<PurposeOfUse xmlns="urn:hl7-org:v3" xsi:type="CE"
+						code="DISASTER" codeSystem="2.16.840.1.113883.3.18.7.1"
+						codeSystemName="nhin-purpose" displayName="Use and disclosures for disaster relief purposes" />
+				</saml2:AttributeValue>
+			</saml2:Attribute>
+			<saml2:Attribute
+				Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id">
+				<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">medicalclinic.org</saml2:AttributeValue>
+			</saml2:Attribute>
+			<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:subject-id">
+				<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">John</saml2:AttributeValue>
+			</saml2:Attribute>
+			<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization">
+				<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">Medical
+					Clinic One</saml2:AttributeValue>
+			</saml2:Attribute>
+			<saml2:Attribute Name="urn:nhin:names:saml:homeCommunityId">
+				<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">urn:oid:2.16.840.1.113883.3.190</saml2:AttributeValue>
+			</saml2:Attribute>
+		</saml2:AttributeStatement>
+	</saml2:Assertion>
+</wsse:Security>
