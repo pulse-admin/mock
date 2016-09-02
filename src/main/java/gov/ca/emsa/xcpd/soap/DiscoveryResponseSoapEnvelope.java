@@ -1,5 +1,6 @@
 package gov.ca.emsa.xcpd.soap;
 
+import gov.ca.emsa.xcpd.soap.fault.SOAPFault;
 import gov.ca.emsa.xcpd.soap.header.DiscoveryResponseSoapHeader;
 
 import javax.xml.bind.annotation.XmlAttribute;

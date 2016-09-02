@@ -13,6 +13,7 @@ import gov.ca.emsa.xcpd.soap.QueryResponseSoapBody;
 import gov.ca.emsa.xcpd.soap.QueryResponseSoapEnvelope;
 import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetResponseSoapBody;
 import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetResponseSoapEnvelope;
+import gov.ca.emsa.xcpd.soap.fault.SOAPFault;
 import gov.ca.emsa.xcpd.soap.header.DiscoveryResponseSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.QueryResponseSoapHeader;
 import gov.ca.emsa.xcpd.soap.header.RetrieveDocumentSetResponseSoapHeader;
@@ -453,6 +454,18 @@ public class XcpdUtils {
 		return rdse;
 	}
 	
+	public static DiscoveryResponseSoapEnvelope generateDiscoverySOAPFault(){
+		DiscoveryResponseSoapEnvelope pdr = new DiscoveryResponseSoapEnvelope();
+		DiscoveryResponseSoapBody body = new DiscoveryResponseSoapBody();
+		SOAPFault fault = new SOAPFault();
+		fault.faultcode = "assertionError";
+		fault.faultString = "Unable to validate the SAML assertion";
+		pdr.sBody = body;
+		pdr.sBody.fault = fault;
+		
+		return null;
+	}
+	
 	public static DiscoveryResponseSoapEnvelope generateDiscoveryResponse(String givenInput, String familyInput){
 		PatientDiscoveryResponse pdr = new PatientDiscoveryResponse();
 		CreationTime ct = new CreationTime();
@@ -645,6 +658,18 @@ public class XcpdUtils {
 		return se;
 	}
 	
+	public static QueryResponseSoapEnvelope generateQuerySOAPFault(){
+		QueryResponseSoapEnvelope pdr = new QueryResponseSoapEnvelope();
+		QueryResponseSoapBody body = new QueryResponseSoapBody();
+		SOAPFault fault = new SOAPFault();
+		fault.faultcode = "assertionError";
+		fault.faultString = "Unable to validate the SAML assertion";
+		pdr.body = body;
+		pdr.body.fault = fault;
+		
+		return null;
+	}
+	
 	public static QueryResponseSoapEnvelope generateQueryResponse(){
 		QueryResponseSoapEnvelope se = new QueryResponseSoapEnvelope();
 		QueryResponseSoapHeader sh = new QueryResponseSoapHeader();
@@ -725,6 +750,18 @@ public class XcpdUtils {
 		se.header = sh;
 		
 		return se;
+	}
+	
+	public static RetrieveDocumentSetResponseSoapEnvelope generateDocumentSetSOAPFault(){
+		RetrieveDocumentSetResponseSoapEnvelope pdr = new RetrieveDocumentSetResponseSoapEnvelope();
+		RetrieveDocumentSetResponseSoapBody body = new RetrieveDocumentSetResponseSoapBody();
+		SOAPFault fault = new SOAPFault();
+		fault.faultcode = "assertionError";
+		fault.faultString = "Unable to validate the SAML assertion";
+		pdr.body = body;
+		pdr.body.fault = fault;
+		
+		return null;
 	}
 	
 	public static RetrieveDocumentSetResponseSoapEnvelope generateDocumentResponse(){

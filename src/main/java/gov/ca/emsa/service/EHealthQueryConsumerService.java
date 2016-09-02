@@ -32,32 +32,43 @@ public class EHealthQueryConsumerService {
 	@RequestMapping(value = "/patientDiscovery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public DiscoveryResponseSoapEnvelope patientDiscovery(@RequestBody DiscoveryRequestSoapEnvelope dr) throws JsonProcessingException{
 		PatientSearch patientSearchTerms = new PatientSearch();
-		ParameterList parameterList = dr.sBody.PRPA_IN201305UV02.controlActProcess.getQueryByParameter().parameterList;
-		patientSearchTerms.setDob(parameterList.getLivingSubjectBirthTime().value.value);
-		patientSearchTerms.setGender(parameterList.getLivingSubjectAdministrativeGender().value.code);
-		patientSearchTerms.setGivenName(parameterList.getLivingSubjectName().getValue().given);
-		patientSearchTerms.setFamilyName(parameterList.getLivingSubjectName().getValue().family);
-		
-		return XcpdUtils.generateDiscoveryResponse(patientSearchTerms.getGivenName(), patientSearchTerms.getFamilyName());
-		
+		if(dr.sHeader.security.assertion != null){
+			ParameterList parameterList = dr.sBody.PRPA_IN201305UV02.controlActProcess.getQueryByParameter().parameterList;
+			patientSearchTerms.setDob(parameterList.getLivingSubjectBirthTime().value.value);
+			patientSearchTerms.setGender(parameterList.getLivingSubjectAdministrativeGender().value.code);
+			patientSearchTerms.setGivenName(parameterList.getLivingSubjectName().getValue().given);
+			patientSearchTerms.setFamilyName(parameterList.getLivingSubjectName().getValue().family);
+			return XcpdUtils.generateDiscoveryResponse(patientSearchTerms.getGivenName(), patientSearchTerms.getFamilyName());
+		}else{
+			// if saml assertion doesnt exist
+			return XcpdUtils.generateDiscoverySOAPFault();
+		}
 	}
 	
 	@RequestMapping(value = "/queryRequest", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public QueryResponseSoapEnvelope queryRequest(@RequestBody QueryRequestSoapEnvelope qr) throws JsonProcessingException{
-		//patient id
-		String patientId = qr.body.adhocQueryRequest.adhocQuery.id;
-		//parameters for the documents to return
-		ArrayList<Slot> slots = qr.body.adhocQueryRequest.adhocQuery.slots;
-		
-		return XcpdUtils.generateQueryResponse();
+		if(qr.header.security.assertion != null){
+			//patient id
+			String patientId = qr.body.adhocQueryRequest.adhocQuery.id;
+			//parameters for the documents to return
+			ArrayList<Slot> slots = qr.body.adhocQueryRequest.adhocQuery.slots;
+			return XcpdUtils.generateQueryResponse();
+		}else{
+			// if saml assertion doesnt exist
+			return XcpdUtils.generateQuerySOAPFault();
+		}
 	}
 	
 	@RequestMapping(value = "/documentRequest", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public RetrieveDocumentSetResponseSoapEnvelope documentRequest(@RequestBody RetrieveDocumentSetRequestSoapEnvelope rds) throws JsonProcessingException{
-		//patient id
-		RetrieveDocumentSetRequest repositoryId = rds.body.documentSetRequest;
-		
-		return XcpdUtils.generateDocumentResponse();
+		if(rds.header.security.assertion != null){
+			//patient id
+			RetrieveDocumentSetRequest repositoryId = rds.body.documentSetRequest;
+			return XcpdUtils.generateDocumentResponse();
+		}else{
+			// if saml assertion doesnt exist
+			return XcpdUtils.generateDocumentSetSOAPFault();
+		}
 	}
 
 }
