@@ -2,17 +2,9 @@ package gov.ca.emsa.service;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.JAXBContext;
+
 import gov.ca.emsa.pulse.common.domain.PatientSearch;
-import gov.ca.emsa.xcpd.XcpdUtils;
-import gov.ca.emsa.xcpd.aqr.Slot;
-import gov.ca.emsa.xcpd.prpa.cap.qbp.ParameterList;
-import gov.ca.emsa.xcpd.rds.RetrieveDocumentSetRequest;
-import gov.ca.emsa.xcpd.soap.DiscoveryRequestSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.DiscoveryResponseSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.QueryRequestSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.QueryResponseSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetRequestSoapEnvelope;
-import gov.ca.emsa.xcpd.soap.RetrieveDocumentSetResponseSoapEnvelope;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
