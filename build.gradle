@@ -70,6 +70,8 @@ dependencies {
   compile('org.opensaml:opensaml:2.6.4')
   compile('gov.ca.emsa.pulse:common:0.0.1-SNAPSHOT')
   compile group: 'org.springframework', name: 'spring-test'
+  compile group: 'org.springframework.ws', name: 'spring-ws-core', version: '2.3.0.RELEASE'
+  compile group: 'org.connectopensource', name: 'CONNECTCommonTypesLib', version: '4.0.9'
   testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

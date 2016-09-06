@@ -1,12 +1,10 @@
 package gov.ca.emsa;
 
-import gov.ca.emsa.saml.SamlGenerator;
-import gov.ca.emsa.service.HIEPatientSearchService;
+import gov.ca.emsa.service.impl.HIEPatientSearchService;
 
 import java.util.Random;
 import java.util.Timer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,8 +22,6 @@ public class MockApplication {
 	
 	@Value("${serviceUrl}")
 	private String serviceUrl;
-	
-	@Autowired static SamlGenerator samlGenerator;
 	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(MockApplication.class, args);
@@ -50,8 +46,8 @@ public class MockApplication {
 
 		if(minimumSeconds > 0 && maximumSeconds > 0) {
 			psTask = new HIEPatientSearchService();
-			psTask.setExpirationMillis(patientSearchIntervalMillis);
-			psTask.setServiceUrl(serviceUrl);
+			/*psTask.setExpirationMillis(patientSearchIntervalMillis);
+			psTask.setServiceUrl(serviceUrl);*/
 			
 			timer.schedule(psTask, patientSearchIntervalMillis);
 
