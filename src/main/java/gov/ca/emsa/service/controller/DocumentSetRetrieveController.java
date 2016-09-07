@@ -7,6 +7,7 @@ import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.opensaml.common.SAMLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -25,13 +26,17 @@ public class DocumentSetRetrieveController {
 	private static final Logger logger = LogManager.getLogger(DocumentSetRetrieveController.class);
 	@Autowired private ResourceLoader resourceLoader;
 	private static final String RESOURCE_FILE_NAME = "ValidDocumentSetRetrieveResponse.xml";
-	
+
 	@Autowired EHealthQueryConsumerService consumerService;
-	
+
 	@RequestMapping(value = "/retrieveDocumentSet", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public String documentRequest(@RequestBody String request) {
-		RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
-		
+		try {
+			RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
+		} catch (SAMLException e1) {
+			return consumerService.createSOAPFault();
+		}
+
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
 			return Resources.toString(documentsFile.getURL(), Charsets.UTF_8);

@@ -1,12 +1,24 @@
 package gov.ca.emsa.service.controller;
 
 import java.io.IOException;
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
+import javax.xml.namespace.QName;
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPConstants;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPFault;
 
 import gov.ca.emsa.service.EHealthQueryConsumerService;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hl7.v3.PRPAIN201305UV02;
+import org.opensaml.common.SAMLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -29,8 +41,13 @@ public class PatientDiscoveryController {
 	
 	@RequestMapping(value = "/patientDiscovery", method = RequestMethod.POST, produces={"application/xml"} , consumes ={"application/xml"})
 	public String patientDiscovery(@RequestBody String request){
-		PRPAIN201305UV02 requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);
-
+		try{
+			PRPAIN201305UV02 requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);
+		}catch(SAMLException e){
+			return consumerService.createSOAPFault();
+		} catch (SOAPException e) {
+			logger.error(e);
+		}
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
 			return Resources.toString(documentsFile.getURL(), Charsets.UTF_8);

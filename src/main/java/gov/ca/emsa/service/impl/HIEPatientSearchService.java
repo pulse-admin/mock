@@ -102,9 +102,9 @@ public class HIEPatientSearchService extends TimerTask {
 	@Override
 	public void run() {
 		try {
-			sendPatientSearchRequest();
-			sendQueryRequest();
-			sendDocumentSetRequest();
+			//sendPatientSearchRequest();
+			//sendQueryRequest();
+			//sendDocumentSetRequest();
 		} catch(Exception ex) {
 			logger.error("Error sending SOAP search query", ex);
 		}
