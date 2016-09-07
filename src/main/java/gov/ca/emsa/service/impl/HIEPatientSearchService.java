@@ -59,13 +59,14 @@ public class HIEPatientSearchService extends TimerTask {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + PATIENT_DISCOVERY_RESOURCE_FILE_NAME);
-			request= Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			request = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			logger.info(request);
 		} catch (IOException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
-		String patientDiscoveryResponse = restTemplate.postForObject(serviceUrl + "/patientDiscovery", request, String.class);
-		logger.info(patientDiscoveryResponse);
+		//String patientDiscoveryResponse = restTemplate.postForObject(serviceUrl + "/patientDiscovery", request, String.class);
+		//logger.info(patientDiscoveryResponse);
 		logger.info("HIE sending patient discovery search query with SOAP...");
 	}
 	
@@ -74,13 +75,14 @@ public class HIEPatientSearchService extends TimerTask {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + DOCUMENT_QUERY_RESOURCE_FILE_NAME);
-			request= Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			request = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			logger.info(request);
 		} catch (IOException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
-		String queryResponse = restTemplate.postForObject(serviceUrl + "/queryRequest", request, String.class);
-		logger.info(queryResponse);
+		//String queryResponse = restTemplate.postForObject(serviceUrl + "/queryRequest", request, String.class);
+		//logger.info(queryResponse);
 		logger.info("HIE sending query patient search with SOAP...");
 	}
 	
@@ -89,22 +91,23 @@ public class HIEPatientSearchService extends TimerTask {
 		String request;
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + RETRIEVE_DOCUMENT_SET_RESOURCE_FILE_NAME);
-			request= Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			request = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			logger.info(request);
 		} catch (IOException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
-		String queryResponse = restTemplate.postForObject(serviceUrl + "/documentRequest", request, String.class);
-		logger.info(queryResponse);
+		//String queryResponse = restTemplate.postForObject(serviceUrl + "/documentRequest", request, String.class);
+		//logger.info(queryResponse);
 		logger.info("HIE sending document set search query with SOAP...");
 	}
 
 	@Override
 	public void run() {
 		try {
-			//sendPatientSearchRequest();
-			//sendQueryRequest();
-			//sendDocumentSetRequest();
+			sendPatientSearchRequest();
+			sendQueryRequest();
+			sendDocumentSetRequest();
 		} catch(Exception ex) {
 			logger.error("Error sending SOAP search query", ex);
 		}
