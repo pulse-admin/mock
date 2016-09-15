@@ -1,8 +1,9 @@
 package gov.ca.emsa.domain;
 
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Patient {
@@ -15,7 +16,11 @@ public class Patient {
 	private Address address;
 	private String ssn;
 	
+	@XmlTransient
+	private DateTimeFormatter formatter;
+	
 	public Patient() {
+		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	}
 	
 	public String getOrgPatientId() {
@@ -27,11 +32,13 @@ public class Patient {
 	}
 
 	public String getDateOfBirth() {
-		return dateOfBirth;
+		return this.dateOfBirth;
 	}
+	
 	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+		this.dateOfBirth = dateOfBirth; 
 	}
+	
 	public String getGender() {
 		return gender;
 	}

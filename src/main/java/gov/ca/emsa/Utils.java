@@ -7,6 +7,9 @@ import gov.ca.emsa.domain.Patient;
 import gov.ca.emsa.domain.Patients;
 
 import java.io.InputStream;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -56,6 +59,14 @@ public class Utils {
 			patients = unmarshal(jaxbUnmarshaller , Patient.class , xmlFile);
 		} catch (JAXBException e) {
 			e.printStackTrace();
+		}
+		
+		//I messed up when creating the test data - all the dates should have been yyyy-MM-dd
+		DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		for(Patient patient : patients) {
+			TemporalAccessor dt = inFormatter.parse(patient.getDateOfBirth());
+			patient.setDateOfBirth(outFormatter.format(dt));
 		}
 		return patients;
 	}

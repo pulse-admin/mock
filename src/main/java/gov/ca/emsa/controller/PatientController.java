@@ -1,9 +1,6 @@
 package gov.ca.emsa.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -11,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -37,14 +33,11 @@ public class PatientController {
 	private static final String E_HEALTH_PATIENT_FILE_NAME = "ehealthPatients.xml";
 	private static final String IHE_PATIENT_FILE_NAME = "ihePatients.xml";
 	@Autowired private ResourceLoader resourceLoader;
-	private DateTimeFormatter patientDateFormatter;
-	private static final String PATIENT_DOB_FORMAT = "MM/dd/yyyy";
 	
 	private List<Patient> ehealthPatients = null;
 	private List<Patient> ihePatients = null;
 	
 	public PatientController() {
-		patientDateFormatter = DateTimeFormatter.ofPattern(PATIENT_DOB_FORMAT);
 	}
 	
 	//note that the first name and last name search params must be a valid java regex
@@ -118,7 +111,7 @@ public class PatientController {
 		
 		List<Patient> matchedPatients = new ArrayList<Patient>();
 		//match against the passed in parameters
-		for(Patient patient : ehealthPatients) {
+		for(Patient patient : toSearch) {
 			boolean givenNameMatch = true;
 			if(!StringUtils.isEmpty(givenName)) {
 				if(!StringUtils.isEmpty(patient.getGivenName()) &&
@@ -147,11 +140,11 @@ public class PatientController {
 				
 				ZonedDateTime patientDob = null;
 				try {
-					 LocalDate date = LocalDate.parse(patient.getDateOfBirth(), patientDateFormatter);
+					 LocalDate date = LocalDate.parse(patient.getDateOfBirth(), DateTimeFormatter.ISO_DATE);
 					 patientDob = date.atStartOfDay(ZoneId.of("GMT"));
 					 patientDob = patientDob.truncatedTo(ChronoUnit.DAYS);
 				} catch(DateTimeParseException pex) {
-					logger.error("Could not parse " + patient.getDateOfBirth() + " as a date in the format " + PATIENT_DOB_FORMAT);
+					logger.error("Could not parse " + patient.getDateOfBirth() + " as a date in the format " + DateTimeFormatter.ISO_DATE);
 					throw new IOException(pex.getMessage());
 				} 
 				
@@ -167,7 +160,10 @@ public class PatientController {
 					gender = "M";
 				} else if(gender.toUpperCase().startsWith("F")) {
 					gender = "F";
+				} else if(gender.toUpperCase().startsWith("U")) {
+					gender = "UN";
 				}
+				
 				if(!patient.getGender().equals(gender)) {
 					genderMatch = false;
 				}
