@@ -58,34 +58,6 @@ public class DocumentController {
 		return new String(buffer);
 	}
 	
-	//note that the first name and last name search params must be a valid java regex
-	@RequestMapping(value= "/ihe/documents", method = RequestMethod.POST, 
-			produces="application/json; charset=utf-8")
-	public List<Document> getIHEDocuments(@RequestParam(value="patientId", required=true) String patientId,
-			@RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
-		
-
-		List<Document> docsForPatient = new ArrayList<Document>();
-		List<File> ccdaResults = getRandomFileList();
-		for(File ccda : ccdaResults) {
-			Document document = new Document();
-			document.setName(ccda.getName());
-			docsForPatient.add(document);
-		}
-		return docsForPatient;
-    }
-		
-	@RequestMapping(value= "/ihe/document", method = RequestMethod.POST, 
-			produces="application/xml; charset=utf-8")
-	public String getIHEDocument(@RequestParam(value="name") String docName, 
-			HttpServletResponse response, @RequestParam(value="samlMessage", required=false) String samlMessage) throws IOException {
-
-		Resource documentFile = resourceLoader.getResource("classpath:" + CCDA_RESOURCE_DIR + File.separator + docName);		
-		byte[] buffer = new byte[(int)documentFile.contentLength()];
-		IOUtils.readFully(documentFile.getInputStream(), buffer);
-		return new String(buffer);
-	}
-		
 	private List<File> getRandomFileList() throws IOException {
 		List<File> result = new ArrayList<File>();
 		
