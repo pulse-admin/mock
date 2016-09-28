@@ -53,9 +53,9 @@ public class PatientController {
 		
 		try {	
 			List<Patient> matchedPatients = searchPatients(givenName, familyName, dob, gender, ehealthPatients);
-			long sleepMillis = (long)(Math.random()*60000);
-			logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
-			Thread.sleep(sleepMillis);
+			//long sleepMillis = (long)(Math.random()*60000);
+			//logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
+			Thread.sleep(1000);
 			return matchedPatients;
 		} catch(InterruptedException inter) {
 			logger.error("Interruped!", inter);
