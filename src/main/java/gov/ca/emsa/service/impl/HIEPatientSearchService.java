@@ -21,9 +21,10 @@ public class HIEPatientSearchService extends TimerTask {
 	private long intervalMillis;
 	
 	@Autowired private ResourceLoader resourceLoader;
-	private static final String RETRIEVE_DOCUMENT_SET_RESOURCE_FILE_NAME = "ValidDocumentSetRetrieveResponse.xml";
-	private static final String DOCUMENT_QUERY_RESOURCE_FILE_NAME = "ValidDocumentQueryResponse.xml";
-	private static final String PATIENT_DISCOVERY_RESOURCE_FILE_NAME = "ValidXcpdResponse.xml";
+	private static final String RETRIEVE_DOCUMENT_SET_RESOURCE_FILE_NAME = "ValidDocumentSetRequest.xml";
+	private static final String DOCUMENT_QUERY_RESOURCE_FILE_NAME = "ValidDocumentQueryRequest.xml";
+	private static final String PATIENT_DISCOVERY_RESOURCE_FILE_NAME = "ValidXcpdRequest.xml";
+	int count = 1;
 	
 	/*public AssertionImpl createSamlHeader(){
 		SAMLInput input = new SAMLInput();
@@ -60,14 +61,15 @@ public class HIEPatientSearchService extends TimerTask {
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + PATIENT_DISCOVERY_RESOURCE_FILE_NAME);
 			request = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
-			logger.info(request);
 		} catch (IOException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
-		//String patientDiscoveryResponse = restTemplate.postForObject(serviceUrl + "/patientDiscovery", request, String.class);
+		logger.info(serviceUrl + "/patientDiscovery");
+		logger.info("HIE sending Patient Discovery search query from file " + PATIENT_DISCOVERY_RESOURCE_FILE_NAME);
+		String patientDiscoveryResponse = restTemplate.postForObject(serviceUrl + "/patientDiscovery", request, String.class);
 		//logger.info(patientDiscoveryResponse);
-		logger.info("HIE sending patient discovery search query with SOAP...");
+		
 	}
 	
 	public void sendQueryRequest() throws Exception{
@@ -76,14 +78,14 @@ public class HIEPatientSearchService extends TimerTask {
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + DOCUMENT_QUERY_RESOURCE_FILE_NAME);
 			request = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
-			logger.info(request);
 		} catch (IOException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
-		//String queryResponse = restTemplate.postForObject(serviceUrl + "/queryRequest", request, String.class);
+		logger.info("HIE sending Document Query from file " + DOCUMENT_QUERY_RESOURCE_FILE_NAME);
+		String queryResponse = restTemplate.postForObject(serviceUrl + "/documentQuery", request, String.class);
 		//logger.info(queryResponse);
-		logger.info("HIE sending query patient search with SOAP...");
+		
 	}
 	
 	public void sendDocumentSetRequest() throws Exception{
@@ -92,22 +94,29 @@ public class HIEPatientSearchService extends TimerTask {
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + RETRIEVE_DOCUMENT_SET_RESOURCE_FILE_NAME);
 			request = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
-			logger.info(request);
 		} catch (IOException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
-		//String queryResponse = restTemplate.postForObject(serviceUrl + "/documentRequest", request, String.class);
+		logger.info("HIE sending Document Set Retreive query from file " + RETRIEVE_DOCUMENT_SET_RESOURCE_FILE_NAME);
+		String queryResponse = restTemplate.postForObject(serviceUrl + "/retrieveDocumentSet", request, String.class);
 		//logger.info(queryResponse);
-		logger.info("HIE sending document set search query with SOAP...");
+		
 	}
 
 	@Override
 	public void run() {
 		try {
-			sendPatientSearchRequest();
-			sendQueryRequest();
-			sendDocumentSetRequest();
+			if(count == 1){
+				sendPatientSearchRequest();
+				count++;
+			}else if(count == 2){
+				sendQueryRequest();
+				count++;
+			}else if(count == 3){
+				sendDocumentSetRequest();
+				count = 1;
+			}
 		} catch(Exception ex) {
 			logger.error("Error sending SOAP search query", ex);
 		}

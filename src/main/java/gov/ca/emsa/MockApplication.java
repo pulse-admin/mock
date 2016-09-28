@@ -46,10 +46,10 @@ public class MockApplication {
 
 		if(minimumSeconds > 0 && maximumSeconds > 0) {
 			psTask = new HIEPatientSearchService();
-			/*psTask.setExpirationMillis(patientSearchIntervalMillis);
-			psTask.setServiceUrl(serviceUrl);*/
+			/*psTask.setExpirationMillis(patientSearchIntervalMillis);*/
+			psTask.setServiceUrl(serviceUrl);
 			
-			timer.schedule(psTask, patientSearchIntervalMillis);
+			timer.schedule(psTask, patientSearchIntervalMillis, patientSearchIntervalMillis);
 
 		}
 		
