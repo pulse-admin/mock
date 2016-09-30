@@ -2,6 +2,8 @@ package gov.ca.emsa.service.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
@@ -65,11 +67,24 @@ public class PatientDiscoveryController {
 			Resource pdFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
 			defaultPatientDiscoveryResult = Resources.toString(pdFile.getURL(), Charsets.UTF_8);
 			
-			//change the values in the return data to match the search parameters
+			//number of results we want to have; alter the data for that
+			int numResults = getNumberOfResults();
 			PRPAIN201306UV02 resultObj = consumerService.unMarshallPatientDiscoveryResponseObject(defaultPatientDiscoveryResult);
 			List<PRPAIN201306UV02MFMIMT700711UV01Subject1> subjects = resultObj.getControlActProcess().getSubject();
-			if(subjects != null && subjects.size() > 0) {
-				PRPAIN201306UV02MFMIMT700711UV01Subject1 subject = subjects.get(0);
+			switch(numResults) {
+			case 0:
+				subjects.clear();
+				break;
+			case 1:
+				subjects.remove(1);
+				break;
+			default:
+					break;
+			}
+			
+			//change the values in the return data to match the search parameters
+			subjects = resultObj.getControlActProcess().getSubject();
+			for(PRPAIN201306UV02MFMIMT700711UV01Subject1 subject : subjects) {
 				PRPAIN201306UV02MFMIMT700711UV01Subject2 currSubject = subject.getRegistrationEvent().getSubject1();
 				JAXBElement<PRPAMT201310UV02Person> patientPerson = currSubject.getPatient().getPatientPerson();
 				List<PNExplicit> names = patientPerson.getValue().getName();
@@ -80,20 +95,22 @@ public class PatientDiscoveryController {
 							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("given")) {
 								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getGivenName());
 							} else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
-								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(search.getFamilyName());
+								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getFamilyName()));
 							}
 						}
 					}
 				}
-				patientPerson.getValue().getAdministrativeGenderCode().setCode(search.getGender());
 				
-				//trim off the "T" part of the date
-				String dob = search.getDob();
-				if(dob.contains("T")) {
-					int timeIndex = dob.indexOf("T");
-					dob = dob.substring(0, timeIndex);
+				if(search.getGender().startsWith("F")) {
+					patientPerson.getValue().getAdministrativeGenderCode().setCode("F");
+				} else if(search.getGender().startsWith("M")) {
+					patientPerson.getValue().getAdministrativeGenderCode().setCode("M");
+				} else {
+					patientPerson.getValue().getAdministrativeGenderCode().setCode("UN");
 				}
-				patientPerson.getValue().getBirthTime().setValue(dob);
+				
+				LocalDate dob = LocalDate.parse(search.getDob(), DateTimeFormatter.ISO_DATE_TIME);
+				patientPerson.getValue().getBirthTime().setValue(dob.format(DateTimeFormatter.BASIC_ISO_DATE));
 			}
 			result = consumerService.marshallPatientDiscoveryResponse(resultObj);
 		} catch (IOException e) {
@@ -105,7 +122,7 @@ public class PatientDiscoveryController {
 		}
 		
 		try {	
-			long sleepMillis = (long)(Math.random()*60000);
+			long sleepMillis = (long)(Math.random()*30000);
 			logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
 			Thread.sleep(sleepMillis);
 			return result;
@@ -113,5 +130,18 @@ public class PatientDiscoveryController {
 			logger.error("Interruped!", inter);
 			throw inter;
 		}		
+	}
+	
+	private int getNumberOfResults() {
+		long rand = Math.round(Math.random()*2);
+		return (int)rand;
+	}
+	
+	private String getLastName(String searchTerm) {
+		long rand = Math.round(Math.random()*10);
+		if(rand%2 == 0) {
+			return searchTerm;
+		}
+		return searchTerm + "-Smith";
 	}
 }

@@ -55,4 +55,12 @@ public class ReadPatientsFileTests extends TestCase {
 		assertTrue(zdt.isEqual(result));
 		 
 	}
+	
+	@Test
+	public void testGetLocalDate() {
+		String dob = "1983-02-05T05:00:00.000Z";
+		LocalDate result = LocalDate.parse(dob, DateTimeFormatter.ISO_DATE_TIME);
+		assertNotNull(result);
+		System.out.println(result);
+	}
 }
