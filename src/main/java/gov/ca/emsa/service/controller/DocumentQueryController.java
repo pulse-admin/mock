@@ -1,15 +1,24 @@
 package gov.ca.emsa.service.controller;
 
+import gov.ca.emsa.pulse.common.domain.Document;
 import gov.ca.emsa.service.EHealthQueryConsumerService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import javax.xml.soap.SOAPException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 
 import org.opensaml.common.SAMLException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +37,11 @@ import com.google.common.io.Resources;
 @RestController
 public class DocumentQueryController {
 	private static final Logger logger = LogManager.getLogger(DocumentQueryController.class);
-	@Autowired private ResourceLoader resourceLoader;
 	private static final String RESOURCE_FILE_NAME = "ValidDocumentQueryResponse.xml";
-
+	private static final int MIN_DOCUMENTS = 1;
+	private static final int MAX_DOCUMENTS = 2;
+	
+	@Autowired private ResourceLoader resourceLoader;
 	@Autowired EHealthQueryConsumerService consumerService;
 
 	@RequestMapping(value = "/documentQuery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
@@ -41,12 +52,22 @@ public class DocumentQueryController {
 			return consumerService.createSOAPFault();
 		}
 
+		int numDocsToReturn = ThreadLocalRandom.current().nextInt(MIN_DOCUMENTS, MAX_DOCUMENTS + 1);
+		String result = "";
 		try {
 			Resource documentsFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
-			return Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
-		} catch (IOException e) {
+			result = Resources.toString(documentsFile.getURL(), Charsets.UTF_8);
+			if(numDocsToReturn == 1) {
+				AdhocQueryResponse response = consumerService.unMarshallDocumentQueryResponseObject(result);
+				RegistryObjectListType regList = response.getRegistryObjectList();
+				regList.getIdentifiable().remove(1);
+				result = consumerService.marshallDocumentQueryResponse(response);
+			}
+		} catch (IOException |SAMLException | SOAPException | JAXBException e) {
 			logger.error(e);
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
+		
+		return result;
 	}
 }

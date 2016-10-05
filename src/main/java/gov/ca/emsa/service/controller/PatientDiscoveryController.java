@@ -122,7 +122,7 @@ public class PatientDiscoveryController {
 		}
 		
 		try {	
-			long sleepMillis = (long)(Math.random()*60000);
+			long sleepMillis = (long)(Math.random()*30000);
 			logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
 			Thread.sleep(sleepMillis);
 			return result;

@@ -108,13 +108,13 @@ public class HIEPatientSearchService extends TimerTask {
 	public void run() {
 		try {
 			if(count == 1){
-				sendPatientSearchRequest();
+				//sendPatientSearchRequest();
 				count++;
 			}else if(count == 2){
 				sendQueryRequest();
 				count++;
 			}else if(count == 3){
-				sendDocumentSetRequest();
+				//sendDocumentSetRequest();
 				count = 1;
 			}
 		} catch(Exception ex) {

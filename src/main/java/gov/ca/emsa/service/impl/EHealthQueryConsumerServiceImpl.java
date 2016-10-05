@@ -31,6 +31,7 @@ import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.Source;
 
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
 
 import org.hl7.v3.*;
 import org.opensaml.common.SAMLException;
@@ -281,6 +282,49 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		return (PRPAIN201306UV02) requestObj.getValue();
 	}
 
+	public AdhocQueryResponse unMarshallDocumentQueryResponseObject(String xml) throws SAMLException,SOAPException 
+	{
+		MessageFactory factory = null;
+		try {
+			factory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
+		} catch (SOAPException e1) {
+			logger.error(e1);
+		}
+		SOAPMessage soapMessage = null;
+		try {
+			soapMessage = factory.createMessage(new MimeHeaders(), new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+		} catch (IOException | SOAPException e) {
+			logger.error(e);
+		}
+		SaajSoapMessage saajSoap = new SaajSoapMessage(soapMessage);
+		Source requestSource = saajSoap.getSoapBody().getPayloadSource();
+
+		// Create a JAXB context
+		JAXBContext jc = null;
+		try {
+			jc = JAXBContext.newInstance(AdhocQueryResponse.class);
+		}
+		catch (Exception ex) {
+			logger.error(ex);
+		}
+
+		// Create JAXB unmarshaller
+		Unmarshaller unmarshaller = null;
+		try {
+			unmarshaller = jc.createUnmarshaller();
+		}
+		catch (Exception ex) {
+			logger.error(ex);
+		}
+		JAXBElement<?> requestObj = null;
+		try {
+			requestObj = (JAXBElement<?>) unmarshaller.unmarshal(requestSource, AdhocQueryResponse.class);
+		} catch (JAXBException e) {
+			logger.error(e);
+		}
+		return (AdhocQueryResponse) requestObj.getValue();
+	}
+	
 	public Marshaller createMarshaller(JAXBContext jc){
 		// Create JAXB marshaller
 		Marshaller marshaller = null;
@@ -307,6 +351,42 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 			logger.error(e);
 		}
 		JAXBElement<PRPAIN201306UV02> je = new JAXBElement<PRPAIN201306UV02>(new QName("PRPAIN201306UV02"), PRPAIN201306UV02.class, response);
+		Document document = null;
+		try {
+			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		Marshaller documentMarshaller = createMarshaller(createJAXBContext(response.getClass()));
+		documentMarshaller.marshal(je, document);
+		try {
+			soapMessage.getSOAPBody().addDocument(document);
+		} catch (SOAPException e1) {
+			e1.printStackTrace();
+		}
+		OutputStream sw = new ByteArrayOutputStream();
+		try {
+			soapMessage.writeTo(sw);
+		} catch (IOException | SOAPException e) {
+			e.printStackTrace();
+		}
+		return sw.toString();
+	}
+	
+	public String marshallDocumentQueryResponse(AdhocQueryResponse response) throws JAXBException{
+		MessageFactory factory = null;
+		try {
+			factory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
+		} catch (SOAPException e1) {
+			logger.error(e1);
+		}
+		SOAPMessage soapMessage = null;
+		try {
+			soapMessage = factory.createMessage();
+		} catch (SOAPException e) {
+			logger.error(e);
+		}
+		JAXBElement<AdhocQueryResponse> je = new JAXBElement<AdhocQueryResponse>(new QName("AdhocQueryResponse"), AdhocQueryResponse.class, response);
 		Document document = null;
 		try {
 			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
