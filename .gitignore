@@ -354,3 +354,5 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 /src/main/resources/organizations1.xml
+src/main/resources/application.properties
+src/test/resources/application-test.properties

@@ -6,11 +6,27 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.xml.bind.JAXBException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.opensaml.common.SAMLException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.common.io.Resources;
+import com.sun.istack.ByteArrayDataSource;
 
 import gov.ca.emsa.pulse.common.domain.DocumentIdentifier;
 import gov.ca.emsa.service.EHealthQueryConsumerService;
@@ -20,34 +36,21 @@ import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType.DocumentResponse;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.opensaml.common.SAMLException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-import com.sun.istack.ByteArrayDataSource;
-
 @RestController
 public class DocumentSetRetrieveController {
 	private static final Logger logger = LogManager.getLogger(DocumentSetRetrieveController.class);
 	@Autowired private ResourceLoader resourceLoader;
 	private static final String CCDA_RESOURCE_DIR = "ccdas";
-
 	@Autowired EHealthQueryConsumerService consumerService;
+	
+	@Value("${minimumResponseSeconds}")
+	private String minimumResponseSeconds;
+	
+	@Value("${maximumResponseSeconds}")
+	private String maximumResponseSeconds;
 
 	@RequestMapping(value = "/retrieveDocumentSet", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-	public String documentRequest(@RequestBody String request) {
+	public String documentRequest(@RequestBody String request) throws InterruptedException  {
 		try {
 			RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
 			List<DocumentIdentifier> docIds = new ArrayList<DocumentIdentifier>();
@@ -79,7 +82,18 @@ public class DocumentSetRetrieveController {
 				docResponse.setDocument(dh);
 				response.getDocumentResponse().add(docResponse);
 			}
-			return consumerService.marshallDocumentSetResponseType(response);
+			
+			try {	
+				int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
+				int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
+				int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
+				logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+				Thread.sleep(responseIntervalSeconds*1000);
+				return consumerService.marshallDocumentSetResponseType(response);
+			} catch(InterruptedException inter) {
+				logger.error("Interruped!", inter);
+				throw inter;
+			}	
 		} catch (IOException | SAMLException | JAXBException e) {
 			logger.error(e);
 			return consumerService.createSOAPFault();

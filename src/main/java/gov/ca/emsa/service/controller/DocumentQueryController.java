@@ -1,9 +1,5 @@
 package gov.ca.emsa.service.controller;
 
-import gov.ca.emsa.pulse.common.domain.Document;
-import gov.ca.emsa.pulse.common.domain.DocumentIdentifier;
-import gov.ca.emsa.service.EHealthQueryConsumerService;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -15,18 +11,9 @@ import javax.xml.soap.SOAPException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
-import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.LocalizedStringType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ValueListType;
-
 import org.opensaml.common.SAMLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
@@ -39,6 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
+import gov.ca.emsa.service.EHealthQueryConsumerService;
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.ValueListType;
+
 @RestController
 public class DocumentQueryController {
 	private static final Logger logger = LogManager.getLogger(DocumentQueryController.class);
@@ -50,8 +46,14 @@ public class DocumentQueryController {
 	@Autowired private ResourceLoader resourceLoader;
 	@Autowired EHealthQueryConsumerService consumerService;
 
+	@Value("${minimumResponseSeconds}")
+	private String minimumResponseSeconds;
+	
+	@Value("${maximumResponseSeconds}")
+	private String maximumResponseSeconds;
+	
 	@RequestMapping(value = "/documentQuery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-	public String queryRequest(@RequestBody String request) {
+	public String queryRequest(@RequestBody String request) throws InterruptedException {
 		try{
 			AdhocQueryRequest requestObj = consumerService.unMarshallDocumentQueryRequestObject(request);
 		}catch(SAMLException e){
@@ -96,7 +98,17 @@ public class DocumentQueryController {
 			throw new HttpMessageNotWritableException("Could not read response file");
 		}
 		
-		return result;
+		try {	
+			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
+			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
+			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
+			logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+			Thread.sleep(responseIntervalSeconds*1000);
+			return result;
+		} catch(InterruptedException inter) {
+			logger.error("Interruped!", inter);
+			throw inter;
+		}	
 	}
 	
 	private long getLargestFileSizeInDir(String dir) throws IOException {
