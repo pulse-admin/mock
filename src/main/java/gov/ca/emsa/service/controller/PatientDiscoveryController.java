@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -22,6 +23,7 @@ import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject2;
 import org.hl7.v3.PRPAMT201310UV02Person;
 import org.opensaml.common.SAMLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -42,9 +44,14 @@ public class PatientDiscoveryController {
 	private static final Logger logger = LogManager.getLogger(PatientDiscoveryController.class);
 	@Autowired private ResourceLoader resourceLoader;
 	private static final String RESOURCE_FILE_NAME = "ValidXcpdResponse.xml";
-	
 	@Autowired EHealthQueryConsumerService consumerService;
 	@Autowired SOAPToJSONService soapToJson;
+	
+	@Value("${minimumResponseSeconds}")
+	private String minimumResponseSeconds;
+	
+	@Value("${maximumResponseSeconds}")
+	private String maximumResponseSeconds;
 	
 	@RequestMapping(value = "/patientDiscovery", 
 			method = RequestMethod.POST, 
@@ -122,9 +129,11 @@ public class PatientDiscoveryController {
 		}
 		
 		try {	
-			long sleepMillis = (long)(Math.random()*30000);
-			logger.info("Sleeping for " + (sleepMillis/1000) + " seconds");
-			Thread.sleep(sleepMillis);
+			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
+			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
+			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
+			logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+			Thread.sleep(responseIntervalSeconds*1000);
 			return result;
 		} catch(InterruptedException inter) {
 			logger.error("Interruped!", inter);

@@ -1,5 +1,0 @@
-server.port = 8090
-patientSearchInterval = 6000
-serviceUrl = localhost:8090/search
-minimumResponseSeconds=1
-maximumResponseSeconds=5
