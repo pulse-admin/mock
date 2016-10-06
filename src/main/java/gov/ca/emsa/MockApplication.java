@@ -4,6 +4,8 @@ import gov.ca.emsa.service.impl.HIEPatientSearchService;
 
 import java.util.Random;
 import java.util.Timer;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -36,11 +38,10 @@ public class MockApplication {
 	public HIEPatientSearchService patientSearchManager() {
 		int minimumSeconds = new Integer(minimumResponseSeconds.trim());
 		int maximumSeconds = new Integer(maximumResponseSeconds.trim());
-		
-		Random random = new Random();
+	
 		Timer timer = new Timer();
-		
-		long patientSearchIntervalMillis = random.nextInt(maximumSeconds - minimumSeconds + 1) + minimumSeconds * 1000;
+		int patientSearchIntervalSeconds = ThreadLocalRandom.current().nextInt(minimumSeconds, maximumSeconds + 1);
+		long patientSearchIntervalMillis = patientSearchIntervalSeconds * 1000;
 		
 		HIEPatientSearchService psTask = null;
 
