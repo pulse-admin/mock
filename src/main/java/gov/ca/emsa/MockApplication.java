@@ -15,12 +15,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @SpringBootApplication
 public class MockApplication {
-	
-	@Value("${minimumResponseSeconds}")
-	private String minimumResponseSeconds;
-	
-	@Value("${maximumResponseSeconds}")
-	private String maximumResponseSeconds;
+	@Value("${patientSearchIntervalSeconds}")
+	private String patientSearchIntervalSeconds;
 	
 	@Value("${serviceUrl}")
 	private String serviceUrl;
@@ -36,23 +32,15 @@ public class MockApplication {
 	
 	@Bean
 	public HIEPatientSearchService patientSearchManager() {
-		int minimumSeconds = new Integer(minimumResponseSeconds.trim());
-		int maximumSeconds = new Integer(maximumResponseSeconds.trim());
+		int patientSearchIntervalSecondsInt = new Integer(patientSearchIntervalSeconds.trim());
 	
 		Timer timer = new Timer();
-		int patientSearchIntervalSeconds = ThreadLocalRandom.current().nextInt(minimumSeconds, maximumSeconds + 1);
-		long patientSearchIntervalMillis = patientSearchIntervalSeconds * 1000;
+		long patientSearchIntervalMillis = patientSearchIntervalSecondsInt * 1000;
 		
 		HIEPatientSearchService psTask = null;
-
-		if(minimumSeconds > 0 && maximumSeconds > 0) {
-			psTask = new HIEPatientSearchService();
-			/*psTask.setExpirationMillis(patientSearchIntervalMillis);*/
-			psTask.setServiceUrl(serviceUrl);
-			
-			timer.schedule(psTask, patientSearchIntervalMillis, patientSearchIntervalMillis);
-
-		}
+		psTask = new HIEPatientSearchService();
+		psTask.setServiceUrl(serviceUrl);
+		timer.schedule(psTask, patientSearchIntervalMillis, patientSearchIntervalMillis);
 		
 		return psTask;
 	}
