@@ -2,7 +2,9 @@ package gov.ca.emsa.service.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.activation.DataHandler;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import com.sun.istack.ByteArrayDataSource;
 
 @RestController
 public class DocumentSetRetrieveController {
@@ -69,7 +72,9 @@ public class DocumentSetRetrieveController {
 				
 				File documentFile = getRandomFileInDir(CCDA_RESOURCE_DIR);
 				Resource documentResource = resourceLoader.getResource("classpath:" + CCDA_RESOURCE_DIR + File.separator + documentFile.getName());
-				DataSource ds = new FileDataSource(documentResource.getFile());
+				String docStr = Resources.toString(documentResource.getURL(), Charset.forName("UTF-8"));
+				String binaryDocStr = base64EncodeMessage(docStr);
+				DataSource ds = new ByteArrayDataSource(binaryDocStr.getBytes(), "text/xml; charset=UTF-8");
 			    DataHandler dh = new DataHandler(ds);
 				docResponse.setDocument(dh);
 				response.getDocumentResponse().add(docResponse);
@@ -97,4 +102,10 @@ public class DocumentSetRetrieveController {
 		}
 		return result;
 	}
+	
+	 private String base64EncodeMessage(String rawMessage){
+		 byte[] bytes = rawMessage.getBytes(Charset.forName("UTF-8"));
+	     String encoded = Base64.getEncoder().encodeToString(bytes);
+	     return encoded;
+	 }
 }

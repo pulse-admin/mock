@@ -1,8 +1,11 @@
 package gov.ca.emsa.service.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.List;
 
@@ -14,7 +17,6 @@ import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Base64InputStream;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.hl7.v3.Charset;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.google.common.io.Resources;
+import com.sun.istack.ByteArrayDataSource;
 
 import gov.ca.emsa.MockTestConfig;
 import gov.ca.emsa.service.EHealthQueryConsumerService;
@@ -82,12 +85,12 @@ public class DocumentSetRetrieveControllerTest extends TestCase {
 		docResponse.setDocumentUniqueId("3.3.3.3.3");
 		docResponse.setMimeType("text/xml");
 		
-		Resource documentResource = resourceLoader.getResource("classpath:patients.xml");		
-		byte[] buffer = new byte[(int)documentResource.contentLength()];
-		IOUtils.readFully(documentResource.getInputStream(), buffer);
-		String fileContents = new String(buffer);
-		
-		DataHandler dh = new DataHandler(fileContents, docResponse.getMimeType());
+		Resource documentResource = resourceLoader.getResource("classpath:367 XDR.xml");	
+		String docStr = Resources.toString(documentResource.getURL(), Charset.forName("UTF-8"));
+		String binaryDocStr = base64EncodeMessage(docStr);
+		System.out.println(binaryDocStr);
+		DataSource ds = new ByteArrayDataSource(binaryDocStr.getBytes(), "text/xml; charset=UTF-8");
+	    DataHandler dh = new DataHandler(ds);
 		docResponse.setDocument(dh);
 		response.getDocumentResponse().add(docResponse);
 		
@@ -96,13 +99,10 @@ public class DocumentSetRetrieveControllerTest extends TestCase {
 		DataHandler dataHandler = docResponse.getDocument();
 		InputStream in = null;
 		try {
-			in = dataHandler.getInputStream();
-			//TODO confirm if the size is in bytes and is it guaranteed we will have it?
-			long byteCount = new Long(documentResource.contentLength()).longValue();
-			byte[] dataBytes = new byte[(int)byteCount];
-			IOUtils.readFully(in, dataBytes);
-			assertNotNull(dataBytes);
-			String dataStr = new String(dataBytes);
+			in = dataHandler.getDataSource().getInputStream();
+			StringWriter writer = new StringWriter();
+			org.apache.commons.io.IOUtils.copy(in, writer, Charset.forName("UTF-8"));
+			String dataStr = base64DecodeMessage(writer.toString());
 			assertNotNull(dataStr);
 			assertTrue(dataStr.length() > 0);
 			System.out.println(dataStr);
@@ -115,4 +115,19 @@ public class DocumentSetRetrieveControllerTest extends TestCase {
 			} catch(Exception ignore) {}
 		}
 	}
+	
+	  public static String base64EncodeMessage(String rawMessage){
+	        
+	        byte[] bytes = rawMessage.getBytes(Charset.forName("UTF-8"));
+	        String encoded = Base64.getEncoder().encodeToString(bytes);
+	        return encoded;
+	        
+	    }
+	    
+	    public static String base64DecodeMessage(String encodedMessage){
+	        
+	        byte[] decoded = Base64.getDecoder().decode(encodedMessage);
+	        String decodedMessage = new String(decoded, Charset.forName("UTF-8"));
+	        return decodedMessage;
+	    }
 }
