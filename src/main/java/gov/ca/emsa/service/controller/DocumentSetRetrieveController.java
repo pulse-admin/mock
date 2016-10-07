@@ -41,6 +41,12 @@ public class DocumentSetRetrieveController {
 	private static final Logger logger = LogManager.getLogger(DocumentSetRetrieveController.class);
 	@Autowired private ResourceLoader resourceLoader;
 	private static final String CCDA_RESOURCE_DIR = "ccdas";
+	private String[] ccdaList = {CCDA_RESOURCE_DIR + File.separator + "367 XDR.xml", 
+			CCDA_RESOURCE_DIR + File.separator + "CCDA_CCD_b1_Ambulatory_v2.xml",
+			CCDA_RESOURCE_DIR + File.separator + "CCDA_CCD_b1_InPatient_v2.xml",
+			CCDA_RESOURCE_DIR + File.separator + "problems-and-medications.xml",
+			CCDA_RESOURCE_DIR + File.separator + "Transition_of_Care_Referral_Summary.xml",
+			CCDA_RESOURCE_DIR + File.separator + "VCN CCDA.xml"};
 	@Autowired EHealthQueryConsumerService consumerService;
 	
 	@Value("${minimumResponseSeconds}")
@@ -73,8 +79,7 @@ public class DocumentSetRetrieveController {
 				docResponse.setDocumentUniqueId(docId.getDocumentUniqueId());
 				docResponse.setMimeType("text/xml");
 				
-				File documentFile = getRandomFileInDir(CCDA_RESOURCE_DIR);
-				Resource documentResource = resourceLoader.getResource("classpath:" + CCDA_RESOURCE_DIR + File.separator + documentFile.getName());
+				Resource documentResource = getRandomCcdaResource();
 				String docStr = Resources.toString(documentResource.getURL(), Charset.forName("UTF-8"));
 				String binaryDocStr = base64EncodeMessage(docStr);
 				DataSource ds = new ByteArrayDataSource(binaryDocStr.getBytes(), "text/xml; charset=UTF-8");
@@ -100,9 +105,29 @@ public class DocumentSetRetrieveController {
 		}		
 	}
 	
+	/**
+	 * Using this for now because we can't call getFile() on a resources
+	 * loaded in a jar. 
+	 * @return
+	 */
+	private Resource getRandomCcdaResource() {
+		int index = (int)(Math.floor(Math.random()*ccdaList.length));
+		String path = ccdaList[index];
+		logger.debug("Loading " + path + " as a resource.");
+		return resourceLoader.getResource("classpath:" + path);
+	}
+	
+	/**
+	 * getFile() doesn't work on resources located in a jar, so for now this method is 
+	 * obsolete although I would like to revisit it because it seems so much better
+	 * to get the list of files rather than hardcode them. 
+	 * This code would work on local deployments but not from the spring-boot jar.
+	 * @param dir
+	 * @return
+	 * @throws IOException
+	 */
 	private File getRandomFileInDir(String dir) throws IOException {
 		File result = null;
-		
 		Resource ccdaResource = resourceLoader.getResource("classpath:" + dir);
 		File ccdaDir = ccdaResource.getFile();
 		if(ccdaDir.exists() && ccdaDir.isDirectory()) {
@@ -111,7 +136,7 @@ public class DocumentSetRetrieveController {
 				int fileIndex = (int)(Math.floor(Math.random()*ccdas.length));
 				result = ccdas[fileIndex];
 			} else {
-				logger.error("Could not find any ccdas in " + ccdaDir.getAbsolutePath());
+				logger.error("Could not find any ccdas in " + ccdaDir.getName());
 			}
 		}
 		return result;
