@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
@@ -93,9 +94,9 @@ public class PatientDiscoveryController {
 					for(Serializable namePart : nameParts) {
 						if(namePart instanceof JAXBElement<?>) {
 							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("given")) {
-								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getGivenName());
+								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getPatientName().getGivenName().get(0));
 							} else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
-								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getFamilyName()));
+								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientName().getFamilyName()));
 							}
 						}
 					}
