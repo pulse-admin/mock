@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -101,9 +102,9 @@ public class PatientDiscoveryController {
 					for(Serializable namePart : nameParts) {
 						if(namePart instanceof JAXBElement<?>) {
 							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("given")) {
-								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getGivenName());
+								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getPatientNames().get(0).getGivenName().get(0));
 							} else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
-								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getFamilyName()));
+								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().get(0).getFamilyName()));
 							}
 						}
 					}

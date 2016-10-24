@@ -15,8 +15,7 @@
 		<a:To s:mustUnderstand="1">http://servicelocation/IHEXCPDRespondingGateway
 		</a:To>
 		<xcpd:CorrelationTimeToLive>P0Y0M7D</xcpd:CorrelationTimeToLive>
-		<wsse:Security>
-			<saml2:Assertion ID="12345678-1234-1234-012345678910"
+		<wsse:Security><saml2:Assertion ID="12345678-1234-1234-012345678910"
 				IssueInstant="2016-08-31T17:22:43.295Z" Version="2.0"
 				xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
 				<saml2:Issuer
