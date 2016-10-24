@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -58,6 +59,7 @@ public class PatientDiscoveryController {
 			produces={"application/xml"} , 
 			consumes ={"application/xml"})
 	public String patientDiscovery(@RequestBody String request) throws InterruptedException {
+		logger.info("/patientDiscovery received request: " + request);
 		PRPAIN201305UV02 requestObj = null;
 		try{
 			requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);
@@ -100,9 +102,9 @@ public class PatientDiscoveryController {
 					for(Serializable namePart : nameParts) {
 						if(namePart instanceof JAXBElement<?>) {
 							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("given")) {
-								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getGivenName());
+								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getPatientNames().get(0).getGivenName().get(0));
 							} else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
-								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getFamilyName()));
+								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().get(0).getFamilyName()));
 							}
 						}
 					}
@@ -132,7 +134,7 @@ public class PatientDiscoveryController {
 			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
 			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
 			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-			logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+			logger.info("/patientDiscovery is waiting for " + responseIntervalSeconds + " seconds to return " + result);
 			Thread.sleep(responseIntervalSeconds*1000);
 			return result;
 		} catch(InterruptedException inter) {

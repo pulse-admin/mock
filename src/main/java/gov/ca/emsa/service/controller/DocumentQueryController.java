@@ -1,11 +1,8 @@
 package gov.ca.emsa.service.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.soap.SOAPException;
 
@@ -29,17 +26,12 @@ import com.google.common.io.Resources;
 import gov.ca.emsa.service.EHealthQueryConsumerService;
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ValueListType;
 
 @RestController
 public class DocumentQueryController {
 	private static final Logger logger = LogManager.getLogger(DocumentQueryController.class);
 	private static final String RESOURCE_FILE_NAME = "ValidDocumentQueryResponse.xml";
-	private static final String CCDA_RESOURCE_DIR = "ccdas";
 	private static final int MIN_DOCUMENTS = 1;
 	private static final int MAX_DOCUMENTS = 2;
 	
@@ -54,6 +46,7 @@ public class DocumentQueryController {
 	
 	@RequestMapping(value = "/documentQuery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public String queryRequest(@RequestBody String request) throws InterruptedException {
+		logger.info("/documentQuery received request " + request);
 		try{
 			AdhocQueryRequest requestObj = consumerService.unMarshallDocumentQueryRequestObject(request);
 		}catch(SAMLException e){
@@ -71,26 +64,6 @@ public class DocumentQueryController {
 				RegistryObjectListType regList = response.getRegistryObjectList();
 				regList.getIdentifiable().remove(1);	
 			}
-			
-			//adjust the sizes of the files to be the largest out of all the files in the ccda dir
-			long largestSize = getLargestFileSizeInDir(CCDA_RESOURCE_DIR);
-			RegistryObjectListType regList = response.getRegistryObjectList();
-			List<JAXBElement<? extends IdentifiableType>> idTypes = regList.getIdentifiable();
-			for(Object obj : idTypes) {
-				if(obj instanceof JAXBElement<?>) {
-					JAXBElement<?> jaxbObj = (JAXBElement<?>)obj;
-					if(jaxbObj != null && jaxbObj.getValue() != null && jaxbObj.getValue() instanceof ExtrinsicObjectType) {
-						ExtrinsicObjectType extObj = (ExtrinsicObjectType)jaxbObj.getValue();
-						List<SlotType1> slots = extObj.getSlot();
-						for(SlotType1 slot : slots) {
-							if(slot.getName().equalsIgnoreCase("size")) {
-								ValueListType values = slot.getValueList();
-								values.getValue().set(0, largestSize+"");
-							}
-						}
-					}
-				}
-			}
 
 			result = consumerService.marshallDocumentQueryResponse(response);
 		} catch (IOException |SAMLException | SOAPException | JAXBException e) {
@@ -102,28 +75,12 @@ public class DocumentQueryController {
 			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
 			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
 			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-			logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+			logger.info("/documentQuery is waiting for " + responseIntervalSeconds + " seconds to return " + result);
 			Thread.sleep(responseIntervalSeconds*1000);
 			return result;
 		} catch(InterruptedException inter) {
 			logger.error("Interruped!", inter);
 			throw inter;
 		}	
-	}
-	
-	private long getLargestFileSizeInDir(String dir) throws IOException {
-		long largest = 0;
-		
-		Resource ccdaResource = resourceLoader.getResource("classpath:" + dir);
-		File ccdaDir = ccdaResource.getFile();
-		if(ccdaDir.exists() && ccdaDir.isDirectory()) {
-			File[] ccdas = ccdaDir.listFiles();
-			for(int i = 0; i < ccdas.length; i++) {
-				if(ccdas[i].length() > largest) {
-					largest = ccdas[i].length();
-				}
-			}
-		}
-		return largest;
 	}
 }
