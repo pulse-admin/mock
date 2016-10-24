@@ -46,6 +46,7 @@ public class DocumentQueryController {
 	
 	@RequestMapping(value = "/documentQuery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public String queryRequest(@RequestBody String request) throws InterruptedException {
+		logger.info("/documentQuery received request " + request);
 		try{
 			AdhocQueryRequest requestObj = consumerService.unMarshallDocumentQueryRequestObject(request);
 		}catch(SAMLException e){
@@ -74,7 +75,7 @@ public class DocumentQueryController {
 			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
 			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
 			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-			logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+			logger.info("/documentQuery is waiting for " + responseIntervalSeconds + " seconds to return " + result);
 			Thread.sleep(responseIntervalSeconds*1000);
 			return result;
 		} catch(InterruptedException inter) {

@@ -59,6 +59,7 @@ public class PatientDiscoveryController {
 			produces={"application/xml"} , 
 			consumes ={"application/xml"})
 	public String patientDiscovery(@RequestBody String request) throws InterruptedException {
+		logger.info("/patientDiscovery received request: " + request);
 		PRPAIN201305UV02 requestObj = null;
 		try{
 			requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);
@@ -133,7 +134,7 @@ public class PatientDiscoveryController {
 			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
 			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
 			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-			logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+			logger.info("/patientDiscovery is waiting for " + responseIntervalSeconds + " seconds to return " + result);
 			Thread.sleep(responseIntervalSeconds*1000);
 			return result;
 		} catch(InterruptedException inter) {

@@ -57,6 +57,7 @@ public class DocumentSetRetrieveController {
 
 	@RequestMapping(value = "/retrieveDocumentSet", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public String documentRequest(@RequestBody String request) throws InterruptedException  {
+		logger.info("/retrieveDocumentSet received request " + request);
 		try {
 			RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
 			List<DocumentIdentifier> docIds = new ArrayList<DocumentIdentifier>();
@@ -88,13 +89,14 @@ public class DocumentSetRetrieveController {
 				response.getDocumentResponse().add(docResponse);
 			}
 			
+			String result = consumerService.marshallDocumentSetResponseType(response);
 			try {	
 				int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
 				int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
 				int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-				logger.info("Sleeping for " + responseIntervalSeconds + " seconds");
+				logger.info("/retrieveDocumentSet is waiting for " + responseIntervalSeconds + " seconds to return " + result);
 				Thread.sleep(responseIntervalSeconds*1000);
-				return consumerService.marshallDocumentSetResponseType(response);
+				return result;
 			} catch(InterruptedException inter) {
 				logger.error("Interruped!", inter);
 				throw inter;
