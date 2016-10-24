@@ -4,9 +4,13 @@ privateKey=C://samlPrivateKey.txt
 publicKey=C://samlPublicKey.txt
 
 # mock pretending to be an HIE querying us
-patientSearchIntervalSeconds = 600000 # how often (milliseconds) it queries PULSE
-serviceUrl = http://localhost:8090 # where the query goes
+# how often (milliseconds) it queries PULSE
+patientSearchIntervalSeconds = 600000
+# where the query goes
+serviceUrl = http://localhost:8090
 
 # mock pretending to be external organizations responding to us
-minimumResponseSeconds=1 # the quickest it can respond
-maximumResponseSeconds=5 # the slowest it can respond
+# the quickest it can respond
+minimumResponseSeconds=1
+# the slowest it can respond
+maximumResponseSeconds=5
