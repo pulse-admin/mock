@@ -102,9 +102,9 @@ public class PatientDiscoveryController {
 					for(Serializable namePart : nameParts) {
 						if(namePart instanceof JAXBElement<?>) {
 							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("given")) {
-								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getPatientNames().getGivenName().get(0).getGivenName());
+								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getPatientNames().get(0).getGivenName().get(0));
 							} else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
-								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().getFamilyName()));
+								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().get(0).getFamilyName()));
 							}
 						}
 					}
