@@ -6,7 +6,7 @@
 		<active>true</active>
 		<adapter>eHealth</adapter>
 		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:9080</endpointUrl>
+		<endpointUrl>http://localhost:9081</endpointUrl>
 		<username>org1User</username>
 		<password>password1</password>
 	</organization>
@@ -16,7 +16,7 @@
 		<active>true</active>
 		<adapter>eHealth</adapter>
 		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:9080</endpointUrl>
+		<endpointUrl>http://localhost:9081</endpointUrl>
 		<username>org1User</username>
 		<password>password1</password>
 	</organization>
@@ -26,7 +26,7 @@
 		<active>true</active>
 		<adapter>eHealth</adapter>
 		<ipAddress>127.0.0.1</ipAddress>
-		<endpointUrl>http://localhost:9080</endpointUrl>
+		<endpointUrl>http://localhost:9081</endpointUrl>
 		<username>org1User</username>
 		<password>password1</password>
 	</organization>	

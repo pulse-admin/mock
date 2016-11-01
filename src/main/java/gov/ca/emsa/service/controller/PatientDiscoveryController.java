@@ -10,12 +10,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
 import javax.xml.soap.SOAPException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hl7.v3.EnExplicitFamily;
 import org.hl7.v3.EnExplicitGiven;
+import org.hl7.v3.EnExplicitPrefix;
+import org.hl7.v3.EnExplicitSuffix;
 import org.hl7.v3.PNExplicit;
 import org.hl7.v3.PRPAIN201305UV02;
 import org.hl7.v3.PRPAIN201306UV02;
@@ -54,6 +57,7 @@ public class PatientDiscoveryController {
 	@Value("${maximumResponseSeconds}")
 	private String maximumResponseSeconds;
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/patientDiscovery", 
 			method = RequestMethod.POST, 
 			produces={"application/xml"} , 
@@ -101,12 +105,18 @@ public class PatientDiscoveryController {
 					List<Serializable> nameParts = name.getContent();
 					for(Serializable namePart : nameParts) {
 						if(namePart instanceof JAXBElement<?>) {
-							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("given")) {
-								((JAXBElement<EnExplicitGiven>)namePart).getValue().setContent(search.getPatientNames().get(0).getGivenName().get(0));
-							} else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
+							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
 								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().get(0).getFamilyName()));
+							}else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("prefix")){
+								((JAXBElement<EnExplicitPrefix>)namePart).getValue().setContent(search.getPatientNames().get(0).getPrefix());
+							}else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("suffix")){
+								((JAXBElement<EnExplicitSuffix>)namePart).getValue().setContent(search.getPatientNames().get(0).getSuffix());
 							}
 						}
+					}
+					for(String given : search.getPatientNames().get(0).getGivenName()){
+						JAXBElement<String> givenName = new JAXBElement<String>(new QName("given"), String.class, given);
+						nameParts.add(givenName);
 					}
 				}
 				
