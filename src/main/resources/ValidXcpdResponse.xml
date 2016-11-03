@@ -55,8 +55,6 @@
 										<family>Jones</family>
 										<nameType>L</nameType>
 									</name>
-									<telecom value="tel:+1-481-555-7684;ext=2342" use="WP" />
-									<telecom value="tel:+1-765-555-4352" use="HP" />
 									<administrativeGenderCode code="M" />
 									<birthTime value="19630804" />
 									<addr>
@@ -123,7 +121,6 @@
 										<given>Jim</given>
 										<family>Jones</family>
 									</name>
-									<telecom value="tel:+1-795-555-4745" use="HP" />
 									<administrativeGenderCode code="M" />
 									<birthTime value="19630713" />
 									<addr>
