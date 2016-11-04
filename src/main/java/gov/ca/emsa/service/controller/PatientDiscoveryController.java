@@ -19,18 +19,23 @@ import org.hl7.v3.EnExplicitFamily;
 import org.hl7.v3.EnExplicitGiven;
 import org.hl7.v3.EnExplicitPrefix;
 import org.hl7.v3.EnExplicitSuffix;
+import org.hl7.v3.II;
 import org.hl7.v3.PNExplicit;
 import org.hl7.v3.PRPAIN201305UV02;
 import org.hl7.v3.PRPAIN201306UV02;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject1;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject2;
+import org.hl7.v3.PRPAMT201306UV02LivingSubjectId;
+import org.hl7.v3.PRPAMT201310UV02OtherIDs;
 import org.hl7.v3.PRPAMT201310UV02Person;
+import org.hl7.v3.TELExplicit;
 import org.opensaml.common.SAMLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -128,8 +133,29 @@ public class PatientDiscoveryController {
 					patientPerson.getValue().getAdministrativeGenderCode().setCode("UN");
 				}
 				
-				LocalDate dob = LocalDate.parse(search.getDob(), DateTimeFormatter.ISO_DATE_TIME);
-				patientPerson.getValue().getBirthTime().setValue(dob.format(DateTimeFormatter.BASIC_ISO_DATE));
+				patientPerson.getValue().getBirthTime().setValue(search.getDob());
+				if(!StringUtils.isEmpty(search.getTelephone())){
+					TELExplicit tel = new TELExplicit();
+					tel.setValue("tel:+1-" + search.getTelephone());
+					patientPerson.getValue().getTelecom().add(tel);
+				}
+				if(!StringUtils.isEmpty(search.getSsn())){
+					List<PRPAMT201310UV02OtherIDs> otherIds = patientPerson.getValue().getAsOtherIDs();
+					for(PRPAMT201310UV02OtherIDs otherId : otherIds) {
+						List<String> classCodes = otherId.getClassCode();
+						for(String classCode : classCodes) {
+							if(classCode.equalsIgnoreCase("CIT")) {
+								List<II> citIds = otherId.getId();
+								for(II citId : citIds) {
+									if(citId.getRoot().equals("2.16.840.1.113883.4.1")) {
+										citId.setExtension(search.getSsn());
+									}
+								}
+							}
+						}
+					}
+				}
+				
 			}
 			result = consumerService.marshallPatientDiscoveryResponse(resultObj);
 		} catch (IOException e) {
