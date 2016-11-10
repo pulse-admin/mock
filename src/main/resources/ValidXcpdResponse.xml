@@ -58,9 +58,6 @@
 									<administrativeGenderCode code="M" />
 									<birthTime value="19630804" />
 									<addr>
-										<streetAddressLine>3443 North Arctic Avenue</streetAddressLine>
-										<city>Some City</city>
-										<state>IL</state>
 									</addr>
 									<asOtherIDs classCode="PAT">
 										<id root="1.2.840.114350.1.13.99997.2.3412" extension="38273D433" />
