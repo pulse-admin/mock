@@ -15,6 +15,7 @@ import javax.xml.soap.SOAPException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hl7.v3.ADExplicit;
 import org.hl7.v3.EnExplicitFamily;
 import org.hl7.v3.EnExplicitGiven;
 import org.hl7.v3.EnExplicitPrefix;
@@ -26,6 +27,7 @@ import org.hl7.v3.PRPAIN201306UV02;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject1;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject2;
 import org.hl7.v3.PRPAMT201306UV02LivingSubjectId;
+import org.hl7.v3.PRPAMT201306UV02PatientAddress;
 import org.hl7.v3.PRPAMT201310UV02OtherIDs;
 import org.hl7.v3.PRPAMT201310UV02Person;
 import org.hl7.v3.TELExplicit;
@@ -45,6 +47,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
 import gov.ca.emsa.pulse.common.domain.PatientSearch;
+import gov.ca.emsa.pulse.common.domain.PatientSearchAddress;
 import gov.ca.emsa.pulse.common.soap.SOAPToJSONService;
 import gov.ca.emsa.service.EHealthQueryConsumerService;
 
@@ -153,6 +156,22 @@ public class PatientDiscoveryController {
 								}
 							}
 						}
+					}
+				}
+				
+				PRPAMT201306UV02PatientAddress patientAddress = new PRPAMT201306UV02PatientAddress();
+				if(search.getAddresses() != null){
+					for(PatientSearchAddress patientSearchAddress : search.getAddresses()){
+						ADExplicit addr = new ADExplicit();
+						addr.getContent().add(new JAXBElement<String>(new QName("state"), String.class, patientSearchAddress.getState()));
+						addr.getContent().add(new JAXBElement<String>(new QName("city"), String.class, patientSearchAddress.getCity()));
+						addr.getContent().add(new JAXBElement<String>(new QName("postalCode"), String.class, patientSearchAddress.getZipcode()));
+
+						for(String line : patientSearchAddress.getLines()){
+							addr.getContent().add(new JAXBElement<String>(new QName("streetAddressLine"), String.class, line));
+						}
+						patientAddress.getValue().add(addr);
+						patientPerson.getValue().getAddr().add(addr);
 					}
 				}
 				
