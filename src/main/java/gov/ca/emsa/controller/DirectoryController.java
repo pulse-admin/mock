@@ -38,7 +38,7 @@ public class DirectoryController {
 	}
 	
 	@RequestMapping(value= "/Organization", method = RequestMethod.GET, produces="application/json; charset=utf-8")
-	public List<Organization> getOrganizations() {
+	public OrganizationWrapper getOrganizations() {
 		Resource organizationsFile = resourceLoader.getResource("classpath:" + ORGANIZATION_RESOURCE_FILE_NAME);
 		OrganizationWrapper parsed = null;
 		try {
@@ -46,11 +46,11 @@ public class DirectoryController {
 		} catch(IOException ex) {
 			logger.error("Could not parse organizations file", ex);
 		}
-		return parsed.getEntry();
+		return parsed;
 	}
 	
 	@RequestMapping(value= "/Location", method = RequestMethod.GET, produces="application/json; charset=utf-8")
-	public List<Location> getLocations() {
+	public LocationWrapper getLocations() {
 		Resource locationsFile = resourceLoader.getResource("classpath:" + LOCATIONS_RESOURCE_FILE_NAME);
 		LocationWrapper parsed = null;
 		try {
@@ -58,11 +58,11 @@ public class DirectoryController {
 		} catch(IOException ex) {
 			logger.error("Could not parse locations file", ex);
 		}
-		return parsed.getEntry();
+		return parsed;
 	}
 	
 	@RequestMapping(value= "/Endpoint", method = RequestMethod.GET, produces="application/json; charset=utf-8")
-	public List<Endpoint> getEndpoints() {
+	public EndpointWrapper getEndpoints() {
 		Resource endpointsFile = resourceLoader.getResource("classpath:" + ENDPOINTS_RESOURCE_FILE_NAME);
 		EndpointWrapper parsed = null;
 		try {
@@ -70,6 +70,6 @@ public class DirectoryController {
 		} catch(IOException ex) {
 			logger.error("Could not parse endpoints file", ex);
 		}
-		return parsed.getEntry();
+		return parsed;
 	}
 }
