@@ -2,9 +2,6 @@ package gov.ca.emsa.service.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,7 +14,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hl7.v3.ADExplicit;
 import org.hl7.v3.EnExplicitFamily;
-import org.hl7.v3.EnExplicitGiven;
 import org.hl7.v3.EnExplicitPrefix;
 import org.hl7.v3.EnExplicitSuffix;
 import org.hl7.v3.II;
@@ -26,7 +22,6 @@ import org.hl7.v3.PRPAIN201305UV02;
 import org.hl7.v3.PRPAIN201306UV02;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject1;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject2;
-import org.hl7.v3.PRPAMT201306UV02LivingSubjectId;
 import org.hl7.v3.PRPAMT201306UV02PatientAddress;
 import org.hl7.v3.PRPAMT201310UV02OtherIDs;
 import org.hl7.v3.PRPAMT201310UV02Person;
