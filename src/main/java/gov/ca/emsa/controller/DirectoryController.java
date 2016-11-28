@@ -23,7 +23,6 @@ import gov.ca.emsa.pulse.cten.domain.OrganizationWrapper;
 import io.swagger.annotations.Api;
 
 @RestController
-@Api(value="/mock")
 public class DirectoryController {
 	private static final Logger logger = LogManager.getLogger(DirectoryController.class);
 	private static final String ORGANIZATION_RESOURCE_FILE_NAME = "organizations.json";
@@ -37,7 +36,7 @@ public class DirectoryController {
 		jsonMapper = new ObjectMapper();
 	}
 	
-	@RequestMapping(value= "/Organization", method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	@RequestMapping(value= "/mock/Organization", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public OrganizationWrapper getOrganizations() {
 		Resource organizationsFile = resourceLoader.getResource("classpath:" + ORGANIZATION_RESOURCE_FILE_NAME);
 		OrganizationWrapper parsed = null;
@@ -49,7 +48,7 @@ public class DirectoryController {
 		return parsed;
 	}
 	
-	@RequestMapping(value= "/Location", method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	@RequestMapping(value= "/mock/Location", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public LocationWrapper getLocations() {
 		Resource locationsFile = resourceLoader.getResource("classpath:" + LOCATIONS_RESOURCE_FILE_NAME);
 		LocationWrapper parsed = null;
@@ -61,7 +60,7 @@ public class DirectoryController {
 		return parsed;
 	}
 	
-	@RequestMapping(value= "/Endpoint", method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	@RequestMapping(value= "/mock/Endpoint", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public EndpointWrapper getEndpoints() {
 		Resource endpointsFile = resourceLoader.getResource("classpath:" + ENDPOINTS_RESOURCE_FILE_NAME);
 		EndpointWrapper parsed = null;
