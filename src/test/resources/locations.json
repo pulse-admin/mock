@@ -1,0 +1,361 @@
+{
+  "type" : "searchset",
+  "total" : 4,
+  "resourceType" : "Bundle",
+  "link" : [ {
+    "relation" : "self",
+    "url" : "https://localhost:9080/mock/Location?_count=50"
+  } ],
+  "entry" : [ {
+    "resource" : {
+      "status" : "active",
+      "name" : "John Muir Medical Center",
+      "mode" : "instance",
+      "description" : "Concord-based hospital facility within the John Muir Health healthcare provider organization",
+      "type" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "code" : "HOSP",
+          "display" : "Hospital"
+        } ]
+      },
+      "physicalType" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/location-physical-type",
+          "code" : "bu",
+          "display" : "Building"
+        } ]
+      },
+      "address" : {
+        "type" : "physical",
+        "text" : "2540 East St, Concord, CA 94520",
+        "line" : "2540 East St",
+        "city" : "Concord",
+        "state" : "CA",
+        "postalCode" : "94520",
+        "resourceType" : "Address",
+        "use" : "work"
+      },
+      "managingOrganization" : {
+        "display" : "John Muir Health Foundation",
+        "url" : "Organization/1"
+      },
+      "meta" : {
+        "lastUpdated" : 1478294131000,
+        "resourceVersion" : "114782941311306161"
+      },
+      "identifier" : [ {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1841687787",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      } ],
+      "endpoint" : [ {
+        "display" : "PCDH Receiver",
+        "url" : "Endpoint/20"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/19"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/1"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/3"
+      }, {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/2"
+      } ],
+      "resourceType" : "Location",
+      "id" : "1"
+    },
+    "fullUrl" : "https://localhost:9080/mock/Location/1",
+    "search" : {
+      "mode" : "match"
+    }
+  }, {
+    "resource" : {
+      "status" : "active",
+      "name" : "John Muir Medical Center (Walnut Creek)",
+      "mode" : "instance",
+      "description" : "Primary Walnut Creek-based hospital facility within the John Muir Health healthcare provider organization",
+      "type" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "code" : "HOSP",
+          "display" : "Hospital"
+        } ]
+      },
+      "physicalType" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/location-physical-type",
+          "code" : "bu",
+          "display" : "Building"
+        } ]
+      },
+      "address" : {
+        "type" : "physical",
+        "text" : "1601 Ygnacio Valley Rd, Walnut Creek, CA 94598",
+        "line" : "1601 Ygnacio Valley Rd",
+        "city" : "Walnut Creek",
+        "state" : "CA",
+        "postalCode" : "94598",
+        "resourceType" : "Address",
+        "use" : "work"
+      },
+      "managingOrganization" : {
+        "display" : "John Muir Health Foundation",
+        "url" : "Organization/1"
+      },
+      "meta" : {
+        "lastUpdated" : 1478294180000,
+        "resourceVersion" : "214782941804974561"
+      },
+      "identifier" : [ {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1740215219",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      } ],
+      "endpoint" : [ {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/11"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/10"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/12"
+      } ],
+      "resourceType" : "Location",
+      "id" : "2"
+    },
+    "fullUrl" : "https://localhost:9080/mock/Location/2",
+    "search" : {
+      "mode" : "match"
+    }
+  }, {
+    "resource" : {
+      "status" : "active",
+      "name" : "Contra Costa Regional Medical Center",
+      "mode" : "instance",
+      "description" : "Primary hospital facility within the Contra Costa County healthcare provider organization",
+      "type" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "code" : "HOSP",
+          "display" : "Hospital"
+        } ]
+      },
+      "physicalType" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/location-physical-type",
+          "code" : "bu",
+          "display" : "Building"
+        } ]
+      },
+      "address" : {
+        "type" : "physical",
+        "text" : "2500 Alhambra Ave, Martinez, CA 94553",
+        "line" : "2500 Alhambra Ave",
+        "city" : "Martinez",
+        "state" : "CA",
+        "postalCode" : "94553",
+        "resourceType" : "Address",
+        "use" : "work"
+      },
+      "managingOrganization" : {
+        "display" : "Contra Costa Health Services",
+        "url" : "Organization/2"
+      },
+      "meta" : {
+        "lastUpdated" : 1478294478000,
+        "resourceVersion" : "1414782944777844607"
+      },
+      "identifier" : [ {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1417029562",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1386719086",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1659602647",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1497820203",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1427138726",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1477623205",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1356413496",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      }, {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1215286554",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      } ],
+      "endpoint" : [ {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/6"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/5"
+      }, {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/4"
+      } ],
+      "resourceType" : "Location",
+      "id" : "14"
+    },
+    "fullUrl" : "https://localhost:9080/Location/3",
+    "search" : {
+      "mode" : "match"
+    }
+  }, {
+    "resource" : {
+      "status" : "active",
+      "name" : "San Ramon Regional Medical Center",
+      "mode" : "instance",
+      "description" : "Primary hospital facility within the San Ramon Regional Medical Center healthcare provider organization, partnered with John Muir Health",
+      "type" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "code" : "HOSP",
+          "display" : "Hospital"
+        } ]
+      },
+      "physicalType" : {
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/location-physical-type",
+          "code" : "bu",
+          "display" : "Building"
+        } ]
+      },
+      "address" : {
+        "type" : "physical",
+        "text" : "6001 Norris Canyon Rd, San Ramon, CA 94583",
+        "line" : "6001 Norris Canyon Rd",
+        "city" : "San Ramon",
+        "state" : "CA",
+        "postalCode" : "94583",
+        "resourceType" : "Address",
+        "use" : "work"
+      },
+      "managingOrganization" : {
+        "display" : "San Ramon Regional Medical Center",
+        "url" : "Organization/3"
+      },
+      "meta" : {
+        "lastUpdated" : 1478294536000,
+        "resourceVersion" : "1514782945363342146"
+      },
+      "identifier" : [ {
+        "use" : "usual",
+        "system" : "NPI",
+        "value" : "1841398104",
+        "type" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/v2/0203",
+            "code" : "PRN",
+            "display" : "Provider number"
+          } ]
+        }
+      } ],
+      "endpoint" : [ {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/8"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/7"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/9"
+      } ],
+      "resourceType" : "Location",
+      "id" : "15"
+    },
+    "fullUrl" : "https://localhost:9080/Location/4",
+    "search" : {
+      "mode" : "match"
+    }
+  } ]
+}

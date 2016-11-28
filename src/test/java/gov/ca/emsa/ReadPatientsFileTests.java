@@ -27,18 +27,6 @@ import junit.framework.TestCase;
 @WebAppConfiguration
 @ContextConfiguration(classes = MockTestConfig.class)
 public class ReadPatientsFileTests extends TestCase {
-	@Autowired private ResourceLoader resourceLoader;
-
-	@Test
-	public void readPatientsFileTest() throws Exception{
-		Resource patientFile = resourceLoader.getResource("classpath:patients.xml");
-		List<Patient> patients = Utils.readPatients(patientFile.getInputStream());
-		assertNotNull(patients);
-		assertEquals(100, patients.size());
-
-		Patient first = patients.get(0);
-		assertEquals("Mary", first.getGivenName());
-	}
 	
 	@Test
 	public void testParseZonedDateTime() {

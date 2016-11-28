@@ -1,0 +1,158 @@
+{
+  "type" : "searchset",
+  "total" : 3,
+  "resourceType" : "Bundle",
+  "link" : [ {
+    "relation" : "self",
+    "url" : "http://localhost:9080/mock/Organization?_count=50"
+  } ],
+  "entry" : [ {
+    "resource" : {
+      "meta" : {
+        "lastUpdated" : 1478284577000,
+        "resourceVersion" : "114782845769926047"
+      },
+      "active" : true,
+      "type" : {
+        "text" : "Top-level organization for the John Muir Health healthcare provider organization",
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/organization-type",
+          "version" : "1.0",
+          "code" : "prov",
+          "display" : "Healthcare Provider"
+        } ]
+      },
+      "name" : "John Muir Health Foundation",
+      "alias" : [ "John Muir Health" ],
+      "endpoint" : [ {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/1"
+      }, {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/2"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/3"
+      },
+      {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/10"
+      }, {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/11"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/12"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/19"
+      }, {
+        "display" : "PCDH Receiver",
+        "url" : "Endpoint/20"
+      } ],
+      "address" : [ {
+        "type" : "both",
+        "text" : "1400 Treat Blvd, Walnut Creek, CA 94597",
+        "line" : "1400 Treat Blvd",
+        "city" : "Walnut Creek",
+        "state" : "CA",
+        "postalCode" : "94597",
+        "resourceType" : "Address",
+        "use" : "work"
+      } ],
+      "resourceType" : "Organization",
+      "id" : "1"
+    },
+    "fullUrl" : "http://localhost:9080/mock/Organization/1",
+    "search" : {
+      "mode" : "match"
+    }
+  }, {
+    "resource" : {
+      "meta" : {
+        "lastUpdated" : 1478284620000,
+        "resourceVersion" : "214782846202804460"
+      },
+      "active" : true,
+      "type" : {
+        "text" : "Top-level organization for the healthcare provider services provided by Contra Costa County",
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/organization-type",
+          "version" : "1.0",
+          "code" : "prov",
+          "display" : "Healthcare Provider"
+        } ]
+      },
+      "name" : "Contra Costa Health Services",
+      "endpoint" : [ {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/4"
+      }, {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/5"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/6"
+      } ],
+      "address" : [ {
+        "type" : "both",
+        "text" : "50 Douglas Dr, Suite 310, Martinez 94553",
+        "line" : "50 Douglas Dr, Suite 310",
+        "city" : "Martinez",
+        "postalCode" : "94553",
+        "resourceType" : "Address",
+        "use" : "work"
+      } ],
+      "resourceType" : "Organization",
+      "id" : "2"
+    },
+    "fullUrl" : "https://localhost:9080/mock/Organization/2",
+    "search" : {
+      "mode" : "match"
+    }
+  }, {
+    "resource" : {
+      "meta" : {
+        "lastUpdated" : 1478284756000,
+        "resourceVersion" : "314782847561711082"
+      },
+      "active" : true,
+      "type" : {
+        "text" : "Top-level organization for the San Ramon Regional Medical Center healthcare provider organization ",
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/organization-type",
+          "version" : "1.0",
+          "code" : "prov",
+          "display" : "Healthcare Provider"
+        } ]
+      },
+      "name" : "San Ramon Regional Medical Center",
+      "endpoint" : [ {
+        "display" : "Patient Discovery",
+        "url" : "Endpoint/7"
+      }, {
+        "display" : "Query for Documents",
+        "url" : "Endpoint/8"
+      }, {
+        "display" : "Retrieve Documents",
+        "url" : "Endpoint/9"
+      } ],
+      "address" : [ {
+        "type" : "both",
+        "text" : "6001 Norris Canyon Rd, San Ramon, CA 94583",
+        "line" : "6001 Norris Canyon Rd",
+        "city" : "San Ramon",
+        "state" : "CA",
+        "postalCode" : "94583",
+        "resourceType" : "Address",
+        "use" : "work"
+      } ],
+      "resourceType" : "Organization",
+      "id" : "3"
+    },
+    "fullUrl" : "https://localhost:9080/mock/Organization/3",
+    "search" : {
+      "mode" : "match"
+    }
+  } ]
+}
