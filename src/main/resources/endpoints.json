@@ -74,7 +74,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+      "address" : "http://localhost:9080/retrieveDocumentSet",
       "payloadFormat" : "application/xml",
       "payloadType" : [ {
         "coding" : [ {
@@ -164,7 +164,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+      "address" : "http://localhost:9080/retrieveDocumentSet",
       "payloadFormat" : "application/xml",
       "payloadType" : [ {
         "coding" : [ {
@@ -254,7 +254,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+      "address" : "http://localhost:9080/retrieveDocumentSet",
       "payloadFormat" : "application/xml",
       "payloadType" : [ {
         "coding" : [ {
@@ -344,7 +344,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+      "address" : "http://localhost:9080/retrieveDocumentSet",
       "payloadFormat" : "application/xml",
       "payloadType" : [ {
         "coding" : [ {
