@@ -51,7 +51,7 @@ public class DirectoryControllerTests extends TestCase {
 		assertNotNull(parsed);
 		assertEquals(3, parsed.getTotal().intValue());
 		Organization firstOrg = parsed.getEntry().get(0);
-		assertEquals("http://localhost:9080/mock/Organization/1", firstOrg.getFullUrl());
+		assertEquals("https://localhost:9080/mock/Organization/1", firstOrg.getFullUrl());
 		OrganizationResource resource = firstOrg.getResource();
 		assertEquals("John Muir Health Foundation", resource.getName());
 		assertEquals("1", resource.getId());
