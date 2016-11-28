@@ -102,7 +102,7 @@ public class DirectoryControllerTests extends TestCase {
 		assertEquals("1", resource.getId());
 		assertEquals("application/xml", resource.getPayloadFormat());
 		assertEquals("active", resource.getStatus());
-		assertEquals("http://localhost:9080/mock/patientDiscovery", resource.getAddress());
+		assertEquals("http://localhost:9080/patientDiscovery", resource.getAddress());
 	}
 	
 }
