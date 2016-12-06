@@ -51,7 +51,7 @@ public class DirectoryControllerTests extends TestCase {
 		assertNotNull(parsed);
 		assertEquals(3, parsed.getTotal().intValue());
 		Organization firstOrg = parsed.getEntry().get(0);
-		assertEquals("https://localhost:9080/mock/Organization/1", firstOrg.getFullUrl());
+		assertEquals("http://localhost:9080/mock/Organization/1", firstOrg.getFullUrl());
 		OrganizationResource resource = firstOrg.getResource();
 		assertEquals("John Muir Health Foundation", resource.getName());
 		assertEquals("1", resource.getId());
@@ -100,7 +100,9 @@ public class DirectoryControllerTests extends TestCase {
 		assertEquals("http://localhost:9080/mock/Endpoint/1", firstEndpoint.getFullUrl());
 		EndpointResource resource = firstEndpoint.getResource();
 		assertEquals("1", resource.getId());
-		assertEquals("application/xml", resource.getPayloadFormat());
+		assertNotNull(resource.getPayloadMimeType());
+		assertEquals(1, resource.getPayloadMimeType().size());
+		assertEquals("application/xml", resource.getPayloadMimeType().get(0));
 		assertEquals("active", resource.getStatus());
 		assertEquals("http://localhost:9080/patientDiscovery", resource.getAddress());
 	}
