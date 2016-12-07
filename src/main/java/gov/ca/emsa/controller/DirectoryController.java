@@ -36,18 +36,6 @@ public class DirectoryController {
 		jsonMapper = new ObjectMapper();
 	}
 	
-	@RequestMapping(value= "/mock/Organization", method = RequestMethod.GET, produces="application/json; charset=utf-8")
-	public OrganizationWrapper getOrganizations() {
-		Resource organizationsFile = resourceLoader.getResource("classpath:" + ORGANIZATION_RESOURCE_FILE_NAME);
-		OrganizationWrapper parsed = null;
-		try {
-			parsed = jsonMapper.readValue(organizationsFile.getInputStream(), OrganizationWrapper.class);
-		} catch(IOException ex) {
-			logger.error("Could not parse organizations file", ex);
-		}
-		return parsed;
-	}
-	
 	@RequestMapping(value= "/mock/Location", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public LocationWrapper getLocations() {
 		Resource locationsFile = resourceLoader.getResource("classpath:" + LOCATIONS_RESOURCE_FILE_NAME);
