@@ -15,7 +15,7 @@
       },
       "name" : "Patient Discovery",
       "address" : "http://localhost:9080/patientDiscovery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -45,7 +45,7 @@
       },
       "name" : "Query for Documents",
       "address" : "http://localhost:9080/documentQuery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -75,7 +75,7 @@
       },
       "name" : "Retrieve Documents",
       "address" : "http://localhost:9080/retrieveDocumentSet",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -105,7 +105,7 @@
       },
       "name" : "Query for Documents",
       "address" : "http://localhost:9080/documentQuery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -135,7 +135,7 @@
       },
       "name" : "Patient Discovery",
       "address" : "http://localhost:9080/patientDiscovery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -165,7 +165,7 @@
       },
       "name" : "Retrieve Documents",
       "address" : "http://localhost:9080/retrieveDocumentSet",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -195,7 +195,7 @@
       },
       "name" : "Patient Discovery",
       "address" : "http://localhost:9080/patientDiscovery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -225,7 +225,7 @@
       },
       "name" : "Query for Documents",
       "address" : "http://localhost:9080/documentQuery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -255,7 +255,7 @@
       },
       "name" : "Retrieve Documents",
       "address" : "http://localhost:9080/retrieveDocumentSet",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -285,7 +285,7 @@
       },
       "name" : "Patient Discovery",
       "address" : "http://localhost:9080/patientDiscovery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -315,7 +315,7 @@
       },
       "name" : "Query for Documents",
       "address" : "http://localhost:9080/documentQuery",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -345,7 +345,7 @@
       },
       "name" : "Retrieve Documents",
       "address" : "http://localhost:9080/retrieveDocumentSet",
-      "payloadFormat" : "application/xml",
+      "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",
@@ -375,7 +375,7 @@
       },
       "name" : "PCDH Receiver",
       "address" : "https://hie.johnmuirhealth.com:443/services/pcdh",
-      "payloadFormat" : "application/json",
+      "payloadMimeType" : ["application/json"],
       "payloadType" : [ { } ],
       "connectionType" : {
         "system" : "http://hl7.org/fhir/subscription-channel-type",
@@ -400,7 +400,6 @@
       },
       "name" : "Patient Discovery",
       "address" : "https://gateway.johnmuirhealth.com:443/test/xca",
-      "payloadFormat" : "application/xml",
       "payloadType" : [ {
         "coding" : [ {
           "system" : "urn:oid:1.3.6.1.4.1.19376.1.2.3",

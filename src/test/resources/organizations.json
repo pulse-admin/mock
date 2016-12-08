@@ -63,7 +63,7 @@
       "resourceType" : "Organization",
       "id" : "1"
     },
-    "fullUrl" : "https://localhost:9080/mock/Organization/1",
+    "fullUrl" : "http://localhost:9080/mock/Organization/1",
     "search" : {
       "mode" : "match"
     }
