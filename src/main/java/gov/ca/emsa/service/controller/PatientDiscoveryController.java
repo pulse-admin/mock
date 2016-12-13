@@ -131,7 +131,8 @@ public class PatientDiscoveryController {
 					patientPerson.getValue().getAdministrativeGenderCode().setCode("UN");
 				}
 				
-				patientPerson.getValue().getBirthTime().setValue(search.getDob());
+				patientPerson.getValue().getBirthTime().setValue(getDob(search.getDob()));
+				
 				if(!StringUtils.isEmpty(search.getTelephone())){
 					TELExplicit tel = new TELExplicit();
 					tel.setValue("tel:+1-" + search.getTelephone());
@@ -191,6 +192,40 @@ public class PatientDiscoveryController {
 			logger.error("Interruped!", inter);
 			throw inter;
 		}		
+	}
+	
+	private String getDob(String dob){
+		int randNum = 1 + (int)(Math.random() * ((3 - 1) + 1));
+		String randMonth = String.valueOf(1 + (int)(Math.random() * ((12 - 1) + 1)));
+		String randDay = String.valueOf(1 + (int)(Math.random() * ((30 - 1) + 1)));
+		String randHour = String.valueOf(1 + (int)(Math.random() * ((24 - 1) + 1)));
+		String randMinute = String.valueOf(1 + (int)(Math.random() * ((60 - 1) + 1)));
+		if(dob.length() == 4){
+			if(randNum == 1)
+				return dob + randMonth;
+			else
+				return dob + randMonth + randDay;
+		}else if(dob.length() == 6){
+			if(randNum == 1)
+				return dob + randDay;
+			else if (randNum == 2)
+				return dob + randDay + randHour;
+			else
+				return dob;
+		}else if(dob.length() == 8){
+			if(randNum == 1)
+				return dob + randHour;
+			else if (randNum == 2)
+				return dob + randHour + randMinute;
+			else
+				return dob;
+		}else if(dob.length() == 10){
+			if(randNum == 1)
+				return dob + randMinute;
+			else
+				return dob;
+		}
+		return dob;
 	}
 	
 	private int getNumberOfResults() {
