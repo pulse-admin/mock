@@ -60,13 +60,20 @@ public class PatientDiscoveryController {
 	@Value("${maximumResponseSeconds}")
 	private String maximumResponseSeconds;
 	
+	@Value("${patientDiscoveryPercentageFailing}")
+	private int percentageFailing;
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/patientDiscovery", 
 			method = RequestMethod.POST, 
 			produces={"application/xml"} , 
 			consumes ={"application/xml"})
-	public String patientDiscovery(@RequestBody String request) throws InterruptedException {
+	public String patientDiscovery(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
 		logger.info("/patientDiscovery received request: " + request);
+		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
+		if(randNum <= percentageFailing){
+			throw new RandomFailingErrorException();
+		}
 		PRPAIN201305UV02 requestObj = null;
 		try{
 			requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);

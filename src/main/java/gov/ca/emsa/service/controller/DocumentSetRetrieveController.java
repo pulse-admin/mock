@@ -54,10 +54,17 @@ public class DocumentSetRetrieveController {
 	
 	@Value("${maximumResponseSeconds}")
 	private String maximumResponseSeconds;
+	
+	@Value("${documentSetRetrievePercentageFailing}")
+	private int percentageFailing;
 
 	@RequestMapping(value = "/retrieveDocumentSet", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-	public String documentRequest(@RequestBody String request) throws InterruptedException  {
+	public String documentRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException  {
 		logger.info("/retrieveDocumentSet received request " + request);
+		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
+		if(randNum <= percentageFailing){
+			throw new RandomFailingErrorException();
+		}
 		try {
 			RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
 			List<DocumentIdentifier> docIds = new ArrayList<DocumentIdentifier>();

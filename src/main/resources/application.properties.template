@@ -14,3 +14,8 @@ serviceUrl = http://localhost:8090
 minimumResponseSeconds=1
 # the slowest it can respond
 maximumResponseSeconds=5
+
+# percentage chance that a query will fail
+patientDiscoveryPercentageFailing=0
+documentQueryPercentageFailing=0
+documentSetRetrievePercentageFailing=0
