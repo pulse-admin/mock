@@ -44,9 +44,16 @@ public class DocumentQueryController {
 	@Value("${maximumResponseSeconds}")
 	private String maximumResponseSeconds;
 	
+	@Value("${documentQueryPercentageFailing}")
+	private int percentageFailing;
+	
 	@RequestMapping(value = "/documentQuery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-	public String queryRequest(@RequestBody String request) throws InterruptedException {
+	public String queryRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
 		logger.info("/documentQuery received request " + request);
+		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
+		if(randNum <= percentageFailing){
+			throw new RandomFailingErrorException();
+		}
 		try{
 			AdhocQueryRequest requestObj = consumerService.unMarshallDocumentQueryRequestObject(request);
 		}catch(SAMLException e){
