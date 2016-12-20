@@ -204,9 +204,17 @@ public class PatientDiscoveryController {
 	private String getDob(String dob){
 		int randNum = 1 + (int)(Math.random() * ((3 - 1) + 1));
 		String randMonth = String.valueOf(1 + (int)(Math.random() * ((12 - 1) + 1)));
+		if(Integer.parseInt(randMonth) < 10)
+			randMonth = "0" + randMonth;
 		String randDay = String.valueOf(1 + (int)(Math.random() * ((30 - 1) + 1)));
+		if(Integer.parseInt(randDay) < 10)
+			randDay = "0" + randDay;
 		String randHour = String.valueOf(1 + (int)(Math.random() * ((24 - 1) + 1)));
+		if(Integer.parseInt(randHour) < 10)
+			randHour = "0" + randHour;
 		String randMinute = String.valueOf(1 + (int)(Math.random() * ((60 - 1) + 1)));
+		if(Integer.parseInt(randMinute) < 10)
+			randMinute = "0" + randMinute;
 		if(dob.length() == 4){
 			if(randNum == 1)
 				return dob + randMonth;
