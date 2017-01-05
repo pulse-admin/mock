@@ -14,7 +14,7 @@
         "resourceVersion" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -44,7 +44,7 @@
         "resourceVersion" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -74,7 +74,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:9080/retrieveDocumentSet",
+      "address" : "https://localhost:9080/retrieveDocumentSet",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -104,7 +104,7 @@
         "resourceVersion" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -164,7 +164,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:9080/retrieveDocumentSet",
+      "address" : "https://localhost:9080/retrieveDocumentSet",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -194,7 +194,7 @@
         "resourceVersion" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -224,7 +224,7 @@
         "resourceVersion" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -254,7 +254,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:9080/retrieveDocumentSet",
+      "address" : "https://localhost:9080/retrieveDocumentSet",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -284,7 +284,7 @@
         "resourceVersion" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -314,7 +314,7 @@
         "resourceVersion" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -344,7 +344,7 @@
         "resourceVersion" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:9080/retrieveDocumentSet",
+      "address" : "https://localhost:9080/retrieveDocumentSet",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
