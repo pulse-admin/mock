@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.sun.istack.ByteArrayDataSource;
 
@@ -40,6 +41,8 @@ import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 public class DocumentSetRetrieveController {
 	private static final Logger logger = LogManager.getLogger(DocumentSetRetrieveController.class);
 	@Autowired private ResourceLoader resourceLoader;
+	private static final String ERROR_FILE_NAME = "ErrorQueryResponse.xml";
+
 	private static final String CCDA_RESOURCE_DIR = "ccdas";
 	private String[] ccdaList = {CCDA_RESOURCE_DIR + File.separator + "367 XDR.xml", 
 			CCDA_RESOURCE_DIR + File.separator + "CCDA_CCD_b1_Ambulatory_v2.xml",
@@ -57,6 +60,9 @@ public class DocumentSetRetrieveController {
 	
 	@Value("${documentSetRetrievePercentageFailing}")
 	private int percentageFailing;
+	
+	@Value("${documentSetRetrievePercentageError}")
+	private int percentageError;
 
 	@RequestMapping(value = "/retrieveDocumentSet", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
 	public String documentRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException  {
@@ -65,53 +71,68 @@ public class DocumentSetRetrieveController {
 		if(randNum <= percentageFailing){
 			throw new RandomFailingErrorException();
 		}
-		try {
-			RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
-			List<DocumentIdentifier> docIds = new ArrayList<DocumentIdentifier>();
-			for(DocumentRequest currDocRequest : requestObj.getDocumentRequest()) {
-				DocumentIdentifier docId = new DocumentIdentifier();
-				docId.setRepositoryUniqueId(currDocRequest.getRepositoryUniqueId());
-				docId.setHomeCommunityId(currDocRequest.getHomeCommunityId());
-				docId.setDocumentUniqueId(currDocRequest.getDocumentUniqueId());
-				docIds.add(docId);
+		
+		String result = "";
+		randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
+		if(randNum <= percentageError){
+			logger.info("Returning error message.");
+			//marshal the error message
+			try {
+			Resource errFile = resourceLoader.getResource("classpath:" + ERROR_FILE_NAME);
+			result = Resources.toString(errFile.getURL(), Charsets.UTF_8);
+			} catch(IOException ex) {
+				logger.error("Could not open " + ERROR_FILE_NAME, ex);
 			}
-			RetrieveDocumentSetResponseType response = new RetrieveDocumentSetResponseType();
-			RegistryResponseType registryResponse = new RegistryResponseType();
-			registryResponse.setStatus("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success");
-			response.setRegistryResponse(registryResponse);
-			
-			for(DocumentIdentifier docId : docIds) {
-				DocumentResponse docResponse = new DocumentResponse();
-				docResponse.setRepositoryUniqueId(docId.getRepositoryUniqueId());
-				docResponse.setHomeCommunityId(docId.getHomeCommunityId());
-				docResponse.setDocumentUniqueId(docId.getDocumentUniqueId());
-				docResponse.setMimeType("text/xml");
+		} else {
+			try {
+				RetrieveDocumentSetRequestType requestObj = consumerService.unMarshallDocumentSetRetrieveRequestObject(request);
+				List<DocumentIdentifier> docIds = new ArrayList<DocumentIdentifier>();
+				for(DocumentRequest currDocRequest : requestObj.getDocumentRequest()) {
+					DocumentIdentifier docId = new DocumentIdentifier();
+					docId.setRepositoryUniqueId(currDocRequest.getRepositoryUniqueId());
+					docId.setHomeCommunityId(currDocRequest.getHomeCommunityId());
+					docId.setDocumentUniqueId(currDocRequest.getDocumentUniqueId());
+					docIds.add(docId);
+				}
+				RetrieveDocumentSetResponseType response = new RetrieveDocumentSetResponseType();
+				RegistryResponseType registryResponse = new RegistryResponseType();
+				registryResponse.setStatus("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success");
+				response.setRegistryResponse(registryResponse);
 				
-				Resource documentResource = getRandomCcdaResource();
-				String docStr = Resources.toString(documentResource.getURL(), Charset.forName("UTF-8"));
-				String binaryDocStr = base64EncodeMessage(docStr);
-				DataSource ds = new ByteArrayDataSource(binaryDocStr.getBytes(), "text/xml; charset=UTF-8");
-			    DataHandler dh = new DataHandler(ds);
-				docResponse.setDocument(dh);
-				response.getDocumentResponse().add(docResponse);
-			}
+				for(DocumentIdentifier docId : docIds) {
+					DocumentResponse docResponse = new DocumentResponse();
+					docResponse.setRepositoryUniqueId(docId.getRepositoryUniqueId());
+					docResponse.setHomeCommunityId(docId.getHomeCommunityId());
+					docResponse.setDocumentUniqueId(docId.getDocumentUniqueId());
+					docResponse.setMimeType("text/xml");
+					
+					Resource documentResource = getRandomCcdaResource();
+					String docStr = Resources.toString(documentResource.getURL(), Charset.forName("UTF-8"));
+					String binaryDocStr = base64EncodeMessage(docStr);
+					DataSource ds = new ByteArrayDataSource(binaryDocStr.getBytes(), "text/xml; charset=UTF-8");
+				    DataHandler dh = new DataHandler(ds);
+					docResponse.setDocument(dh);
+					response.getDocumentResponse().add(docResponse);
+				}
+				
+				result = consumerService.marshallDocumentSetResponseType(response);
 			
-			String result = consumerService.marshallDocumentSetResponseType(response);
-			try {	
-				int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
-				int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
-				int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-				logger.info("/retrieveDocumentSet is waiting for " + responseIntervalSeconds + " seconds to return " + result);
-				Thread.sleep(responseIntervalSeconds*1000);
-				return result;
-			} catch(InterruptedException inter) {
-				logger.error("Interruped!", inter);
-				throw inter;
-			}	
-		} catch (IOException | SAMLException | JAXBException e) {
-			logger.error(e);
-			return consumerService.createSOAPFault();
-		}		
+			} catch (IOException | SAMLException | JAXBException e) {
+				logger.error(e);
+				return consumerService.createSOAPFault();
+			}
+		}
+		try {	
+			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
+			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
+			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
+			logger.info("/retrieveDocumentSet is waiting for " + responseIntervalSeconds + " seconds to return " + result);
+			Thread.sleep(responseIntervalSeconds*1000);
+			return result;
+		} catch(InterruptedException inter) {
+			logger.error("Interruped!", inter);
+			throw inter;
+		}	
 	}
 	
 	/**

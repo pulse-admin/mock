@@ -21,6 +21,7 @@ public interface EHealthQueryConsumerService {
 	public String marshallPatientDiscoveryResponse(PRPAIN201306UV02 response) throws JAXBException;
 	public String marshallDocumentQueryResponse(AdhocQueryResponse response) throws JAXBException;
 	public String marshallDocumentSetResponseType(RetrieveDocumentSetResponseType response) throws JAXBException;
+	public String marshallErrorResponse(AdhocQueryResponse response) throws JAXBException;
 	public RetrieveDocumentSetResponseType unMarshallDocumentSetRetrieveResponseObject(String xml);
 	public String createSOAPFault();
 }
