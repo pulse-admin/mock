@@ -14,14 +14,14 @@
       "description" : "Concord-based hospital facility within the John Muir Health healthcare provider organization",
       "type" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "system" : "https://hl7.org/fhir/v3/RoleCode",
           "code" : "HOSP",
           "display" : "Hospital"
         } ]
       },
       "physicalType" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/location-physical-type",
+          "system" : "https://hl7.org/fhir/location-physical-type",
           "code" : "bu",
           "display" : "Building"
         } ]
@@ -50,7 +50,7 @@
         "value" : "1841687787",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -87,14 +87,14 @@
       "description" : "Primary Walnut Creek-based hospital facility within the John Muir Health healthcare provider organization",
       "type" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "system" : "https://hl7.org/fhir/v3/RoleCode",
           "code" : "HOSP",
           "display" : "Hospital"
         } ]
       },
       "physicalType" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/location-physical-type",
+          "system" : "https://hl7.org/fhir/location-physical-type",
           "code" : "bu",
           "display" : "Building"
         } ]
@@ -123,7 +123,7 @@
         "value" : "1740215219",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -154,14 +154,14 @@
       "description" : "Primary hospital facility within the Contra Costa County healthcare provider organization",
       "type" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "system" : "https://hl7.org/fhir/v3/RoleCode",
           "code" : "HOSP",
           "display" : "Hospital"
         } ]
       },
       "physicalType" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/location-physical-type",
+          "system" : "https://hl7.org/fhir/location-physical-type",
           "code" : "bu",
           "display" : "Building"
         } ]
@@ -190,7 +190,7 @@
         "value" : "1417029562",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -201,7 +201,7 @@
         "value" : "1386719086",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -212,7 +212,7 @@
         "value" : "1659602647",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -223,7 +223,7 @@
         "value" : "1497820203",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -234,7 +234,7 @@
         "value" : "1427138726",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -245,7 +245,7 @@
         "value" : "1477623205",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -256,7 +256,7 @@
         "value" : "1356413496",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -267,7 +267,7 @@
         "value" : "1215286554",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -298,14 +298,14 @@
       "description" : "Primary hospital facility within the San Ramon Regional Medical Center healthcare provider organization, partnered with John Muir Health",
       "type" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/v3/RoleCode",
+          "system" : "https://hl7.org/fhir/v3/RoleCode",
           "code" : "HOSP",
           "display" : "Hospital"
         } ]
       },
       "physicalType" : {
         "coding" : [ {
-          "system" : "http://hl7.org/fhir/location-physical-type",
+          "system" : "https://hl7.org/fhir/location-physical-type",
           "code" : "bu",
           "display" : "Building"
         } ]
@@ -334,7 +334,7 @@
         "value" : "1841398104",
         "type" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/v2/0203",
+            "system" : "https://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]

@@ -24,7 +24,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -32,7 +32,7 @@
       "resourceType" : "Endpoint",
       "id" : "1"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/1",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/1",
     "search" : {
       "mode" : "match"
     }
@@ -54,7 +54,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -84,7 +84,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -114,7 +114,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -134,7 +134,7 @@
         "resourceVersion" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -144,7 +144,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -152,7 +152,7 @@
       "resourceType" : "Endpoint",
       "id" : "5"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/5",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/5",
     "search" : {
       "mode" : "match"
     }
@@ -174,7 +174,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -204,7 +204,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -212,7 +212,7 @@
       "resourceType" : "Endpoint",
       "id" : "7"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/7",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/7",
     "search" : {
       "mode" : "match"
     }
@@ -234,7 +234,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -264,7 +264,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -294,7 +294,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -302,7 +302,7 @@
       "resourceType" : "Endpoint",
       "id" : "10"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/10",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/10",
     "search" : {
       "mode" : "match"
     }
@@ -324,7 +324,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -354,7 +354,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -378,7 +378,7 @@
       "payloadMimeType" : ["application/json"],
       "payloadType" : [ { } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "rest-hook",
         "display" : "Rest Hook"
       },
@@ -408,7 +408,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },

@@ -87,8 +87,8 @@ public class PatientDiscoveryController {
 			logger.info("Returning error message.");
 			//marshal the error message
 			try {
-			Resource errFile = resourceLoader.getResource("classpath:" + ERROR_FILE_NAME);
-			result = Resources.toString(errFile.getURL(), Charsets.UTF_8);
+				Resource errFile = resourceLoader.getResource("classpath:" + ERROR_FILE_NAME);
+				result = Resources.toString(errFile.getURL(), Charsets.UTF_8);
 			} catch(IOException ex) {
 				logger.error("Could not open " + ERROR_FILE_NAME, ex);
 			}
