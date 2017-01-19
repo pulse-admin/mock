@@ -5,16 +5,19 @@
   "link" : [ {
     "relation" : "self",
     "url" : "https://localhost:9080/mock/Endpoint?_count=50"
+  }, {
+    "relation" : "last",
+    "url" : "https://localhost:9080/mock/Endpoint?_count=50&page=1"
   } ],
   "entry" : [ {
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623380000,
-        "resourceVersion" : "214786233798141982"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -24,7 +27,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -32,7 +35,7 @@
       "resourceType" : "Endpoint",
       "id" : "1"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/1",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/1",
     "search" : {
       "mode" : "match"
     }
@@ -40,11 +43,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623421000,
-        "resourceVersion" : "314786234207869946"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -54,7 +57,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -70,8 +73,8 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623432000,
-        "resourceVersion" : "414786234318308634"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
       "address" : "https://localhost:9080/retrieveDocumentSet",
@@ -84,7 +87,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -100,11 +103,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623421000,
-        "resourceVersion" : "314786234207869946"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -114,7 +117,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -130,11 +133,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623380000,
-        "resourceVersion" : "214786233798141982"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -144,7 +147,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -152,7 +155,7 @@
       "resourceType" : "Endpoint",
       "id" : "5"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/5",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/5",
     "search" : {
       "mode" : "match"
     }
@@ -160,8 +163,8 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623432000,
-        "resourceVersion" : "414786234318308634"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
       "address" : "https://localhost:9080/retrieveDocumentSet",
@@ -174,7 +177,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -190,11 +193,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623380000,
-        "resourceVersion" : "214786233798141982"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -204,7 +207,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -212,7 +215,7 @@
       "resourceType" : "Endpoint",
       "id" : "7"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/7",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/7",
     "search" : {
       "mode" : "match"
     }
@@ -220,11 +223,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623421000,
-        "resourceVersion" : "314786234207869946"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -234,7 +237,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -250,8 +253,8 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623432000,
-        "resourceVersion" : "414786234318308634"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
       "address" : "https://localhost:9080/retrieveDocumentSet",
@@ -264,7 +267,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -280,11 +283,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623380000,
-        "resourceVersion" : "214786233798141982"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "http://localhost:9080/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -294,7 +297,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -302,7 +305,7 @@
       "resourceType" : "Endpoint",
       "id" : "10"
     },
-    "fullUrl" : "http://localhost:9080/mock/Endpoint/10",
+    "fullUrl" : "https://localhost:9080/mock/Endpoint/10",
     "search" : {
       "mode" : "match"
     }
@@ -310,11 +313,11 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623421000,
-        "resourceVersion" : "314786234207869946"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:9080/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -324,13 +327,13 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
       "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
-      "id" : "1"
+      "id" : "11"
     },
     "fullUrl" : "https://localhost:9080/mock/Endpoint/11",
     "search" : {
@@ -340,8 +343,8 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623432000,
-        "resourceVersion" : "414786234318308634"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
       "address" : "https://localhost:9080/retrieveDocumentSet",
@@ -354,7 +357,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },
@@ -370,15 +373,15 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623659000,
-        "resourceVersion" : "2014786236588992721"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "2014786236588992721"
       },
       "name" : "PCDH Receiver",
       "address" : "https://hie.johnmuirhealth.com:443/services/pcdh",
       "payloadMimeType" : ["application/json"],
       "payloadType" : [ { } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "rest-hook",
         "display" : "Rest Hook"
       },
@@ -395,8 +398,8 @@
     "resource" : {
       "status" : "active",
       "meta" : {
-        "lastUpdated" : 1478623695000,
-        "resourceVersion" : "1914786236954296865"
+        "lastUpdated" : "2016-12-07T23:15:02.000+0000",
+        "versionId" : "1914786236954296865"
       },
       "name" : "Patient Discovery",
       "address" : "https://gateway.johnmuirhealth.com:443/test/xca",
@@ -408,7 +411,7 @@
         } ]
       } ],
       "connectionType" : {
-        "system" : "http://hl7.org/fhir/subscription-channel-type",
+        "system" : "https://hl7.org/fhir/subscription-channel-type",
         "code" : "message",
         "display" : "Message"
       },

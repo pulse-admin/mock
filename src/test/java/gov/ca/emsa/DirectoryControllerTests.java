@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import gov.ca.emsa.pulse.cten.CtenToPulseConverter;
 import gov.ca.emsa.pulse.cten.domain.Endpoint;
 import gov.ca.emsa.pulse.cten.domain.EndpointResource;
 import gov.ca.emsa.pulse.cten.domain.EndpointWrapper;
@@ -81,6 +82,8 @@ public class DirectoryControllerTests extends TestCase {
 		assertEquals("John Muir Health Foundation", resource.getManagingOrganization().getDisplay());
 		assertEquals("1", resource.getId());
 		assertEquals("active", resource.getStatus());
+		
+		CtenToPulseConverter.convertLocations(parsed);
 	}
 	
 	@Test
@@ -97,14 +100,16 @@ public class DirectoryControllerTests extends TestCase {
 		assertNotNull(parsed);
 		assertEquals(13, parsed.getTotal().intValue());
 		Endpoint firstEndpoint = parsed.getEntry().get(0);
-		assertEquals("http://localhost:9080/mock/Endpoint/1", firstEndpoint.getFullUrl());
+		assertEquals("https://localhost:9080/mock/Endpoint/1", firstEndpoint.getFullUrl());
 		EndpointResource resource = firstEndpoint.getResource();
 		assertEquals("1", resource.getId());
 		assertNotNull(resource.getPayloadMimeType());
 		assertEquals(1, resource.getPayloadMimeType().size());
 		assertEquals("application/xml", resource.getPayloadMimeType().get(0));
 		assertEquals("active", resource.getStatus());
-		assertEquals("http://localhost:9080/patientDiscovery", resource.getAddress());
+		assertEquals("https://localhost:9080/patientDiscovery", resource.getAddress());
+		
+		CtenToPulseConverter.convertEndpoints(parsed);
 	}
 	
 }

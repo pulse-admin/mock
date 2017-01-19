@@ -5,6 +5,9 @@
   "link" : [ {
     "relation" : "self",
     "url" : "https://localhost:9080/mock/Location?_count=50"
+  }, {
+    "relation" : "last",
+    "url" : "https://localhost:9080/mock/Location?_count=50&_page=1"
   } ],
   "entry" : [ {
     "resource" : {
@@ -14,23 +17,24 @@
       "description" : "Concord-based hospital facility within the John Muir Health healthcare provider organization",
       "type" : {
         "coding" : [ {
-          "system" : "https://hl7.org/fhir/v3/RoleCode",
+          "system" : "http://hl7.org/fhir/v3/RoleCode",
           "code" : "HOSP",
           "display" : "Hospital"
         } ]
       },
       "physicalType" : {
         "coding" : [ {
-          "system" : "https://hl7.org/fhir/location-physical-type",
+          "system" : "http://hl7.org/fhir/location-physical-type",
           "code" : "bu",
           "display" : "Building"
         } ]
       },
       "address" : {
         "type" : "physical",
-        "text" : "2540 East St, Concord, CA 94520",
-        "line" : "2540 East St",
+        "text" : "2540 East St, Concord, Contra Costa County, CA, 94520",
+        "line" : [ "2540 East St" ],
         "city" : "Concord",
+        "district" : "Contra Costa County",
         "state" : "CA",
         "postalCode" : "94520",
         "resourceType" : "Address",
@@ -38,11 +42,11 @@
       },
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
-        "url" : "Organization/1"
+        "reference" : "Organization/1"
       },
       "meta" : {
-        "lastUpdated" : 1478294131000,
-        "resourceVersion" : "114782941311306161"
+        "lastUpdated" : "2016-12-12T16:18:07.000+0000",
+        "versionId" : "114815594865172022"
       },
       "identifier" : [ {
         "use" : "usual",
@@ -50,7 +54,7 @@
         "value" : "1841687787",
         "type" : {
           "coding" : [ {
-            "system" : "https://hl7.org/fhir/v2/0203",
+            "system" : "http://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -58,19 +62,19 @@
       } ],
       "endpoint" : [ {
         "display" : "PCDH Receiver",
-        "url" : "Endpoint/20"
+        "reference" : "Endpoint/20"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/19"
+        "reference" : "Endpoint/19"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/1"
+        "reference" : "Endpoint/1"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/3"
+        "reference" : "Endpoint/3"
       }, {
         "display" : "Query for Documents",
-        "url" : "Endpoint/2"
+        "reference" : "Endpoint/2"
       } ],
       "resourceType" : "Location",
       "id" : "1"
@@ -101,9 +105,10 @@
       },
       "address" : {
         "type" : "physical",
-        "text" : "1601 Ygnacio Valley Rd, Walnut Creek, CA 94598",
-        "line" : "1601 Ygnacio Valley Rd",
+        "text" : "1601 Ygnacio Valley Rd, Walnut Creek, Contra Costa County, CA, 94598",
+        "line" : [ "1601 Ygnacio Valley Rd" ],
         "city" : "Walnut Creek",
+        "district" : "Contra Costa County",
         "state" : "CA",
         "postalCode" : "94598",
         "resourceType" : "Address",
@@ -111,11 +116,11 @@
       },
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
-        "url" : "Organization/1"
+        "reference" : "Organization/1"
       },
       "meta" : {
-        "lastUpdated" : 1478294180000,
-        "resourceVersion" : "214782941804974561"
+        "lastUpdated" : "2016-12-12T16:18:28.000+0000",
+        "versionId" : "214815595082207064"
       },
       "identifier" : [ {
         "use" : "usual",
@@ -123,7 +128,7 @@
         "value" : "1740215219",
         "type" : {
           "coding" : [ {
-            "system" : "https://hl7.org/fhir/v2/0203",
+            "system" : "http://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -131,13 +136,13 @@
       } ],
       "endpoint" : [ {
         "display" : "Query for Documents",
-        "url" : "Endpoint/11"
+        "reference" : "Endpoint/11"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/10"
+        "reference" : "Endpoint/10"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/12"
+        "reference" : "Endpoint/12"
       } ],
       "resourceType" : "Location",
       "id" : "2"
@@ -168,9 +173,10 @@
       },
       "address" : {
         "type" : "physical",
-        "text" : "2500 Alhambra Ave, Martinez, CA 94553",
-        "line" : "2500 Alhambra Ave",
+        "text" : "2500 Alhambra Ave, Martinez, Contra Costa County, CA, 94553",
+        "line" : [ "2500 Alhambra Ave" ],
         "city" : "Martinez",
+        "district" : "Contra Costa County",
         "state" : "CA",
         "postalCode" : "94553",
         "resourceType" : "Address",
@@ -178,11 +184,11 @@
       },
       "managingOrganization" : {
         "display" : "Contra Costa Health Services",
-        "url" : "Organization/2"
+        "reference" : "Organization/2"
       },
       "meta" : {
-        "lastUpdated" : 1478294478000,
-        "resourceVersion" : "1414782944777844607"
+        "lastUpdated" : "2016-12-12T16:36:25.000+0000",
+        "versionId" : "1414815605848920831"
       },
       "identifier" : [ {
         "use" : "usual",
@@ -190,7 +196,7 @@
         "value" : "1417029562",
         "type" : {
           "coding" : [ {
-            "system" : "https://hl7.org/fhir/v2/0203",
+            "system" : "http://hl7.org/fhir/v2/0203",
             "code" : "PRN",
             "display" : "Provider number"
           } ]
@@ -275,13 +281,13 @@
       } ],
       "endpoint" : [ {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/6"
+        "reference" : "Endpoint/6"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/5"
+        "reference" : "Endpoint/5"
       }, {
         "display" : "Query for Documents",
-        "url" : "Endpoint/4"
+        "reference" : "Endpoint/4"
       } ],
       "resourceType" : "Location",
       "id" : "14"
@@ -312,9 +318,10 @@
       },
       "address" : {
         "type" : "physical",
-        "text" : "6001 Norris Canyon Rd, San Ramon, CA 94583",
-        "line" : "6001 Norris Canyon Rd",
+        "text" : "6001 Norris Canyon Rd, San Ramon, Contra Costa County, CA, 94583",
+        "line" : [ "6001 Norris Canyon Rd" ],
         "city" : "San Ramon",
+        "district" : "Contra Costa County",
         "state" : "CA",
         "postalCode" : "94583",
         "resourceType" : "Address",
@@ -322,11 +329,11 @@
       },
       "managingOrganization" : {
         "display" : "San Ramon Regional Medical Center",
-        "url" : "Organization/3"
+        "reference" : "Organization/3"
       },
       "meta" : {
-        "lastUpdated" : 1478294536000,
-        "resourceVersion" : "1514782945363342146"
+        "lastUpdated" : "2016-12-12T16:36:34.000+0000",
+        "versionId" : "1514815605944615656"
       },
       "identifier" : [ {
         "use" : "usual",
@@ -342,13 +349,13 @@
       } ],
       "endpoint" : [ {
         "display" : "Query for Documents",
-        "url" : "Endpoint/8"
+        "reference" : "Endpoint/8"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/7"
+        "reference" : "Endpoint/7"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/9"
+        "reference" : "Endpoint/9"
       } ],
       "resourceType" : "Location",
       "id" : "15"
