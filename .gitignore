@@ -355,4 +355,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 /src/main/resources/organizations1.xml
 src/main/resources/application.properties
+src/main/resources/keystore.p12
 src/test/resources/application-test.properties

@@ -488,4 +488,40 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		}
 		return sw.toString();
 	}
+	
+	public String marshallErrorResponse(AdhocQueryResponse response) throws JAXBException{
+		MessageFactory factory = null;
+		try {
+			factory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
+		} catch (SOAPException e1) {
+			logger.error(e1);
+		}
+		SOAPMessage soapMessage = null;
+		try {
+			soapMessage = factory.createMessage();
+		} catch (SOAPException e) {
+			logger.error(e);
+		}
+		JAXBElement<AdhocQueryResponse> je = new JAXBElement<AdhocQueryResponse>(new QName("AdhocQueryResponse"), AdhocQueryResponse.class, response);
+		Document document = null;
+		try {
+			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		Marshaller documentMarshaller = createMarshaller(createJAXBContext(response.getClass()));
+		documentMarshaller.marshal(je, document);
+		try {
+			soapMessage.getSOAPBody().addDocument(document);
+		} catch (SOAPException e1) {
+			e1.printStackTrace();
+		}
+		OutputStream sw = new ByteArrayOutputStream();
+		try {
+			soapMessage.writeTo(sw);
+		} catch (IOException | SOAPException e) {
+			e.printStackTrace();
+		}
+		return sw.toString();
+	}
 }

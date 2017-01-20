@@ -9,8 +9,8 @@
   "entry" : [ {
     "resource" : {
       "meta" : {
-        "lastUpdated" : 1478284577000,
-        "resourceVersion" : "114782845769926047"
+        "lastUpdated" : "2016-09-16T13:55:22.000-0700",
+        "versionId" : "114782845769926047"
       },
       "active" : true,
       "type" : {
@@ -26,34 +26,34 @@
       "alias" : [ "John Muir Health" ],
       "endpoint" : [ {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/1"
+        "reference" : "Endpoint/1"
       }, {
         "display" : "Query for Documents",
-        "url" : "Endpoint/2"
+        "reference" : "Endpoint/2"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/3"
+        "reference" : "Endpoint/3"
       },
       {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/10"
+        "reference" : "Endpoint/10"
       }, {
         "display" : "Query for Documents",
-        "url" : "Endpoint/11"
+        "reference" : "Endpoint/11"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/12"
+        "reference" : "Endpoint/12"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/19"
+        "reference" : "Endpoint/19"
       }, {
         "display" : "PCDH Receiver",
-        "url" : "Endpoint/20"
+        "reference" : "Endpoint/20"
       } ],
       "address" : [ {
         "type" : "both",
         "text" : "1400 Treat Blvd, Walnut Creek, CA 94597",
-        "line" : "1400 Treat Blvd",
+        "line" : ["1400 Treat Blvd"],
         "city" : "Walnut Creek",
         "state" : "CA",
         "postalCode" : "94597",
@@ -70,8 +70,8 @@
   }, {
     "resource" : {
       "meta" : {
-        "lastUpdated" : 1478284620000,
-        "resourceVersion" : "214782846202804460"
+        "lastUpdated" : "2016-09-16T13:55:22.000-0700",
+        "versionId" : "214782846202804460"
       },
       "active" : true,
       "type" : {
@@ -86,18 +86,18 @@
       "name" : "Contra Costa Health Services",
       "endpoint" : [ {
         "display" : "Query for Documents",
-        "url" : "Endpoint/4"
+        "reference" : "Endpoint/4"
       }, {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/5"
+        "reference" : "Endpoint/5"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/6"
+        "reference" : "Endpoint/6"
       } ],
       "address" : [ {
         "type" : "both",
         "text" : "50 Douglas Dr, Suite 310, Martinez 94553",
-        "line" : "50 Douglas Dr, Suite 310",
+        "line" : ["50 Douglas Dr, Suite 310"],
         "city" : "Martinez",
         "postalCode" : "94553",
         "resourceType" : "Address",
@@ -113,8 +113,8 @@
   }, {
     "resource" : {
       "meta" : {
-        "lastUpdated" : 1478284756000,
-        "resourceVersion" : "314782847561711082"
+        "lastUpdated" : "2016-09-16T13:55:22.000-0700",
+        "versionId" : "314782847561711082"
       },
       "active" : true,
       "type" : {
@@ -129,18 +129,18 @@
       "name" : "San Ramon Regional Medical Center",
       "endpoint" : [ {
         "display" : "Patient Discovery",
-        "url" : "Endpoint/7"
+        "reference" : "Endpoint/7"
       }, {
         "display" : "Query for Documents",
-        "url" : "Endpoint/8"
+        "reference" : "Endpoint/8"
       }, {
         "display" : "Retrieve Documents",
-        "url" : "Endpoint/9"
+        "reference" : "Endpoint/9"
       } ],
       "address" : [ {
         "type" : "both",
         "text" : "6001 Norris Canyon Rd, San Ramon, CA 94583",
-        "line" : "6001 Norris Canyon Rd",
+        "line" : ["6001 Norris Canyon Rd"],
         "city" : "San Ramon",
         "state" : "CA",
         "postalCode" : "94583",

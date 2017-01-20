@@ -51,6 +51,8 @@ public class PatientDiscoveryController {
 	private static final Logger logger = LogManager.getLogger(PatientDiscoveryController.class);
 	@Autowired private ResourceLoader resourceLoader;
 	private static final String RESOURCE_FILE_NAME = "ValidXcpdResponse.xml";
+	private static final String ERROR_FILE_NAME = "ErrorQueryResponse.xml";
+
 	@Autowired EHealthQueryConsumerService consumerService;
 	@Autowired SOAPToJSONService soapToJson;
 	
@@ -63,6 +65,9 @@ public class PatientDiscoveryController {
 	@Value("${patientDiscoveryPercentageFailing}")
 	private int percentageFailing;
 	
+	@Value("${patientDiscoveryPercentageError}")
+	private int percentageError;
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/patientDiscovery", 
 			method = RequestMethod.POST, 
@@ -74,118 +79,132 @@ public class PatientDiscoveryController {
 		if(randNum <= percentageFailing){
 			throw new RandomFailingErrorException();
 		}
-		PRPAIN201305UV02 requestObj = null;
-		try{
-			requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);
-		}catch(SAMLException e){
-			return consumerService.createSOAPFault();
-		} catch (SOAPException e) {
-			logger.error(e);
-		}
 		
-		PatientSearch search = soapToJson.convertToPatientSearch(requestObj);
 		String result = "";
-		String defaultPatientDiscoveryResult = "";
-		try {
-			Resource pdFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
-			defaultPatientDiscoveryResult = Resources.toString(pdFile.getURL(), Charsets.UTF_8);
-			
-			//number of results we want to have; alter the data for that
-			int numResults = getNumberOfResults();
-			PRPAIN201306UV02 resultObj = consumerService.unMarshallPatientDiscoveryResponseObject(defaultPatientDiscoveryResult);
-			List<PRPAIN201306UV02MFMIMT700711UV01Subject1> subjects = resultObj.getControlActProcess().getSubject();
-			switch(numResults) {
-			case 0:
-				subjects.clear();
-				break;
-			case 1:
-				subjects.remove(1);
-				break;
-			default:
-					break;
+		
+		randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
+		if(randNum <= percentageError) {
+			logger.info("Returning error message.");
+			//marshal the error message
+			try {
+				Resource errFile = resourceLoader.getResource("classpath:" + ERROR_FILE_NAME);
+				result = Resources.toString(errFile.getURL(), Charsets.UTF_8);
+			} catch(IOException ex) {
+				logger.error("Could not open " + ERROR_FILE_NAME, ex);
+			}
+		} else {
+			PRPAIN201305UV02 requestObj = null;
+			try{
+				requestObj = consumerService.unMarshallPatientDiscoveryRequestObject(request);
+			}catch(SAMLException e){
+				return consumerService.createSOAPFault();
+			} catch (SOAPException e) {
+				logger.error(e);
 			}
 			
-			//change the values in the return data to match the search parameters
-			subjects = resultObj.getControlActProcess().getSubject();
-			for(PRPAIN201306UV02MFMIMT700711UV01Subject1 subject : subjects) {
-				PRPAIN201306UV02MFMIMT700711UV01Subject2 currSubject = subject.getRegistrationEvent().getSubject1();
-				JAXBElement<PRPAMT201310UV02Person> patientPerson = currSubject.getPatient().getPatientPerson();
-				List<PNExplicit> names = patientPerson.getValue().getName();
-				for(PNExplicit name : names) {
-					List<Serializable> nameParts = name.getContent();
-					for(Serializable namePart : nameParts) {
-						if(namePart instanceof JAXBElement<?>) {
-							if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
-								((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().get(0).getFamilyName()));
-							}else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("prefix")){
-								((JAXBElement<EnExplicitPrefix>)namePart).getValue().setContent(search.getPatientNames().get(0).getPrefix());
-							}else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("suffix")){
-								((JAXBElement<EnExplicitSuffix>)namePart).getValue().setContent(search.getPatientNames().get(0).getSuffix());
+			PatientSearch search = soapToJson.convertToPatientSearch(requestObj);
+			String patientDiscoveryResult = "";
+			try {
+				Resource pdFile = resourceLoader.getResource("classpath:" + RESOURCE_FILE_NAME);
+				patientDiscoveryResult = Resources.toString(pdFile.getURL(), Charsets.UTF_8);
+				
+				//number of results we want to have; alter the data for that
+				int numResults = getNumberOfResults();
+				PRPAIN201306UV02 resultObj = consumerService.unMarshallPatientDiscoveryResponseObject(patientDiscoveryResult);
+				List<PRPAIN201306UV02MFMIMT700711UV01Subject1> subjects = resultObj.getControlActProcess().getSubject();
+				switch(numResults) {
+				case 0:
+					subjects.clear();
+					break;
+				case 1:
+					subjects.remove(1);
+					break;
+				default:
+						break;
+				}
+				
+				//change the values in the return data to match the search parameters
+				subjects = resultObj.getControlActProcess().getSubject();
+				for(PRPAIN201306UV02MFMIMT700711UV01Subject1 subject : subjects) {
+					PRPAIN201306UV02MFMIMT700711UV01Subject2 currSubject = subject.getRegistrationEvent().getSubject1();
+					JAXBElement<PRPAMT201310UV02Person> patientPerson = currSubject.getPatient().getPatientPerson();
+					List<PNExplicit> names = patientPerson.getValue().getName();
+					for(PNExplicit name : names) {
+						List<Serializable> nameParts = name.getContent();
+						for(Serializable namePart : nameParts) {
+							if(namePart instanceof JAXBElement<?>) {
+								if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("family")) {
+									((JAXBElement<EnExplicitFamily>)namePart).getValue().setContent(getLastName(search.getPatientNames().get(0).getFamilyName()));
+								}else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("prefix")){
+									((JAXBElement<EnExplicitPrefix>)namePart).getValue().setContent(search.getPatientNames().get(0).getPrefix());
+								}else if(((JAXBElement<?>) namePart).getName().getLocalPart().equalsIgnoreCase("suffix")){
+									((JAXBElement<EnExplicitSuffix>)namePart).getValue().setContent(search.getPatientNames().get(0).getSuffix());
+								}
 							}
 						}
+						for(String given : search.getPatientNames().get(0).getGivenName()){
+							JAXBElement<String> givenName = new JAXBElement<String>(new QName("given"), String.class, given);
+							nameParts.add(givenName);
+						}
 					}
-					for(String given : search.getPatientNames().get(0).getGivenName()){
-						JAXBElement<String> givenName = new JAXBElement<String>(new QName("given"), String.class, given);
-						nameParts.add(givenName);
+					
+					if(search.getGender().startsWith("F")) {
+						patientPerson.getValue().getAdministrativeGenderCode().setCode("F");
+					} else if(search.getGender().startsWith("M")) {
+						patientPerson.getValue().getAdministrativeGenderCode().setCode("M");
+					} else {
+						patientPerson.getValue().getAdministrativeGenderCode().setCode("UN");
 					}
-				}
-				
-				if(search.getGender().startsWith("F")) {
-					patientPerson.getValue().getAdministrativeGenderCode().setCode("F");
-				} else if(search.getGender().startsWith("M")) {
-					patientPerson.getValue().getAdministrativeGenderCode().setCode("M");
-				} else {
-					patientPerson.getValue().getAdministrativeGenderCode().setCode("UN");
-				}
-				
-				patientPerson.getValue().getBirthTime().setValue(getDob(search.getDob()));
-				
-				if(!StringUtils.isEmpty(search.getTelephone())){
-					TELExplicit tel = new TELExplicit();
-					tel.setValue("tel:+1-" + search.getTelephone());
-					patientPerson.getValue().getTelecom().add(tel);
-				}
-				if(!StringUtils.isEmpty(search.getSsn())){
-					List<PRPAMT201310UV02OtherIDs> otherIds = patientPerson.getValue().getAsOtherIDs();
-					for(PRPAMT201310UV02OtherIDs otherId : otherIds) {
-						List<String> classCodes = otherId.getClassCode();
-						for(String classCode : classCodes) {
-							if(classCode.equalsIgnoreCase("CIT")) {
-								List<II> citIds = otherId.getId();
-								for(II citId : citIds) {
-									if(citId.getRoot().equals("2.16.840.1.113883.4.1")) {
-										citId.setExtension(search.getSsn());
+					
+					patientPerson.getValue().getBirthTime().setValue(getDob(search.getDob()));
+					
+					if(!StringUtils.isEmpty(search.getTelephone())){
+						TELExplicit tel = new TELExplicit();
+						tel.setValue("tel:+1-" + search.getTelephone());
+						patientPerson.getValue().getTelecom().add(tel);
+					}
+					if(!StringUtils.isEmpty(search.getSsn())){
+						List<PRPAMT201310UV02OtherIDs> otherIds = patientPerson.getValue().getAsOtherIDs();
+						for(PRPAMT201310UV02OtherIDs otherId : otherIds) {
+							List<String> classCodes = otherId.getClassCode();
+							for(String classCode : classCodes) {
+								if(classCode.equalsIgnoreCase("CIT")) {
+									List<II> citIds = otherId.getId();
+									for(II citId : citIds) {
+										if(citId.getRoot().equals("2.16.840.1.113883.4.1")) {
+											citId.setExtension(search.getSsn());
+										}
 									}
 								}
 							}
 						}
 					}
-				}
-				
-				PRPAMT201306UV02PatientAddress patientAddress = new PRPAMT201306UV02PatientAddress();
-				if(search.getAddresses() != null){
-					for(PatientSearchAddress patientSearchAddress : search.getAddresses()){
-						ADExplicit addr = new ADExplicit();
-						addr.getContent().add(new JAXBElement<String>(new QName("state"), String.class, patientSearchAddress.getState()));
-						addr.getContent().add(new JAXBElement<String>(new QName("city"), String.class, patientSearchAddress.getCity()));
-						addr.getContent().add(new JAXBElement<String>(new QName("postalCode"), String.class, patientSearchAddress.getZipcode()));
-
-						for(String line : patientSearchAddress.getLines()){
-							addr.getContent().add(new JAXBElement<String>(new QName("streetAddressLine"), String.class, line));
+					
+					PRPAMT201306UV02PatientAddress patientAddress = new PRPAMT201306UV02PatientAddress();
+					if(search.getAddresses() != null){
+						for(PatientSearchAddress patientSearchAddress : search.getAddresses()){
+							ADExplicit addr = new ADExplicit();
+							addr.getContent().add(new JAXBElement<String>(new QName("state"), String.class, patientSearchAddress.getState()));
+							addr.getContent().add(new JAXBElement<String>(new QName("city"), String.class, patientSearchAddress.getCity()));
+							addr.getContent().add(new JAXBElement<String>(new QName("postalCode"), String.class, patientSearchAddress.getZipcode()));
+	
+							for(String line : patientSearchAddress.getLines()){
+								addr.getContent().add(new JAXBElement<String>(new QName("streetAddressLine"), String.class, line));
+							}
+							patientAddress.getValue().add(addr);
+							patientPerson.getValue().getAddr().add(addr);
 						}
-						patientAddress.getValue().add(addr);
-						patientPerson.getValue().getAddr().add(addr);
 					}
+					
 				}
-				
+				result = consumerService.marshallPatientDiscoveryResponse(resultObj);
+			} catch (IOException e) {
+				logger.error(e);
+				throw new HttpMessageNotWritableException("Could not read response file");
+			} catch(SAMLException | SOAPException | JAXBException ex) {
+				logger.error("Could not convert patient results file to XML object. Returning default XML.", ex);
+				return patientDiscoveryResult;
 			}
-			result = consumerService.marshallPatientDiscoveryResponse(resultObj);
-		} catch (IOException e) {
-			logger.error(e);
-			throw new HttpMessageNotWritableException("Could not read response file");
-		} catch(SAMLException | SOAPException | JAXBException ex) {
-			logger.error("Could not convert patient results file to XML object. Returning default XML.", ex);
-			return defaultPatientDiscoveryResult;
 		}
 		
 		try {	
