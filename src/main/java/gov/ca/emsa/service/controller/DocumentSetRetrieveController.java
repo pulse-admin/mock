@@ -11,6 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.xml.bind.JAXBException;
+import javax.xml.soap.SOAPException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -65,7 +66,7 @@ public class DocumentSetRetrieveController {
 	private int percentageError;
 
 	@RequestMapping(value = "/retrieveDocumentSet", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-	public String documentRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException  {
+	public String documentRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException, SOAPException  {
 		logger.info("/retrieveDocumentSet received request " + request);
 		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		if(randNum <= percentageFailing){

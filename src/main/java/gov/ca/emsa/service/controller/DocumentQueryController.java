@@ -53,7 +53,7 @@ public class DocumentQueryController {
 	private int percentageError;
 	
 	@RequestMapping(value = "/documentQuery", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-	public String queryRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
+	public String queryRequest(@RequestBody String request) throws InterruptedException, RandomFailingErrorException, SOAPException {
 		logger.info("/documentQuery received request " + request);
 		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		if(randNum <= percentageFailing){
@@ -74,6 +74,7 @@ public class DocumentQueryController {
 		} else {
 			try{
 				AdhocQueryRequest requestObj = consumerService.unMarshallDocumentQueryRequestObject(request);
+				//logger.info(requestObj.getAdhocQuery().);
 			}catch(SAMLException e){
 				return consumerService.createSOAPFault();
 			}

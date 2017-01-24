@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -26,8 +27,10 @@ import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConstants;
+import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPFault;
+import javax.xml.soap.SOAPHeaderElement;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.Source;
 
@@ -41,13 +44,17 @@ import org.springframework.ws.soap.SoapFault;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import com.google.common.collect.Lists;
 
 @Service
 public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerService{
 
-	private static final Logger logger = LogManager.getLogger(PatientDiscoveryController.class);
+	private static final Logger logger = LogManager.getLogger(EHealthQueryConsumerServiceImpl.class);
 
 	public String createSOAPFault(){
 		MessageFactory factory = null;
@@ -128,9 +135,14 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		SaajSoapMessage saajSoap = new SaajSoapMessage(soapMessage);
 
 		if(checkSecurityHeading(saajSoap)){
-
+			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(2);
+			
+			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
+			
+			logger.info("Patient Discovery Request made by username: " + username);
+			
 			Source requestSource = saajSoap.getSoapBody().getPayloadSource();
-
+			
 			// Create a JAXB context
 			JAXBContext jc = createJAXBContext(PRPAIN201305UV02.class);
 
@@ -151,7 +163,7 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		}
 	}
 
-	public AdhocQueryRequest unMarshallDocumentQueryRequestObject(String xml) throws SAMLException{
+	public AdhocQueryRequest unMarshallDocumentQueryRequestObject(String xml) throws SAMLException, SOAPException{
 		MessageFactory factory = null;
 		try {
 			factory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
@@ -167,6 +179,12 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		SaajSoapMessage saajSoap = new SaajSoapMessage(soapMessage);
 
 		if(checkSecurityHeading(saajSoap)){
+			
+			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(2);
+			
+			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
+			
+			logger.info("Document Query Request made by username: " + username);
 
 			Source requestSource = saajSoap.getSoapBody().getPayloadSource();
 
@@ -200,7 +218,7 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		}
 	}
 
-	public RetrieveDocumentSetRequestType unMarshallDocumentSetRetrieveRequestObject(String xml) throws SAMLException{
+	public RetrieveDocumentSetRequestType unMarshallDocumentSetRetrieveRequestObject(String xml) throws SAMLException, SOAPException{
 		MessageFactory factory = null;
 		try {
 			factory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
@@ -216,6 +234,12 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		SaajSoapMessage saajSoap = new SaajSoapMessage(soapMessage);
 
 		if(checkSecurityHeading(saajSoap)){
+			
+			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(2);
+			
+			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
+			
+			logger.info("Document Set Retrieve Request made by username: " + username);
 
 			Source requestSource = saajSoap.getSoapBody().getPayloadSource();
 
