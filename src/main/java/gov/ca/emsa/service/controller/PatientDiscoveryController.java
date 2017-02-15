@@ -74,7 +74,7 @@ public class PatientDiscoveryController {
 			produces={"application/xml"} , 
 			consumes ={"application/xml"})
 	public String patientDiscovery(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
-		logger.info("/patientDiscovery received request: " + request);
+		logger.info("/patientDiscovery received a request");
 		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		if(randNum <= percentageFailing){
 			throw new RandomFailingErrorException();
@@ -211,8 +211,9 @@ public class PatientDiscoveryController {
 			int minSeconds = new Integer(minimumResponseSeconds.trim()).intValue();
 			int maxSeconds = new Integer(maximumResponseSeconds.trim()).intValue();
 			int responseIntervalSeconds = ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1);
-			logger.info("/patientDiscovery is waiting for " + responseIntervalSeconds + " seconds to return " + result);
+			logger.info("/patientDiscovery is waiting for " + responseIntervalSeconds + " seconds to return a successful response.");
 			Thread.sleep(responseIntervalSeconds*1000);
+			logger.info("/patientDiscovery is returning a successful response.");
 			return result;
 		} catch(InterruptedException inter) {
 			logger.error("Interruped!", inter);
