@@ -61,12 +61,6 @@
         }
       } ],
       "endpoint" : [ {
-        "display" : "PCDH Receiver",
-        "reference" : "Endpoint/20"
-      }, {
-        "display" : "Patient Discovery",
-        "reference" : "Endpoint/19"
-      }, {
         "display" : "Patient Discovery",
         "reference" : "Endpoint/1"
       }, {
@@ -139,7 +133,7 @@
         "reference" : "Endpoint/11"
       }, {
         "display" : "Patient Discovery",
-        "reference" : "Endpoint/10"
+        "reference" : "Endpoint/1"
       }, {
         "display" : "Retrieve Documents",
         "reference" : "Endpoint/12"
