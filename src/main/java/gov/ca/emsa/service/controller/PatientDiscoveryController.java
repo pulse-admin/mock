@@ -3,6 +3,7 @@ package gov.ca.emsa.service.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.xml.bind.JAXBElement;
@@ -55,6 +56,11 @@ public class PatientDiscoveryController {
 
 	@Autowired EHealthQueryConsumerService consumerService;
 	@Autowired SOAPToJSONService soapToJson;
+	
+	private static final String[] cities = {"Austin", "Springfield", "Baltimore"};
+	private static final String[] states = { "TX", "IL", "MD" };
+	private static final String[] zipcodes = { "11330", "21228", "45678"};
+	private static final String[] addrLines = {"510 Hunters Lane", "1110 Roland Ave", "4432A Snowflake Ave."};
 	
 	@Value("${minimumResponseSeconds}")
 	private String minimumResponseSeconds;
@@ -180,15 +186,37 @@ public class PatientDiscoveryController {
 						}
 					}
 					
+					Random random = new Random();
 					PRPAMT201306UV02PatientAddress patientAddress = new PRPAMT201306UV02PatientAddress();
 					if(search.getAddresses() != null){
+						patientPerson.getValue().getAddr().clear();
 						for(PatientSearchAddress patientSearchAddress : search.getAddresses()){
 							ADExplicit addr = new ADExplicit();
-							addr.getContent().add(new JAXBElement<String>(new QName("state"), String.class, patientSearchAddress.getState()));
-							addr.getContent().add(new JAXBElement<String>(new QName("city"), String.class, patientSearchAddress.getCity()));
-							addr.getContent().add(new JAXBElement<String>(new QName("postalCode"), String.class, patientSearchAddress.getZipcode()));
+							String state = patientSearchAddress.getState();
+							if(StringUtils.isEmpty(state)) {
+								state = states[Math.round(random.nextInt(states.length-1))];
+							}
+							addr.getContent().add(new JAXBElement<String>(new QName("state"), String.class, state));
+							String city = patientSearchAddress.getCity();
+							if(StringUtils.isEmpty(city)) {
+								city = cities[Math.round(random.nextInt(cities.length-1))];
+							}
+							addr.getContent().add(new JAXBElement<String>(new QName("city"), String.class, city));
+							String zip = patientSearchAddress.getZipcode();
+							if(StringUtils.isEmpty(zip)) {
+								zip = zipcodes[Math.round(random.nextInt(zipcodes.length-1))];
+							}
+							addr.getContent().add(new JAXBElement<String>(new QName("postalCode"), String.class, zip));
 	
-							for(String line : patientSearchAddress.getLines()){
+							if(patientSearchAddress.getLines() != null && patientSearchAddress.getLines().size() > 0) {
+								for(String line : patientSearchAddress.getLines()){
+									if(StringUtils.isEmpty(line)) {
+										line = addrLines[Math.round(random.nextInt(addrLines.length-1))];
+									}
+									addr.getContent().add(new JAXBElement<String>(new QName("streetAddressLine"), String.class, line));
+								}
+							} else {
+								String line = addrLines[Math.round(random.nextInt(addrLines.length-1))];
 								addr.getContent().add(new JAXBElement<String>(new QName("streetAddressLine"), String.class, line));
 							}
 							patientAddress.getValue().add(addr);
