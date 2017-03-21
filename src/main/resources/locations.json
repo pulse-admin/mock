@@ -130,13 +130,13 @@
       } ],
       "endpoint" : [ {
         "display" : "Query for Documents",
-        "reference" : "Endpoint/11"
+        "reference" : "Endpoint/2"
       }, {
         "display" : "Patient Discovery",
         "reference" : "Endpoint/1"
       }, {
         "display" : "Retrieve Documents",
-        "reference" : "Endpoint/12"
+        "reference" : "Endpoint/3"
       } ],
       "resourceType" : "Location",
       "id" : "2"
