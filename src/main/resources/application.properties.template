@@ -1,0 +1,29 @@
+ # mock basic parameters
+server.port = 9080
+privateKey=C://samlPrivateKey.txt
+publicKey=C://samlPublicKey.txt
+
+# mock pretending to be an HIE querying us
+# how often (milliseconds) it queries PULSE
+patientSearchIntervalSeconds = 600000
+# where the query goes
+serviceUrl = https://localhost:8090
+
+# mock pretending to be external organizations responding to us
+# the quickest it can respond
+minimumResponseSeconds=1
+# the slowest it can respond
+maximumResponseSeconds=5
+
+# percentage chance that a query will fail
+patientDiscoveryPercentageFailing=0
+patientDiscoveryPercentageError=50
+documentQueryPercentageFailing=0
+documentQueryPercentageError=50
+documentSetRetrievePercentageFailing=0
+documentSetRetrievePercentageError=500
+
+server.ssl.key-store: src/main/resources/keystore.p12
+server.ssl.key-store-password: <insert password>
+server.ssl.keyStoreType: PKCS12
+server.ssl.keyAlias: tomcat

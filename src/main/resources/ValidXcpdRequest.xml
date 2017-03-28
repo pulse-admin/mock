@@ -1,0 +1,169 @@
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:xcpd="urn:ihe:iti:xcpd:2009"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:ihe:iti:xcpd:2009"
+	xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<s:Header>
+		<a:Action s:mustUnderstand="1">
+			urn:hl7-org:v3:PRPA_IN201305UV02:CrossGatewayPatientDiscovery
+		</a:Action>
+		<a:MessageID>urn:uuid:a02ca8cd-86fa-4afc-a27c-16c183b2055
+		</a:MessageID>
+		<a:ReplyTo>
+			<a:Address>http://www.w3.org/2005/08/addressing/anonymous</a:Address>
+		</a:ReplyTo>
+		<a:To s:mustUnderstand="1">http://servicelocation/IHEXCPDRespondingGateway
+		</a:To>
+		<xcpd:CorrelationTimeToLive>P0Y0M7D</xcpd:CorrelationTimeToLive>
+		<wsse:Security><saml2:Assertion ID="12345678-1234-1234-012345678910"
+				IssueInstant="2016-08-31T17:22:43.295Z" Version="2.0"
+				xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
+				<saml2:Issuer
+					Format="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName" />
+				<saml2:Subject>
+					<saml2:NameID
+						Format="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName">CN=Alex G. Bell,O=1.22.333.4444,UID=abell</saml2:NameID>
+					<saml2:SubjectConfirmation>
+						<saml2:SubjectConfirmationData
+							NotBefore="2016-08-31T17:22:43.295Z" NotOnOrAfter="2016-08-31T17:24:43.295Z" />
+					</saml2:SubjectConfirmation>
+				</saml2:Subject>
+				<saml2:Conditions>
+					<saml2:OneTimeUse />
+				</saml2:Conditions>
+				<saml2:AuthnStatement AuthnInstant="2016-08-31T17:22:43.326Z">
+					<saml2:AuthnContext>
+						<saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password
+						</saml2:AuthnContextClassRef>
+					</saml2:AuthnContext>
+				</saml2:AuthnStatement>
+				<saml2:AttributeStatement>
+					<saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:subject:role">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">
+							<Role xmlns="urn:hl7-org:v3" xsi:type="CE" code="46255001"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED_CT"
+								displayName="Pharmacist" />
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">
+							<PurposeOfUse xmlns="urn:hl7-org:v3" xsi:type="CE"
+								code="DISASTER" codeSystem="2.16.840.1.113883.3.18.7.1"
+								codeSystemName="nhin-purpose"
+								displayName="Use and disclosures for disaster relief purposes" />
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute
+						Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">medicalclinic.org
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:subject-id">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">John
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">Medical
+							Clinic One</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:nhin:names:saml:homeCommunityId">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">urn:oid:2.16.840.1.113883.3.190
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute
+						Name="urn:oasis:names:tc:xacml:2.0:resource:resource-id">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">543797436^^^&amp;amp;1.2.840.113619.6.197&amp;amp;ISO
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+				</saml2:AttributeStatement>
+			</saml2:Assertion>
+		</wsse:Security>
+	</s:Header>
+	<s:Body>
+		<PRPA_IN201305UV02 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns="urn:hl7-org:v3"
+			xsi:schemaLocation="urn:hl7-org:v3 ../../schema/HL7V3/NE2008/multicacheschemas/PRPA_IN201305UV02.xsd"
+			ITSVersion="XML_1.0">
+			<id root="1.2.840.114350.1.13.0.1.7.1.1" extension="35423" />
+			<creationTime value="20090417150301" />
+			<interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201305UV02" />
+			<processingCode code="P" />
+			<processingModeCode code="T" />
+			<acceptAckCode code="AL" />
+			<receiver typeCode="RCV">
+				<device classCode="DEV" determinerCode="INSTANCE">
+					<id root="1.2.840.114350.1.13.999.234" />
+					<telecom value="http://servicelocation/IHEXCPDRespondingGateway" />
+				</device>
+			</receiver>
+			<sender typeCode="SND">
+				<device classCode="DEV" determinerCode="INSTANCE">
+					<id root="1.2.840.114350.1.13.999.567" />
+					<!-- Used to carry the homeCommunityId -->
+					<asAgent classCode="AGNT">
+						<representedOrganization classCode="ORG"
+							determinerCode="INSTANCE">
+							<!-- homeCommunityId=urn:oid:1.2.3.928.955 -->
+							<id root="1.2.3.928.955" />
+						</representedOrganization>
+					</asAgent>
+				</device>
+			</sender>
+			<controlActProcess classCode="CACT" moodCode="EVN">
+				<code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.6" />
+				<!-- Identifies one of LivingSubjectID for use by responder in XCA Query 
+					- provisioning the opposite direction -->
+				<authorOrPerformer typeCode="AUT">
+					<assignedDevice>
+						<id root="1.2.840.114350.1.13.99997.2.3412" />
+					</assignedDevice>
+				</authorOrPerformer>
+				<queryByParameter>
+					<queryId root="1.2.840.114350.1.13.28.1.18.5.999"
+						extension="18204" />
+					<statusCode code="new" />
+					<responsePriorityCode code="I" />
+					<responseModalityCode code="R" />
+					<matchCriterionList>
+						<minimumDegreeMatch>
+							<value xsi:type="INT" value="75" />
+							<semanticsText>MinimumDegreeMatch</semanticsText>
+						</minimumDegreeMatch>
+					</matchCriterionList>
+					<parameterList>
+						<livingSubjectAdministrativeGender>
+							<value code="F" />
+							<semanticsText>LivingSubject.administrativeGender</semanticsText>
+						</livingSubjectAdministrativeGender>
+						<livingSubjectBirthTime>
+							<value value="2016-01-10T04:00:00.000Z" />
+							<semanticsText>LivingSubject.birthTime</semanticsText>
+						</livingSubjectBirthTime>
+						<livingSubjectName>
+							<value>
+								<given>Mary</given>
+								<family>Valenzuela</family>
+							</value>
+							<semanticsText>LivingSubject.name</semanticsText>
+						</livingSubjectName>
+						<LivingSubjectId>
+							<value root="1.2.840.114350.1.13.99997.2.3412" extension="1234" />
+							<semanticsText>LivingSubject.id</semanticsText>
+						</LivingSubjectId>
+						<LivingSubjectId>
+							<value root="2.16.840.1.113883.4.1" extension="58910" />
+							<semanticsText>LivingSubject.id</semanticsText>
+						</LivingSubjectId>
+					</parameterList>
+				</queryByParameter>
+			</controlActProcess>
+		</PRPA_IN201305UV02>
+	</s:Body>
+</s:Envelope>

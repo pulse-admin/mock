@@ -1,0 +1,98 @@
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing"
+xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <!--The following header applies for a Synchronous Web Services Exchange Request 
+        Please note that a soap message can only have one header section. -->
+  <!--The following DISABLED header applies for an Asynchronous Web Services Exchange Request 
+        Please note that a soap message can only have one header section. -->
+  <s:Header>
+    <a:Action s:mustUnderstand="1">urn:ihe:iti:2008:RetrieveDocumentSetAsync</a:Action>
+    <a:MessageID>urn:uuid:0fbfdced-6c01-4d09-a110-2201afedaa02</a:MessageID>
+    <a:ReplyTo>
+      <a:Address>http://192.168.2.4:9080/XdsService/DocumentConsumerReceiver.svc</a:Address>
+    </a:ReplyTo>
+    <a:To s:mustUnderstand="1">http://localhost:2647/XdsService/IHEXDSRepository.svc</a:To>
+    <wsse:Security>
+			<saml2:Assertion ID="12345678-1234-1234-012345678910"
+				IssueInstant="2016-08-31T17:22:43.295Z" Version="2.0"
+				xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
+				<saml2:Issuer
+					Format="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName" />
+				<saml2:Subject>
+					<saml2:NameID
+						Format="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName">CN=Alex G. Bell,O=1.22.333.4444,UID=abell</saml2:NameID>
+					<saml2:SubjectConfirmation>
+						<saml2:SubjectConfirmationData
+							NotBefore="2016-08-31T17:22:43.295Z" NotOnOrAfter="2016-08-31T17:24:43.295Z" />
+					</saml2:SubjectConfirmation>
+				</saml2:Subject>
+				<saml2:Conditions>
+					<saml2:OneTimeUse />
+				</saml2:Conditions>
+				<saml2:AuthnStatement AuthnInstant="2016-08-31T17:22:43.326Z">
+					<saml2:AuthnContext>
+						<saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password
+						</saml2:AuthnContextClassRef>
+					</saml2:AuthnContext>
+				</saml2:AuthnStatement>
+				<saml2:AttributeStatement>
+					<saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:subject:role">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">
+							<Role xmlns="urn:hl7-org:v3" xsi:type="CE" code="46255001"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED_CT"
+								displayName="Pharmacist" />
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">
+							<PurposeOfUse xmlns="urn:hl7-org:v3" xsi:type="CE"
+								code="DISASTER" codeSystem="2.16.840.1.113883.3.18.7.1"
+								codeSystemName="nhin-purpose"
+								displayName="Use and disclosures for disaster relief purposes" />
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute
+						Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">medicalclinic.org
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:subject-id">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">John
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">Medical
+							Clinic One</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute Name="urn:nhin:names:saml:homeCommunityId">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">urn:oid:2.16.840.1.113883.3.190
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+					<saml2:Attribute
+						Name="urn:oasis:names:tc:xacml:2.0:resource:resource-id">
+						<saml2:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">543797436^^^&amp;amp;1.2.840.113619.6.197&amp;amp;ISO
+						</saml2:AttributeValue>
+					</saml2:Attribute>
+				</saml2:AttributeStatement>
+			</saml2:Assertion>
+		</wsse:Security>
+  </s:Header>  
+  <s:Body>
+		<RetrieveDocumentSetRequest xsi:schemaLocation="urn:ihe:iti:xds-b:2007 ../../schema/IHE/XDS.b_DocumentRepository.xsd" xmlns="urn:ihe:iti:xds-b:2007" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<DocumentRequest>
+				<RepositoryUniqueId>1.3.6.1.4...1000</RepositoryUniqueId>
+				<DocumentUniqueId>1.3.6.1.4...1000</DocumentUniqueId>
+			</DocumentRequest>
+			<DocumentRequest>
+				<RepositoryUniqueId>1.4.6.1.4...1000</RepositoryUniqueId>
+				<DocumentUniqueId>1.4.6.1.4...1000</DocumentUniqueId>
+			</DocumentRequest>
+		</RetrieveDocumentSetRequest>
+	</s:Body>
+</s:Envelope>
