@@ -50,7 +50,8 @@ public class DocumentSetRetrieveController {
 			CCDA_RESOURCE_DIR + File.separator + "CCDA_CCD_b1_InPatient_v2.xml",
 			CCDA_RESOURCE_DIR + File.separator + "problems-and-medications.xml",
 			CCDA_RESOURCE_DIR + File.separator + "Transition_of_Care_Referral_Summary.xml",
-			CCDA_RESOURCE_DIR + File.separator + "VCN CCDA.xml"};
+			CCDA_RESOURCE_DIR + File.separator + "VCN CCDA.xml",
+			CCDA_RESOURCE_DIR + File.separator + "CCD_100261.xml"};
 	@Autowired EHealthQueryConsumerService consumerService;
 	
 	@Value("${minimumResponseSeconds}")
