@@ -81,6 +81,7 @@ public class PatientDiscoveryController {
 			consumes ={"application/xml"})
 	public String patientDiscovery(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
 		logger.info("/patientDiscovery received a request");
+		System.out.println("Request:" + request);
 		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		if(randNum <= percentageFailing){
 			throw new RandomFailingErrorException();
@@ -242,6 +243,7 @@ public class PatientDiscoveryController {
 			logger.info("/patientDiscovery is waiting for " + responseIntervalSeconds + " seconds to return a successful response.");
 			Thread.sleep(responseIntervalSeconds*1000);
 			logger.info("/patientDiscovery is returning a successful response.");
+			logger.info("/patientDsicovery result is: " + result);
 			return result;
 		} catch(InterruptedException inter) {
 			logger.error("Interruped!", inter);

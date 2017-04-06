@@ -1,4 +1,4 @@
- # mock basic parameters
+# mock basic parameters
 server.port = 9080
 privateKey=C://samlPrivateKey.txt
 publicKey=C://samlPublicKey.txt
@@ -21,7 +21,7 @@ patientDiscoveryPercentageError=50
 documentQueryPercentageFailing=0
 documentQueryPercentageError=50
 documentSetRetrievePercentageFailing=0
-documentSetRetrievePercentageError=500
+documentSetRetrievePercentageError=50
 
 server.ssl.key-store: src/main/resources/keystore.p12
 server.ssl.key-store-password: <insert password>

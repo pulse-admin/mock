@@ -135,7 +135,7 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		SaajSoapMessage saajSoap = new SaajSoapMessage(soapMessage);
 
 		if(checkSecurityHeading(saajSoap)){
-			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(2);
+			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(3);
 			
 			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
 			
@@ -180,7 +180,7 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 
 		if(checkSecurityHeading(saajSoap)){
 			
-			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(2);
+			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(3);
 			
 			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
 			
@@ -235,7 +235,7 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 
 		if(checkSecurityHeading(saajSoap)){
 			
-			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(2);
+			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(3);
 			
 			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
 			
