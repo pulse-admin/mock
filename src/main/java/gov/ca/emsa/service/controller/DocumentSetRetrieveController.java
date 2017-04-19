@@ -45,7 +45,8 @@ public class DocumentSetRetrieveController {
 	private static final String ERROR_FILE_NAME = "ErrorQueryResponse.xml";
 
 	private static final String CCDA_RESOURCE_DIR = "ccdas";
-	private String[] ccdaList = {CCDA_RESOURCE_DIR + File.separator + "367 XDR.xml", 
+	private String[] ccdaList = {
+			CCDA_RESOURCE_DIR + File.separator + "367 XDR.xml", 
 			CCDA_RESOURCE_DIR + File.separator + "CCDA_CCD_b1_Ambulatory_v2.xml",
 			CCDA_RESOURCE_DIR + File.separator + "CCDA_CCD_b1_InPatient_v2.xml",
 			CCDA_RESOURCE_DIR + File.separator + "problems-and-medications.xml",
