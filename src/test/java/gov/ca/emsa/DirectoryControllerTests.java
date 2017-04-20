@@ -76,7 +76,7 @@ public class DirectoryControllerTests extends TestCase {
 		assertEquals("https://localhost:9080/mock/Location/1", firstLocation.getFullUrl());
 		LocationResource resource = firstLocation.getResource();
 		assertNotNull(resource.getEndpoint());
-		assertEquals(3, resource.getEndpoint().size());
+		assertEquals(5, resource.getEndpoint().size());
 		assertEquals("John Muir Medical Center", resource.getName());
 		assertNotNull(resource.getManagingOrganization());
 		assertEquals("John Muir Health Foundation", resource.getManagingOrganization().getDisplay());
