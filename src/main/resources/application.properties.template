@@ -16,7 +16,7 @@ minimumResponseSeconds=1
 maximumResponseSeconds=5
 
 assigningAuthority=1.3.6.1.4.1.21367.2005.13.20.1000
-patientIds=	P20170419155214.7,P20170419155214.8,P20170419155214.9
+patientIds=P20170419155214.7,P20170419155214.8,P20170419155214.9
 
 # percentage chance that a query will fail
 patientDiscoveryPercentageFailing=0
