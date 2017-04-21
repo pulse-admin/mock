@@ -59,7 +59,7 @@ public class PatientDiscoveryController {
 
 	@Autowired EHealthQueryConsumerService consumerService;
 	@Autowired SOAPToJSONService soapToJson;
-	@Autowired Util util;
+	Util util;
 	
 	@Value("${assigningAuthority}")
 	private String assigningAuthority;
