@@ -2,6 +2,7 @@ package gov.ca.emsa.service.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -25,6 +26,7 @@ import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject1;
 import org.hl7.v3.PRPAIN201306UV02MFMIMT700711UV01Subject2;
 import org.hl7.v3.PRPAMT201306UV02PatientAddress;
 import org.hl7.v3.PRPAMT201310UV02OtherIDs;
+import org.hl7.v3.PRPAMT201310UV02Patient;
 import org.hl7.v3.PRPAMT201310UV02Person;
 import org.hl7.v3.TELExplicit;
 import org.opensaml.common.SAMLException;
@@ -47,6 +49,7 @@ import gov.ca.emsa.pulse.common.domain.PatientSearchAddress;
 import gov.ca.emsa.pulse.common.soap.SOAPToJSONService;
 import gov.ca.emsa.service.EHealthQueryConsumerService;
 
+import gov.ca.emsa.Util;
 @RestController
 public class PatientDiscoveryController {
 	private static final Logger logger = LogManager.getLogger(PatientDiscoveryController.class);
@@ -56,7 +59,11 @@ public class PatientDiscoveryController {
 
 	@Autowired EHealthQueryConsumerService consumerService;
 	@Autowired SOAPToJSONService soapToJson;
+	@Autowired Util util;
 	
+	@Value("${assigningAuthority}")
+	private String assigningAuthority;
+	private List<String> patientIds;
 	private static final String[] cities = {"Austin", "Springfield", "Baltimore"};
 	private static final String[] states = { "TX", "IL", "MD" };
 	private static final String[] zipcodes = { "11330", "21228", "45678"};
@@ -81,6 +88,7 @@ public class PatientDiscoveryController {
 			consumes ={"application/xml"})
 	public String patientDiscovery(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
 		logger.info("/patientDiscovery received a request");
+		System.out.println("Request:" + request);
 		int randNum = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		if(randNum <= percentageFailing){
 			throw new RandomFailingErrorException();
@@ -129,10 +137,17 @@ public class PatientDiscoveryController {
 						break;
 				}
 				
+				patientIds = util.getStatuses();
 				//change the values in the return data to match the search parameters
 				subjects = resultObj.getControlActProcess().getSubject();
 				for(PRPAIN201306UV02MFMIMT700711UV01Subject1 subject : subjects) {
 					PRPAIN201306UV02MFMIMT700711UV01Subject2 currSubject = subject.getRegistrationEvent().getSubject1();
+					PRPAMT201310UV02Patient patient = currSubject.getPatient();
+					int randNum1 = 0 + (int)(Math.random() * (((patientIds.size()-1) - 0) + 1));
+					II patientIdElement = new II();
+					patientIdElement.setRoot(assigningAuthority);
+					patientIdElement.setExtension(patientIds.get(randNum1));
+					patient.getId().add(patientIdElement);
 					JAXBElement<PRPAMT201310UV02Person> patientPerson = currSubject.getPatient().getPatientPerson();
 					List<PNExplicit> names = patientPerson.getValue().getName();
 					for(PNExplicit name : names) {
@@ -242,6 +257,7 @@ public class PatientDiscoveryController {
 			logger.info("/patientDiscovery is waiting for " + responseIntervalSeconds + " seconds to return a successful response.");
 			Thread.sleep(responseIntervalSeconds*1000);
 			logger.info("/patientDiscovery is returning a successful response.");
+			logger.info("/patientDsicovery result is: " + result);
 			return result;
 		} catch(InterruptedException inter) {
 			logger.error("Interruped!", inter);

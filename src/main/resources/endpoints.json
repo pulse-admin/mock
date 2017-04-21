@@ -51,11 +51,12 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "https://localhost:9080/documentQuery",
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
       },
+
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -69,7 +70,6 @@
         "code" : "nwhin-xca-query",
         "display" : "IHE XCA"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
       "id" : "2"
     },
@@ -85,11 +85,14 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcr",
+
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
       },
+
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -103,7 +106,6 @@
         "code" : "nwhin-xca-retrieve",
         "display" : "IHE XCA"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
       "id" : "3"
     },
@@ -119,11 +121,13 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "https://localhost:9080/documentQuery",
+
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
       },
+
       "payloadMimeType" : ["application/xml"],
       "payloadType" : [ {
         "coding" : [ {
@@ -137,7 +141,6 @@
         "code" : "nwhin-xca-query",
         "display" : "IHE XCA"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
       "id" : "4"
     },
@@ -187,7 +190,8 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
@@ -255,7 +259,7 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "https://localhost:9080/documentQuery",
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/2"
@@ -273,8 +277,7 @@
         "code" : "nwhin-xca-query",
         "display" : "IHE XCA"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
-      "resourceType" : "Endpoint",
+       "resourceType" : "Endpoint",
       "id" : "8"
     },
     "fullUrl" : "https://localhost:9080/mock/Endpoint/8",
@@ -289,7 +292,7 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/2"
@@ -307,7 +310,6 @@
         "code" : "nwhin-xca-retrieve",
         "display" : "IHE XCA"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
       "id" : "9"
     },
@@ -357,7 +359,7 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "https://localhost:9080/documentQuery",
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "Contra Costa Health Services",
         "reference" : "Organization/2"
@@ -375,7 +377,6 @@
         "code" : "nwhin-xca-query",
         "display" : "IHE XCA"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
       "id" : "11"
     },
@@ -391,7 +392,7 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "https://localhost:9080/retrieveDocumentSet",
+      "address" : "http://localhost:8080/xdstools-4.3.4/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "Contra Costa Health Services",
         "reference" : "Organization/2"
@@ -409,7 +410,6 @@
         "code" : "nwhin-xca-retrieve",
         "display" : "ihe-xca"
       },
-      "publicKey" : "MIIDxDCCAqygAwIBAgIBAjANBgkqhkiG9w0BAQsFADB7MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTE/MD0GA1UECgw2Q2FsaWZvcm5pYSBBc3NvY2lhdGlvbiBvZiBIZWFsdGggSW5mb3JtYXRpb24gRXhjaGFuZ2VzMRYwFAYDVQQDDA1GaWN0aXRpb3VzIENBMB4XDTE2MTEwNzE1NDAzOVoXDTE4MTEwNzE1NDAzOVowUzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExGjAYBgNVBAoMEUthaXNlciBQZXJtYW5lbnRlMRMwEQYDVQQDDAplaHgua3Aub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zh+5F1uN2EK9VCUTGyJYfvAZ2I5Bq5qCntftsks5jR+RIe1WVukVUpjFIFr8QdtmdTI5Wmpgndbh+Pj8E3yHvdXTxosfWtCbxdrAAFfvjQ0PZzVpFHEYP/rCAy0/1lHDEdrNC9C3NNdM6GECdtITuCq7qsK5LJgopITcuvOZYXAOlqMLzXpJ8xsEueoTxIQFhY7SPt5Nl2rprSMJuoltF3ARZ+qU3fmiM4vPrSAJzcUjehu60LMUilwKwS6DEbYai2uJXjavsrWkg3TOcSGPwTD3IoOPjPo/z2QZ41zkD/uVDe1w+UtyjWqQaFaOfNByl0rfWDUhpZarqvEoYG1xwIDAQABo3sweTAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUmkEG1ij7vvcTpF3//Q0IcWyfoXAwHwYDVR0jBBgwFoAUhLxiknJV2lU6HddLzPbXXqzKMT4wDQYJKoZIhvcNAQELBQADggEBAFgMqoBuWBQcHCFrDgyqceQdD9FXzbAIAxHwox6dpd1G4R5/bencf9YlALv9yOJNWz93GJ2fAtimGCICYYek1GmnK6dJ2BvBndygP8qE1Bbvv5/5yfxkm54TMR5mQrllZbPq8HFAJKnipP4PkThjjVWrttgKlklQjdjvEFkfuFth+DKkUZalgQ9WMN6nUxNCeTTOtmsWZqp0GDQQfxmhuk4/7lE33F6OkY9zQTT49UJbtITeSsvr9fzV449wjcR91MyX3zkybDe+Qlih0eR+FJDSJn5XjjSFkNOLgwb25R7U2wfFkVd69N/VW+Bvj6QsW+kg7mUdvOreIX7w1XwzmFo=",
       "resourceType" : "Endpoint",
       "id" : "12"
     },
