@@ -63,7 +63,7 @@ public class PatientDiscoveryController {
 	
 	@Value("${assigningAuthority}")
 	private String assigningAuthority;
-	private List<String> patientIds = util.getStatuses();
+	private List<String> patientIds;
 	private static final String[] cities = {"Austin", "Springfield", "Baltimore"};
 	private static final String[] states = { "TX", "IL", "MD" };
 	private static final String[] zipcodes = { "11330", "21228", "45678"};
@@ -137,6 +137,7 @@ public class PatientDiscoveryController {
 						break;
 				}
 				
+				patientIds = util.getStatuses();
 				//change the values in the return data to match the search parameters
 				subjects = resultObj.getControlActProcess().getSubject();
 				for(PRPAIN201306UV02MFMIMT700711UV01Subject1 subject : subjects) {
