@@ -13,9 +13,6 @@ import org.springframework.util.StringUtils;
 @Component
 public class Util {
 	private static final Logger logger = LogManager.getLogger(Util.class);
-
-	@Value("${patientIds}")
-	private String patientIds;
 	
 	private List<String> pids;
 	
@@ -23,7 +20,7 @@ public class Util {
 		pids = new ArrayList<String>();
 	}
 
-	public List<String> getStatuses() {
+	public List<String> getStatuses(String patientIds) {
 		String[] patientIdsArr = patientIds.split(",");
 		for(int i = 0; i < patientIdsArr.length; i++) {
 			pids.add(patientIdsArr[i]);

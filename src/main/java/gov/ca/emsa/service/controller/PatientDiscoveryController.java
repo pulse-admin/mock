@@ -59,11 +59,13 @@ public class PatientDiscoveryController {
 
 	@Autowired EHealthQueryConsumerService consumerService;
 	@Autowired SOAPToJSONService soapToJson;
-	Util util;
+	Util util = new Util();
 	
 	@Value("${assigningAuthority}")
 	private String assigningAuthority;
-	private List<String> patientIds;
+	@Value("${patientIds}")
+	private String patientIds;
+	private List<String> patientIdsArr;
 	private static final String[] cities = {"Austin", "Springfield", "Baltimore"};
 	private static final String[] states = { "TX", "IL", "MD" };
 	private static final String[] zipcodes = { "11330", "21228", "45678"};
@@ -137,16 +139,16 @@ public class PatientDiscoveryController {
 						break;
 				}
 				
-				patientIds = util.getStatuses();
+				patientIdsArr = util.getStatuses(patientIds);
 				//change the values in the return data to match the search parameters
 				subjects = resultObj.getControlActProcess().getSubject();
 				for(PRPAIN201306UV02MFMIMT700711UV01Subject1 subject : subjects) {
 					PRPAIN201306UV02MFMIMT700711UV01Subject2 currSubject = subject.getRegistrationEvent().getSubject1();
 					PRPAMT201310UV02Patient patient = currSubject.getPatient();
-					int randNum1 = 0 + (int)(Math.random() * (((patientIds.size()-1) - 0) + 1));
+					int randNum1 = 0 + (int)(Math.random() * (((patientIdsArr.size()-1) - 0) + 1));
 					II patientIdElement = new II();
 					patientIdElement.setRoot(assigningAuthority);
-					patientIdElement.setExtension(patientIds.get(randNum1));
+					patientIdElement.setExtension(patientIdsArr.get(randNum1));
 					patient.getId().add(patientIdElement);
 					JAXBElement<PRPAMT201310UV02Person> patientPerson = currSubject.getPatient().getPatientPerson();
 					List<PNExplicit> names = patientPerson.getValue().getName();
