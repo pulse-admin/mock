@@ -137,9 +137,6 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 		if(checkSecurityHeading(saajSoap)){
 			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(3);
 			
-			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
-			
-			logger.info("Patient Discovery Request made by username: " + username);
 			
 			Source requestSource = saajSoap.getSoapBody().getPayloadSource();
 			
@@ -182,9 +179,6 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 			
 			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(3);
 			
-			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
-			
-			logger.info("Document Query Request made by username: " + username);
 
 			Source requestSource = saajSoap.getSoapBody().getPayloadSource();
 
@@ -237,9 +231,6 @@ public class EHealthQueryConsumerServiceImpl implements EHealthQueryConsumerServ
 			
 			SOAPElement securityHeader = (SOAPElement) Lists.newArrayList(saajSoap.getSaajMessage().getSOAPHeader().getChildElements()).get(3);
 			
-			String username = securityHeader.getFirstChild().getChildNodes().item(0).getFirstChild().getNodeValue();
-			
-			logger.info("Document Set Retrieve Request made by username: " + username);
 
 			Source requestSource = saajSoap.getSoapBody().getPayloadSource();
 
