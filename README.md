@@ -38,21 +38,21 @@ While the mock service is running via `bootRun`, you can change the status of, o
 
 ## Installation of NIST tool
 
-Go to https://github.com/usnistgov/iheos-toolkit2/releases and click on the xdstools-4.3.4.war download.
-Go to https://tomcat.apache.org/download-70.cgi and download the windows version of tomcat and install.
-Go to the installation directory of tomcat and copy the xdstools-4.3.4 into the `webapps` directory.
-Start tomcat service.
-Go to localhost:8080/xdstools-4.3.4
-Click conformance tests link at the bottom left corner
-Click on the Initiating Gateway tab for the Actor to Test
-Scroll down and hit Initialize Testing Environment
-Scroll down to Test Data Pattern and copy the patient ID's into a comma seperated list in the patientIds property in the application.properties file
-(Patient Id's start with P and end before the ^^^ characters)
-Copy the Assigning Authority into the assigningAuthority property of appplication.properties
-(Assigning Authority starts after ^^^& and goes until the &ISO)
-In the endpoints file replace all Query Endpoints with the Cross Community Query Endpoint in the Supporting Environment Configuration section
-In the endpoints file replace all Retreive Endpoints with the Cross Community Retrieve Endpoint in the Supporting Environment Configuration section
-Reload Mock and try patient searches
+1. Go to https://github.com/usnistgov/iheos-toolkit2/releases and click on the xdstools-4.3.4.war download.
+2. Go to https://tomcat.apache.org/download-70.cgi and download the windows version of tomcat and install.
+3. Go to the installation directory of tomcat and copy the xdstools-4.3.4 into the `webapps` directory.
+4. Start tomcat service.
+5. Go to localhost:8080/xdstools-4.3.4
+6. Click conformance tests link at the bottom left corner
+7. Click on the Initiating Gateway tab for the Actor to Test
+8. Scroll down and hit Initialize Testing Environment
+9. Scroll down to Test Data Pattern and copy the patient ID's into a comma seperated list in the patientIds property in the application.properties file
+10. (Patient Id's start with P and end before the ^^^ characters)
+11. Copy the Assigning Authority into the assigningAuthority property of appplication.properties
+12. (Assigning Authority starts after ^^^& and goes until the &ISO)
+13. In the endpoints file replace all Query Endpoints with the Cross Community Query Endpoint in the Supporting Environment Configuration section
+14. In the endpoints file replace all Retreive Endpoints with the Cross Community Retrieve Endpoint in the Supporting Environment Configuration section
+15. Reload Mock and try patient searches
 
 
 
