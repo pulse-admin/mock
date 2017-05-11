@@ -87,7 +87,7 @@ public class PatientDiscoveryController {
 	@RequestMapping(value = "/patientDiscovery", 
 			method = RequestMethod.POST, 
 			produces={"application/xml"} , 
-			consumes ={"application/xml"})
+			consumes ={"application/soap+xml; charset=utf-8"})
 	public String patientDiscovery(@RequestBody String request) throws InterruptedException, RandomFailingErrorException {
 		logger.info("/patientDiscovery received a request");
 		System.out.println("Request:" + request);
