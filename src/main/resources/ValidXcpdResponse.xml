@@ -47,7 +47,6 @@
 						<statusCode code="active" />
 						<subject1 typeCode="SBJ">
 							<patient classCode="PAT">
-								<id root="1.2.840.114350.1.13.99998.8734" extension="34827K410" />
 								<statusCode code="active" />
 								<patientPerson>
 									<name>

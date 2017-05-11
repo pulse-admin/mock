@@ -1,6 +1,6 @@
 {
   "type" : "searchset",
-  "total" : 3,
+  "total" : 4,
   "resourceType" : "Bundle",
   "link" : [ {
     "relation" : "self",
@@ -151,6 +151,50 @@
       "id" : "3"
     },
     "fullUrl" : "https://localhost:9080/mock/Organization/3",
+    "search" : {
+      "mode" : "match"
+    }
+  }, {
+    "resource" : {
+      "meta" : {
+        "lastUpdated" : "2016-09-16T13:55:22.000-0700",
+        "versionId" : "314782847561711082"
+      },
+      "active" : true,
+      "type" : {
+        "text" : "PULSE HIO",
+        "coding" : [ {
+          "system" : "http://hl7.org/fhir/organization-type",
+          "version" : "1.0",
+          "code" : "prov",
+          "display" : "Healthcare Provider"
+        } ]
+      },
+      "name" : "PULSE",
+      "endpoint" : [ {
+        "display" : "Patient Discovery",
+        "reference" : "Endpoint/51"
+      }, {
+        "display" : "Query for Documents",
+        "reference" : "Endpoint/50"
+      }, {
+        "display" : "Retrieve Documents",
+        "reference" : "Endpoint/52"
+      } ],
+      "address" : [ {
+        "type" : "both",
+        "text" : "6001 Norris Canyon Rd, San Ramon, CA 94583",
+        "line" : ["6001 Norris Canyon Rd"],
+        "city" : "San Ramon",
+        "state" : "CA",
+        "postalCode" : "94583",
+        "resourceType" : "Address",
+        "use" : "work"
+      } ],
+      "resourceType" : "Organization",
+      "id" : "4"
+    },
+    "fullUrl" : "https://localhost:9080/mock/Organization/4",
     "search" : {
       "mode" : "match"
     }
