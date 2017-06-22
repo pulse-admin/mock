@@ -39,21 +39,21 @@ While the mock service is running via `bootRun`, you can change the status of, o
 ## Installation of NIST tool
 
 1. Go to https://github.com/usnistgov/iheos-toolkit2/releases and click on the xdstools-4.3.4.war download.
-2. Go to https://tomcat.apache.org/download-70.cgi and download the windows version of tomcat and install. Set up tomcat to run on an unusual port to avoid conflicts with other PULSE applications. 7777 is a good choice. Edit conf/server.xml and replace 8080 with 7777.
+2. Go to https://tomcat.apache.org/download-70.cgi and download the windows version of tomcat and install. Set up tomcat to run on an unusual port to avoid conflicts with other PULSE applications. These instructions assume you use 7777. Edit conf/server.xml and replace 8080 with 7777.
 3. Go to the installation directory of tomcat and copy the xdstools-4.3.4 into the `webapps` directory.
 4. Start tomcat service.
-5. Go to localhost:8080/xdstools-4.3.4
-6. Follow the instructions at https://github.com/usnistgov/iheos-toolkit2/wiki/installing to set up your external cache and make the popup error message go away.
+5. Go to http://localhost:7777/xdstools-4.3.4
+6. Follow the instructions at https://github.com/usnistgov/iheos-toolkit2/wiki/installing#configure to set up your external cache and make the popup error message go away.
+  * Specifically, set the External Cache value to a directory on your machine, and the Toolkit Port value to 7777
 7. Click conformance tests link at the bottom left corner
 8. Click on the Initiating Gateway tab for the Actor to Test
 9. Scroll down and hit Initialize Testing Environment
-10. Scroll down to Test Data Pattern and copy the patient ID's into a comma seperated list in the patientIds property in the application.properties file
-11. (Patient Id's start with P and end before the ^^^ characters)
-12. Copy the Assigning Authority into the assigningAuthority property of appplication.properties
-13. (Assigning Authority starts after ^^^& and goes until the &ISO)
-14. In the endpoints file replace all Query Endpoints with the Cross Community Query Endpoint in the Supporting Environment Configuration section
-15. In the endpoints file replace all Retreive Endpoints with the Cross Community Retrieve Endpoint in the Supporting Environment Configuration section
-16. Reload Mock and try patient searches
-
-
-
+10. Scroll down to Test Data Pattern and copy the patient ID's into a comma separated list in the patientIds property in the `mock/src/main/resources/application.properties` file
+  * (Patient Id's start with P and end before the ^^^ characters)
+11. Copy the Assigning Authority into the assigningAuthority property of appplication.properties
+  * (Assigning Authority starts after ^^^& and goes until the &ISO)
+12. In the endpoints file replace all Query Endpoints with the Cross Community Query Endpoint in the Supporting Environment Configuration section
+  * Replace `8081/xdstools-4.3.4` with `7777\xdstools-4.3.4`
+13. In the endpoints file replace all Retreive Endpoints with the Cross Community Retrieve Endpoint in the Supporting Environment Configuration section
+  * Replace `8081/xdstools-4.3.4` with `7777\xdstools-4.3.4`
+14. Reload Mock and try patient searches
