@@ -51,7 +51,7 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcq",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
@@ -86,7 +86,7 @@
       },
       "name" : "Retrieve Documents",
 
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcr",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcr",
 
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
@@ -122,7 +122,7 @@
       },
       "name" : "Query for Documents",
 
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcq",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
@@ -191,7 +191,7 @@
       },
       "name" : "Retrieve Documents",
 
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcr",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/1"
@@ -259,7 +259,7 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcq",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/2"
@@ -292,7 +292,7 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcr",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "John Muir Health Foundation",
         "reference" : "Organization/2"
@@ -359,7 +359,7 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcq",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "Contra Costa Health Services",
         "reference" : "Organization/2"
@@ -392,7 +392,7 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcr",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "Contra Costa Health Services",
         "reference" : "Organization/2"
@@ -487,7 +487,7 @@
         "versionId" : "314786234207869946"
       },
       "name" : "Query for Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcq",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcq",
       "managingOrganization" : {
         "display" : "San Ramon Regional Medical Center",
         "reference" : "Organization/3"
@@ -521,7 +521,7 @@
         "versionId" : "414786234318308634"
       },
       "name" : "Retrieve Documents",
-      "address" : "http://localhost:8081/xdstools-4.3.4/sim/default__community1/rg/xcr",
+      "address" : "http://localhost:8181/xdstools/sim/default__community1/rg/xcr",
       "managingOrganization" : {
         "display" : "San Ramon Regional Medical Center",
         "reference" : "Organization/3"
@@ -555,7 +555,7 @@
       },
       "name" : "Query for Documents",
 
-      "address" : "https://52.32.239.69:9090/documentQuery",
+      "address" : "https://localhost:9080/documentQuery",
       "managingOrganization" : {
         "display" : "PULSE",
         "reference" : "Organization/4"
@@ -589,7 +589,7 @@
         "versionId" : "214786233798141982"
       },
       "name" : "Patient Discovery",
-      "address" : "https://52.32.239.69:9090/patientDiscovery",
+      "address" : "https://localhost:9080/patientDiscovery",
       "managingOrganization" : {
         "display" : "PULSE",
         "reference" : "Organization/4"
@@ -624,7 +624,7 @@
       },
       "name" : "Retrieve Documents",
 
-      "address" : "https://52.32.239.69:9090/retrieveDocumentSet",
+      "address" : "https://localhost:9080/retrieveDocumentSet",
       "managingOrganization" : {
         "display" : "PULSE",
         "reference" : "Organization/4"
