@@ -1,8 +1,8 @@
 package gov.ca.emsa.controller;
 
 import java.io.IOException;
-import java.util.List;
-
+import java.nio.charset.StandardCharsets;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import gov.ca.emsa.pulse.cten.domain.Endpoint;
 import gov.ca.emsa.pulse.cten.domain.EndpointWrapper;
-import gov.ca.emsa.pulse.cten.domain.Location;
 import gov.ca.emsa.pulse.cten.domain.LocationWrapper;
-import gov.ca.emsa.pulse.cten.domain.Organization;
 import gov.ca.emsa.pulse.cten.domain.OrganizationWrapper;
-import io.swagger.annotations.Api;
 
 @RestController
 public class DirectoryController {
@@ -28,6 +24,7 @@ public class DirectoryController {
 	private static final String ORGANIZATION_RESOURCE_FILE_NAME = "organizations.json";
 	private static final String LOCATIONS_RESOURCE_FILE_NAME = "locations.json";
 	private static final String ENDPOINTS_RESOURCE_FILE_NAME = "endpoints.json";
+	private static final String SEQUOIA_RESOURCE_FILE_NAME = "dev-sequoia-count-5.json";
 
 	@Autowired private ResourceLoader resourceLoader;
 	private ObjectMapper jsonMapper;
@@ -46,6 +43,12 @@ public class DirectoryController {
 			logger.error("Could not parse organizations file", ex);		
 		}		
 		return parsed;		
+	}
+	
+	@RequestMapping(value= "/mock/Sequoia", method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	public String getSequoia() throws IOException {		
+		Resource organizationsFile = resourceLoader.getResource("classpath:" + SEQUOIA_RESOURCE_FILE_NAME);		
+		return FileUtils.readFileToString(organizationsFile.getFile(), StandardCharsets.UTF_8);
 	}
 	
 	@RequestMapping(value= "/mock/Location", method = RequestMethod.GET, produces="application/json; charset=utf-8")

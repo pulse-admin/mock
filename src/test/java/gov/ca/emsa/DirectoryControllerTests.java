@@ -1,6 +1,20 @@
 package gov.ca.emsa;
 
+import gov.ca.emsa.pulse.cten.CtenToPulseConverter;
+import gov.ca.emsa.pulse.cten.domain.Endpoint;
+import gov.ca.emsa.pulse.cten.domain.EndpointResource;
+import gov.ca.emsa.pulse.cten.domain.EndpointWrapper;
+import gov.ca.emsa.pulse.cten.domain.Location;
+import gov.ca.emsa.pulse.cten.domain.LocationResource;
+import gov.ca.emsa.pulse.cten.domain.LocationWrapper;
+import gov.ca.emsa.pulse.cten.domain.Organization;
+import gov.ca.emsa.pulse.cten.domain.OrganizationResource;
+import gov.ca.emsa.pulse.cten.domain.OrganizationWrapper;
+import gov.ca.emsa.pulse.sequoia.domain.SequoiaBundle;
+
 import java.io.IOException;
+
+import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,18 +27,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import gov.ca.emsa.pulse.cten.CtenToPulseConverter;
-import gov.ca.emsa.pulse.cten.domain.Endpoint;
-import gov.ca.emsa.pulse.cten.domain.EndpointResource;
-import gov.ca.emsa.pulse.cten.domain.EndpointWrapper;
-import gov.ca.emsa.pulse.cten.domain.Location;
-import gov.ca.emsa.pulse.cten.domain.LocationResource;
-import gov.ca.emsa.pulse.cten.domain.LocationWrapper;
-import gov.ca.emsa.pulse.cten.domain.Organization;
-import gov.ca.emsa.pulse.cten.domain.OrganizationResource;
-import gov.ca.emsa.pulse.cten.domain.OrganizationWrapper;
-import junit.framework.TestCase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -57,6 +59,21 @@ public class DirectoryControllerTests extends TestCase {
 		assertEquals("John Muir Health Foundation", resource.getName());
 		assertEquals("1", resource.getId());
 		assertEquals("true", resource.getActive());
+	}
+	
+	@Test
+	public void parseSequoia() {
+		SequoiaBundle parsed = null;
+		Resource orgsResource = resourceLoader.getResource("classpath:dev-sequoia-count-5.json");
+		try {
+			parsed = jsonMapper.readValue(orgsResource.getInputStream(), SequoiaBundle.class);
+		} catch(IOException ex) {
+			ex.printStackTrace();
+			fail("Caught IOException parsing organizations: " + ex.getMessage());
+		}
+		
+		assertNotNull(parsed);
+		assertNotNull(parsed.getBundle().getEntry().get(0).getResource().getOrganization().getEndpoint());
 	}
 	
 	@Test
