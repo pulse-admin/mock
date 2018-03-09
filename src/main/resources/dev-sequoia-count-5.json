@@ -1,0 +1,1566 @@
+{
+  "Bundle": {
+    "xmlns": "http://hl7.org/fhir",
+    "id": {
+      "value": "956a8bf0-037c-0136-7b89-1634c11983ae"
+    },
+    "meta": {
+      "lastUpdated": {
+        "value": "2018-03-06T14:57:15+00:00"
+      }
+    },
+    "type": {
+      "value": "searchset"
+    },
+    "total": {
+      "value": "4"
+    },
+    "link": {
+      "relation": {
+        "value": "self"
+      },
+      "url": {
+        "value": "/Organization?_format=json"
+      }
+    },
+    "entry": [
+      {
+        "fullUrl": {
+          "value": "/Organization/0"
+        },
+        "resource": {
+          "Organization": {
+            "id": {
+              "value": "0"
+            },
+            "meta": {
+              "versionId": {
+                "value": "1"
+              },
+              "lastUpdated": {
+                "value": "2017-06-27T00:00:00.000+0000"
+              }
+            },
+            "identifier": {
+              "use": {
+                "value": "official"
+              },
+              "system": {
+                "value": "http://www.hl7.org/oid/"
+              },
+              "value": {
+                "value": "urn:oid:2.16.840.1.113883.3.564.1"
+              }
+            },
+            "description": {
+              "value": ""
+            },
+            "active": {
+              "value": "Active"
+            },
+            "name": {
+              "value": "National Healthcare, Inc."
+            },
+            "contact": [
+              {
+                "purpose": {
+                  "value": "Operations"
+                },
+                "name": {
+                  "use": {
+                    "value": "official"
+                  },
+                  "text": "John Kenedy",
+                  "given": {
+                    "value": "John Kenedy"
+                  }
+                },
+                "telcom": {
+                  "ContactPoint": [
+                    {
+                      "system": {
+                        "value": "email"
+                      },
+                      "value": {
+                        "value": "john.kenedy@nationalhealth.com"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    },
+                    {
+                      "system": {
+                        "value": "phone"
+                      },
+                      "value": {
+                        "value": "617-403-1075"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    }
+                  ]
+                },
+                "address": {
+                  "use": {
+                    "value": "work"
+                  },
+                  "type": {
+                    "value": "both"
+                  },
+                  "line": [
+                    {
+                      "value": "313 Arsenal St."
+                    },
+                    {
+                      "value": ""
+                    }
+                  ],
+                  "city": {
+                    "value": "Watertown"
+                  },
+                  "postalCode": {
+                    "value": "2472"
+                  },
+                  "country": {
+                    "value": "US"
+                  }
+                }
+              },
+              {
+                "purpose": {
+                  "value": "Technical"
+                },
+                "name": {
+                  "use": {
+                    "value": "official"
+                  },
+                  "text": "Alex Ernesto",
+                  "given": {
+                    "value": "Alex Ernesto"
+                  }
+                },
+                "telcom": {
+                  "ContactPoint": [
+                    {
+                      "system": {
+                        "value": "email"
+                      },
+                      "value": {
+                        "value": "alex.ern@nationalhealth.com"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    },
+                    {
+                      "system": {
+                        "value": "phone"
+                      },
+                      "value": {
+                        "value": "617-432-8751"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    }
+                  ]
+                },
+                "address": {
+                  "use": {
+                    "value": "work"
+                  },
+                  "type": {
+                    "value": "both"
+                  },
+                  "line": [
+                    {
+                      "value": "313 Arsenal St."
+                    },
+                    {
+                      "value": ""
+                    }
+                  ],
+                  "city": {
+                    "value": "Watertown"
+                  },
+                  "postalCode": {
+                    "value": "2472"
+                  },
+                  "country": {
+                    "value": "US"
+                  }
+                }
+              }
+            ],
+            "address": {
+              "use": {
+                "value": "work"
+              },
+              "type": {
+                "value": "both"
+              },
+              "line": {
+                "value": "313 Arsenal St."
+              },
+              "city": {
+                "value": "Watertown"
+              },
+              "state": {
+                "value": "MA"
+              },
+              "postalCode": {
+                "value": "2472"
+              },
+              "country": {
+                "value": "US"
+              },
+              "position": {
+                "longitude": {
+                  "value": "-71.1670094"
+                },
+                "latitude": {
+                  "value": "42.3634917"
+                }
+              }
+            },
+            "contained": [
+              {
+                "Endpoint": {
+                  "identifier": [
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "HCID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.1"
+                      }
+                    },
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "AAID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.1"
+                      }
+                    }
+                  ],
+                  "connectionType": {
+                    "system": {
+                      "value": "http://hl7.org/fhir/subscription-channel-type"
+                    },
+                    "code": {
+                      "value": "IHE-XCA"
+                    }
+                  },
+                  "name": {
+                    "value": "Patient Discovery"
+                  },
+                  "managingOrganization": {
+                    "reference": {
+                      "value": ""
+                    }
+                  },
+                  "address": {
+                    "value": "https://carequality.nationalhealth.com/xcpd/v1/CAREQUALITY%3A%3AXCPD"
+                  },
+                  "payloadMimeFormat": {
+                    "value": "text/xml"
+                  },
+                  "payloadType": {
+                    "coding": {
+                      "system": {
+                        "value": "urn:oid:1.3.6.1.4.1.19376.1.2.3"
+                      }
+                    }
+                  },
+                  "extension": {
+                    "url": "https://sequoiaproject.org/StructureDefinition/Endpoint/main/1.0.0",
+                    "extension": [
+                      {
+                        "url": "Transaction",
+                        "valueString": {
+                          "value": "XCPD ITI-55"
+                        }
+                      },
+                      {
+                        "url": "Actor",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Actor/1.0.0"
+                            },
+                            "value": {
+                              "value": "Responding Gateway"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Version",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Version/1.0.0"
+                            },
+                            "value": {
+                              "value": "2.0"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "UseCases",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/UseCases/1.0.0"
+                            },
+                            "value": {
+                              "value": "QueryBasedDocumentExchange"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "PurposesOfUse",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/PurposesOfUse/1.0.0"
+                            },
+                            "value": {
+                              "value": "Treatment"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Roles",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Roles/1.0.0"
+                            },
+                            "value": {
+                              "value": "All"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "IPA",
+                        "valueCodeableConcept": {
+                          "system": {
+                            "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/IPA/1.0.0"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "Endpoint": {
+                  "identifier": [
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "HCID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.2"
+                      }
+                    },
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "AAID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      }
+                    }
+                  ],
+                  "connectionType": {
+                    "system": {
+                      "value": "http://hl7.org/fhir/subscription-channel-type"
+                    },
+                    "code": {
+                      "value": "IHE-XCA"
+                    }
+                  },
+                  "name": {
+                    "value": "Query for documents"
+                  },
+                  "managingOrganization": {
+                    "reference": {
+                      "value": ""
+                    }
+                  },
+                  "address": {
+                    "value": "https://carequality.nationalhealth.com/xca/rsq/v1/CAREQUALITY%3A%3AXCA"
+                  },
+                  "payloadMimeFormat": {
+                    "value": "text/xml"
+                  },
+                  "payloadType": {
+                    "coding": {
+                      "system": {
+                        "value": "urn:oid:1.3.6.1.4.1.19376.1.2.3"
+                      }
+                    }
+                  },
+                  "extension": {
+                    "url": "https://sequoiaproject.org/StructureDefinition/Endpoint/main/1.0.0",
+                    "extension": [
+                      {
+                        "url": "Transaction",
+                        "valueString": {
+                          "value": "XCA ITI-38"
+                        }
+                      },
+                      {
+                        "url": "Actor",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Actor/1.0.0"
+                            },
+                            "value": {
+                              "value": "Responding Gateway"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Version",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Version/1.0.0"
+                            },
+                            "value": {
+                              "value": "2.0"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "UseCases",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/UseCases/1.0.0"
+                            },
+                            "value": {
+                              "value": "QueryBasedDocumentExchange"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "PurposesOfUse",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/PurposesOfUse/1.0.0"
+                            },
+                            "value": {
+                              "value": "Treatment"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Roles",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Roles/1.0.0"
+                            },
+                            "value": {
+                              "value": "All"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "IPA",
+                        "valueCodeableConcept": {
+                          "system": {
+                            "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/IPA/1.0.0"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "Endpoint": {
+                  "identifier": [
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "HCID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.3"
+                      }
+                    },
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "AAID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      }
+                    }
+                  ],
+                  "connectionType": {
+                    "system": {
+                      "value": "http://hl7.org/fhir/subscription-channel-type"
+                    },
+                    "code": {
+                      "value": "IHE-XCA"
+                    }
+                  },
+                  "name": {
+                    "value": "Retrieve documents"
+                  },
+                  "managingOrganization": {
+                    "reference": {
+                      "value": ""
+                    }
+                  },
+                  "address": {
+                    "value": "https://carequality.nationalhealth.com/xca/rds/v1/CAREQUALITY%3A%3AXCA"
+                  },
+                  "payloadMimeFormat": {
+                    "value": "text/xml"
+                  },
+                  "payloadType": {
+                    "coding": {
+                      "system": {
+                        "value": "urn:oid:1.3.6.1.4.1.19376.1.2.3"
+                      }
+                    }
+                  },
+                  "extension": {
+                    "url": "https://sequoiaproject.org/StructureDefinition/Endpoint/main/1.0.0",
+                    "extension": [
+                      {
+                        "url": "Transaction",
+                        "valueString": {
+                          "value": "XCA ITI-39"
+                        }
+                      },
+                      {
+                        "url": "Actor",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Actor/1.0.0"
+                            },
+                            "value": {
+                              "value": "Responding Gateway"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Version",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Version/1.0.0"
+                            },
+                            "value": {
+                              "value": "2.0"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "UseCases",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/UseCases/1.0.0"
+                            },
+                            "value": {
+                              "value": "QueryBasedDocumentExchange"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "PurposesOfUse",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/PurposesOfUse/1.0.0"
+                            },
+                            "value": {
+                              "value": "Treatment"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Roles",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Roles/1.0.0"
+                            },
+                            "value": {
+                              "value": "All"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "IPA",
+                        "valueCodeableConcept": {
+                          "system": {
+                            "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/IPA/1.0.0"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "fullUrl": {
+          "value": "/Organization/1"
+        },
+        "resource": {
+          "Organization": {
+            "id": {
+              "value": "1"
+            },
+            "meta": {
+              "versionId": {
+                "value": "1"
+              },
+              "lastUpdated": {
+                "value": "2018-03-05T19:21:36+00:00"
+              }
+            },
+            "identifier": {
+              "use": {
+                "value": "official"
+              },
+              "system": {
+                "value": "http://www.hl7.org/oid/"
+              },
+              "value": {
+                "value": "urn:oid:2.16.840.1.113883.3.564.2"
+              }
+            },
+            "description": {
+              "value": ""
+            },
+            "active": {
+              "value": "Active"
+            },
+            "name": {
+              "value": "AA - athena fhir test"
+            },
+            "contact": [
+              {
+                "purpose": {
+                  "value": "Technical "
+                },
+                "name": {
+                  "use": {
+                    "value": "official"
+                  },
+                  "text": "Jeffrey",
+                  "given": {
+                    "value": "Jeffrey"
+                  }
+                },
+                "telcom": {
+                  "ContactPoint": [
+                    {
+                      "system": {
+                        "value": "phone"
+                      },
+                      "value": {
+                        "value": "111-111-1111"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    }
+                  ]
+                },
+                "address": {
+                  "use": {
+                    "value": "work"
+                  },
+                  "type": {
+                    "value": "both"
+                  },
+                  "line": [
+                    {
+                      "value": "311 Arsenal St."
+                    },
+                    {
+                      "value": ""
+                    }
+                  ],
+                  "city": {
+                    "value": "Watertown"
+                  },
+                  "postalCode": {
+                    "value": "2472"
+                  },
+                  "country": {
+                    "value": "US"
+                  }
+                }
+              }
+            ],
+            "address": {
+              "use": {
+                "value": "work"
+              },
+              "type": {
+                "value": "both"
+              },
+              "line": {
+                "value": "1 NORTH ERWIN STREET"
+              },
+              "city": {
+                "value": "CARTERSVILLE"
+              },
+              "state": {
+                "value": "GA"
+              },
+              "country": {
+                "value": "US"
+              },
+              "position": {
+                "longitude": {
+                  "value": "-95.712891"
+                },
+                "latitude": {
+                  "value": "37.09024"
+                }
+              }
+            },
+            "partOf": {
+              "Reference": {
+                "identifier": {
+                  "use": {
+                    "value": "offical"
+                  },
+                  "type": {
+                    "value": "HCID"
+                  },
+                  "system": {
+                    "value": "http://www.hl7.org/oid/"
+                  },
+                  "value": {
+                    "value": "urn:oid:2.16.840.1.113883.3.564.1"
+                  }
+                }
+              }
+            },
+            "managingOrg": {
+              "reference": {
+                "value": "org.sequoiaproject.fhir.stu3/Organization/athenahealth"
+              }
+            },
+            "contained": [
+              {
+                "Endpoint": {
+                  "identifier": [
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "HCID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.4"
+                      }
+                    },
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "AAID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      }
+                    }
+                  ],
+                  "connectionType": {
+                    "system": {
+                      "value": "http://hl7.org/fhir/subscription-channel-type"
+                    },
+                    "code": {
+                      "value": "IHE-XCA"
+                    }
+                  },
+                  "name": {
+                    "value": "Patient Discovery"
+                  },
+                  "managingOrganization": {
+                    "reference": {
+                      "value": ""
+                    }
+                  },
+                  "address": {
+                    "value": "https://carequality.athenahealth.com/xcpd/v1/CAREQUALITY%3A%3AXCPD"
+                  },
+                  "payloadMimeFormat": {
+                    "value": "text/xml"
+                  },
+                  "payloadType": {
+                    "coding": {
+                      "system": {
+                        "value": "urn:oid:1.3.6.1.4.1.19376.1.2.3"
+                      },
+                      "code": {
+                        "value": ""
+                      }
+                    }
+                  },
+                  "extension": {
+                    "url": "https://sequoiaproject.org/StructureDefinition/Endpoint/main/1.0.0",
+                    "extension": [
+                      {
+                        "url": "Transaction",
+                        "valueString": {
+                          "value": "XCPD ITI-55"
+                        }
+                      },
+                      {
+                        "url": "Actor",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Actor/1.0.0"
+                            },
+                            "value": {
+                              "value": "Responding Gateway"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Version",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Version/1.0.0"
+                            },
+                            "value": {
+                              "value": "2.0"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "UseCases",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/UseCases/1.0.0"
+                            },
+                            "value": {
+                              "value": "QueryBasedDocumentExchange"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "PurposesOfUse",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/PurposesOfUse/1.0.0"
+                            },
+                            "value": {
+                              "value": "Treatment"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Roles",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Roles/1.0.0"
+                            },
+                            "value": {
+                              "value": "All"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "IPA",
+                        "valueCodeableConcept": {
+                          "system": {
+                            "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/IPA/1.0.0"
+                          },
+                          "value": {
+                            "value": ""
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "fullUrl": {
+          "value": "/Organization/2"
+        },
+        "resource": {
+          "Organization": {
+            "id": {
+              "value": "2"
+            },
+            "meta": {
+              "versionId": {
+                "value": "1"
+              },
+              "lastUpdated": {
+                "value": "2018-02-23T18:45:54+00:00"
+              }
+            },
+            "identifier": {
+              "use": {
+                "value": "official"
+              },
+              "system": {
+                "value": "http://www.hl7.org/oid/"
+              },
+              "value": {
+                "value": "urn:oid:2.16.840.1.113883.3.564.3"
+              }
+            },
+            "description": {
+              "value": ""
+            },
+            "active": {
+              "value": "Active"
+            },
+            "name": {
+              "value": "AA - athena fhir test"
+            },
+            "contact": [
+              {
+                "purpose": {
+                  "value": "Technical "
+                },
+                "name": {
+                  "use": {
+                    "value": "official"
+                  },
+                  "text": "Jeffrey",
+                  "given": {
+                    "value": "Jeffrey"
+                  }
+                },
+                "telcom": {
+                  "ContactPoint": [
+                    {
+                      "system": {
+                        "value": "phone"
+                      },
+                      "value": {
+                        "value": "617-402-8751"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    }
+                  ]
+                },
+                "address": {
+                  "use": {
+                    "value": "work"
+                  },
+                  "type": {
+                    "value": "both"
+                  },
+                  "line": [
+                    {
+                      "value": "311 Arsenal St."
+                    },
+                    {
+                      "value": ""
+                    }
+                  ],
+                  "city": {
+                    "value": "Watertown"
+                  },
+                  "postalCode": {
+                    "value": "2472"
+                  },
+                  "country": {
+                    "value": "US"
+                  }
+                }
+              }
+            ],
+            "address": {
+              "use": {
+                "value": "work"
+              },
+              "type": {
+                "value": "both"
+              },
+              "line": {
+                "value": "1 NORTH ERWIN STREET"
+              },
+              "city": {
+                "value": "CARTERSVILLE"
+              },
+              "state": {
+                "value": "GA"
+              },
+              "country": {
+                "value": "US"
+              },
+              "position": {
+                "longitude": {
+                  "value": "-95.712891"
+                },
+                "latitude": {
+                  "value": "37.09024"
+                }
+              }
+            },
+            "partOf": {
+              "Reference": {
+                "identifier": {
+                  "use": {
+                    "value": "offical"
+                  },
+                  "type": {
+                    "value": "HCID"
+                  },
+                  "system": {
+                    "value": "http://www.hl7.org/oid/"
+                  },
+                  "value": {
+                    "value": "urn:oid:2.16.840.1.113883.3.564.1"
+                  }
+                }
+              }
+            },
+            "managingOrg": {
+              "reference": {
+                "value": "org.sequoiaproject.fhir.stu3/Organization/athenahealth"
+              }
+            },
+            "contained": [
+              {
+                "Endpoint": {
+                  "identifier": [
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "HCID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.5"
+                      }
+                    },
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "AAID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      }
+                    }
+                  ],
+                  "connectionType": {
+                    "system": {
+                      "value": "http://hl7.org/fhir/subscription-channel-type"
+                    },
+                    "code": {
+                      "value": "IHE-XCA"
+                    }
+                  },
+                  "name": {
+                    "value": "Patient Discovery"
+                  },
+                  "managingOrganization": {
+                    "reference": {
+                      "value": ""
+                    }
+                  },
+                  "address": {
+                    "value": "https://carequality.athenahealth.com/xcpd/v1/CAREQUALITY%3A%3AXCPD"
+                  },
+                  "payloadMimeFormat": {
+                    "value": "text/xml"
+                  },
+                  "payloadType": {
+                    "coding": {
+                      "system": {
+                        "value": "urn:oid:1.3.6.1.4.1.19376.1.2.3"
+                      },
+                      "code": {
+                        "value": ""
+                      }
+                    }
+                  },
+                  "extension": {
+                    "url": "https://sequoiaproject.org/StructureDefinition/Endpoint/main/1.0.0",
+                    "extension": [
+                      {
+                        "url": "Transaction",
+                        "valueString": {
+                          "value": "XCPD ITI-55"
+                        }
+                      },
+                      {
+                        "url": "Actor",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Actor/1.0.0"
+                            },
+                            "value": {
+                              "value": "Responding Gateway"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Version",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Version/1.0.0"
+                            },
+                            "value": {
+                              "value": "2.0"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "UseCases",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/UseCases/1.0.0"
+                            },
+                            "value": {
+                              "value": "QueryBasedDocumentExchange"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "PurposesOfUse",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/PurposesOfUse/1.0.0"
+                            },
+                            "value": {
+                              "value": "Treatment"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Roles",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Roles/1.0.0"
+                            },
+                            "value": {
+                              "value": "All"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "IPA",
+                        "valueCodeableConcept": {
+                          "system": {
+                            "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/IPA/1.0.0"
+                          },
+                          "value": {
+                            "value": ""
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "fullUrl": {
+          "value": "/Organization/3"
+        },
+        "resource": {
+          "Organization": {
+            "id": {
+              "value": "3"
+            },
+            "meta": {
+              "versionId": {
+                "value": "1"
+              },
+              "lastUpdated": {
+                "value": "2018-02-23T18:52:26+00:00"
+              }
+            },
+            "identifier": {
+              "use": {
+                "value": "official"
+              },
+              "system": {
+                "value": "http://www.hl7.org/oid/"
+              },
+              "value": {
+                "value": "urn:oid:2.16.840.1.113883.3.564.5"
+              }
+            },
+            "description": {
+              "value": ""
+            },
+            "active": {
+              "value": "Active"
+            },
+            "name": {
+              "value": "AA - athena fhir test"
+            },
+            "contact": [
+              {
+                "purpose": {
+                  "value": "Technical "
+                },
+                "name": {
+                  "use": {
+                    "value": "official"
+                  },
+                  "text": "Jeffrey",
+                  "given": {
+                    "value": "Jeffrey"
+                  }
+                },
+                "telcom": {
+                  "ContactPoint": [
+                    {
+                      "system": {
+                        "value": "phone"
+                      },
+                      "value": {
+                        "value": "617-402-8751"
+                      },
+                      "use": {
+                        "value": "work"
+                      }
+                    }
+                  ]
+                },
+                "address": {
+                  "use": {
+                    "value": "work"
+                  },
+                  "type": {
+                    "value": "both"
+                  },
+                  "line": [
+                    {
+                      "value": "311 Arsenal St."
+                    },
+                    {
+                      "value": ""
+                    }
+                  ],
+                  "city": {
+                    "value": "Watertown"
+                  },
+                  "postalCode": {
+                    "value": "2472"
+                  },
+                  "country": {
+                    "value": "US"
+                  }
+                }
+              }
+            ],
+            "address": {
+              "use": {
+                "value": "work"
+              },
+              "type": {
+                "value": "both"
+              },
+              "line": {
+                "value": "1 NORTH ERWIN STREET"
+              },
+              "city": {
+                "value": "CARTERSVILLE"
+              },
+              "state": {
+                "value": "GA"
+              },
+              "country": {
+                "value": "US"
+              },
+              "position": {
+                "longitude": {
+                  "value": "-95.712891"
+                },
+                "latitude": {
+                  "value": "37.09024"
+                }
+              }
+            },
+            "partOf": {
+              "Reference": {
+                "identifier": {
+                  "use": {
+                    "value": "offical"
+                  },
+                  "type": {
+                    "value": "HCID"
+                  },
+                  "system": {
+                    "value": "http://www.hl7.org/oid/"
+                  },
+                  "value": {
+                    "value": "urn:oid:2.16.840.1.113883.3.564.1"
+                  }
+                }
+              }
+            },
+            "managingOrg": {
+              "reference": {
+                "value": "org.sequoiaproject.fhir.stu3/Organization/athenahealth"
+              }
+            },
+            "contained": [
+              {
+                "Endpoint": {
+                  "identifier": [
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "HCID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      },
+                      "value": {
+                        "value": "2.16.840.1.113883.3.564.6"
+                      }
+                    },
+                    {
+                      "use": {
+                        "value": "official"
+                      },
+                      "type": {
+                        "value": "AAID"
+                      },
+                      "system": {
+                        "value": "http://www.hl7.org/oid/"
+                      }
+                    }
+                  ],
+                  "connectionType": {
+                    "system": {
+                      "value": "http://hl7.org/fhir/subscription-channel-type"
+                    },
+                    "code": {
+                      "value": "IHE-XCA"
+                    }
+                  },
+                  "name": {
+                    "value": "Patient Discovery"
+                  },
+                  "managingOrganization": {
+                    "reference": {
+                      "value": ""
+                    }
+                  },
+                  "address": {
+                    "value": "https://carequality.athenahealth.com/xcpd/v1/CAREQUALITY%3A%3AXCPD"
+                  },
+                  "payloadMimeFormat": {
+                    "value": "text/xml"
+                  },
+                  "payloadType": {
+                    "coding": {
+                      "system": {
+                        "value": "urn:oid:1.3.6.1.4.1.19376.1.2.3"
+                      },
+                      "code": {
+                        "value": ""
+                      }
+                    }
+                  },
+                  "extension": {
+                    "url": "https://sequoiaproject.org/StructureDefinition/Endpoint/main/1.0.0",
+                    "extension": [
+                      {
+                        "url": "Transaction",
+                        "valueString": {
+                          "value": "XCPD ITI-55"
+                        }
+                      },
+                      {
+                        "url": "Actor",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Actor/1.0.0"
+                            },
+                            "value": {
+                              "value": "Responding Gateway"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Version",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Version/1.0.0"
+                            },
+                            "value": {
+                              "value": "2.0"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "UseCases",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/UseCases/1.0.0"
+                            },
+                            "value": {
+                              "value": "QueryBasedDocumentExchange"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "PurposesOfUse",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/PurposesOfUse/1.0.0"
+                            },
+                            "value": {
+                              "value": "Treatment"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "Roles",
+                        "valueCodeableConcept": {
+                          "coding": {
+                            "system": {
+                              "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/Roles/1.0.0"
+                            },
+                            "value": {
+                              "value": "All"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "url": "IPA",
+                        "valueCodeableConcept": {
+                          "system": {
+                            "value": "https://sequoiaproject.org/StructureDefinition/Endpoint/IPA/1.0.0"
+                          },
+                          "value": {
+                            "value": ""
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
