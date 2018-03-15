@@ -2,7 +2,9 @@ package gov.ca.emsa.controller;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +50,12 @@ public class DirectoryController {
 	@RequestMapping(value= "/mock/Sequoia", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public String getSequoia() throws IOException {		
 		Resource organizationsFile = resourceLoader.getResource("classpath:" + SEQUOIA_RESOURCE_FILE_NAME);		
-		return FileUtils.readFileToString(organizationsFile.getFile(), StandardCharsets.UTF_8);
+		return IOUtils.toString(organizationsFile.getInputStream(), "UTF-8");
 	}
 	
 	@RequestMapping(value= "/mock/Location", method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	public LocationWrapper getLocations() {
-		Resource locationsFile = resourceLoader.getResource("classpath:" + LOCATIONS_RESOURCE_FILE_NAME);
+		Resource locationsFile = resourceLoader.getResource("/opt/pulse/" + LOCATIONS_RESOURCE_FILE_NAME);
 		LocationWrapper parsed = null;
 		try {
 			parsed = jsonMapper.readValue(locationsFile.getInputStream(), LocationWrapper.class);
